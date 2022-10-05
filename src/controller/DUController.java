@@ -1,6 +1,7 @@
 package controller;
 
-import com.sun.javafx.geom.Point2D;
+import java.awt.Point;
+import model.staticTools.vars;
 import view.DrawCanvas;
 import view.Window;
 
@@ -11,10 +12,16 @@ public class DUController
 	private DrawCanvas c;
 	private Window w;
 
-	public DUController ( Point2D size, String title )
+	// mover a scene controller
+	MapController mc = new MapController();
+
+	public DUController ( Point size, String title )
 	{
-		c = new DrawCanvas(size);
+		mc.loadMap(vars.map0);
+		c = new DrawCanvas(size, mc);
 		w = new Window(title, c);
+		System.out.println("DUController");
+
 	}
 
 	public void update ()

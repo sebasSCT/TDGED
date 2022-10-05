@@ -1,6 +1,7 @@
 package application;
 
 import controller.DUController;
+import model.staticTools.vars;
 
 public class Loop
 {
@@ -12,7 +13,6 @@ public class Loop
 	{
 	}
 
-	// parametro ventana provisional (Quitar)
 	public void startLoop ( DUController duc )
 	{
 		int aps = 0, fps = 0;
@@ -63,15 +63,18 @@ public class Loop
 				// -----------------
 
 				// Dibujar------------------
-				duc.draw();
-				fps++;
-				// ------------------
 
+				// ------------------
 				delta--;
 			}
 
+			duc.draw();
+			fps++;
+
 			if ( System.nanoTime() - referenciaContador > NS_POR_SEGUNDO )
 			{
+				vars.FPS = fps;
+				vars.APS = aps;
 				aps = 0;
 				fps = 0;
 

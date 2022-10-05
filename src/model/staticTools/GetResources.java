@@ -11,9 +11,9 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -111,43 +111,27 @@ public class GetResources
 
 	public static String leerArchivoTxt ( String ruta )
 	{
-		String contenido = "";
-
-		InputStream entradaBytes = ClassLoader.class.getResourceAsStream(ruta);
-
-		BufferedReader lector = new BufferedReader(new InputStreamReader(entradaBytes));
-
-		String linea;
-
+		String msn = "";
+		FileReader input = null;
 		try
 		{
-			while ( (linea = lector.readLine()) != null )
+			input = new FileReader(getPath(ruta));
+
+			BufferedReader buffer = new BufferedReader(input);
+
+			String aux = "";
+			while ( aux != null )
 			{
-				contenido += linea;
+				aux = buffer.readLine();
+				msn += (aux == null) ? "" : aux;
 			}
-			// IO, excepcion para entrada o salida de datos
+
 		} catch ( IOException e )
 		{
 			e.printStackTrace();
-		} finally
-		{
-			try
-			{
-				if ( entradaBytes != null )
-				{
-					entradaBytes.close();
-				}
-				if ( lector != null )
-				{
-					lector.close();
-				}
-			} catch ( IOException ex )
-			{
-				ex.printStackTrace();
-			}
 		}
 
-		return contenido;
+		return msn;
 	}
 
 	public static Font cargarFuentes ( final String ruta, float size )
@@ -182,7 +166,7 @@ public class GetResources
 
 		try
 		{
-			InputStream is = ClassLoader.class.getResourceAsStream(ruta);
+			InputStream is = ClassLoader.class.getResourceAsStream(getPath(ruta));
 			AudioInputStream ais = AudioSystem.getAudioInputStream(
 					new BufferedInputStream(is));
 			DataLine.Info info = new DataLine.Info(Clip.class, ais.getFormat());

@@ -23,6 +23,8 @@ public class Window extends JFrame
 		this.icon = new ImageIcon(GetResources.ciTranslucida(vars.icon));
 
 		configurarVentana(ds);
+
+		System.out.println("WIndow");
 	}
 
 	private void configurarVentana ( DrawCanvas ds )
