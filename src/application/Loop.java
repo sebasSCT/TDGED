@@ -17,7 +17,6 @@ public class Loop
 	{
 		int aps = 0, fps = 0;
 
-		// System.out.println("Si funciona el thread mirey");
 		// Equivalencia
 		final int NS_POR_SEGUNDO = 1000000000;
 
@@ -65,6 +64,7 @@ public class Loop
 				// Dibujar------------------
 
 				// ------------------
+				vars.delta = delta;
 				delta--;
 			}
 

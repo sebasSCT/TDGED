@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
-import controller.MapController;
+import controller.SceneController;
 import model.staticTools.GetResources;
 import model.staticTools.vars;
 
@@ -21,30 +21,28 @@ public class DrawCanvas extends Canvas
 	private int width, height;
 
 	// Constructor
-	public DrawCanvas ( Point size, MapController mc )
+	public DrawCanvas ( Point size )
 	{
 		this.width = (int) size.getX();
 		this.height = (int) size.getY();
 
-		// Configuración del canvas
+		canvasConfig();
+
+		System.out.println("DrawCanvas");
+	}
+
+	private void canvasConfig ()
+	{
 		setIgnoreRepaint(true);
 		setPreferredSize(new Dimension(width, height));
 		setFocusable(true);
 		requestFocus(true);
-
-		this.mc = mc;
-		this.dp = new DrawMap(mc);
-		System.out.println("DrawCanvas");
 	}
 
-	// (ELIMINAR ?) (cambiar por gameCOntroller o scene COntroller)
-	private MapController mc;
-	private DrawMap dp;
-	// ----
 	private BufferStrategy buffer;
 	private Graphics2D g;
-	// COntrollador de estados como parametro o controllador de juego
-	public void draw () // Aceptando mapa provisionalmente
+
+	public void draw ( final SceneController sc )
 	{
 
 		// Configurar la existencia de un buffer en el canvas, espacio en
@@ -73,14 +71,12 @@ public class DrawCanvas extends Canvas
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-		// DRAW AREA===================
+		// # DRAW AREA===================
 
 		/// #test
 		// test(g);
 
-		// Dibujar mapa testeo
-		dp.drawMap(g);
-		// ----------------------------
+		sc.draw(g);
 
 		///
 		g.setColor(Color.yellow);
@@ -88,7 +84,7 @@ public class DrawCanvas extends Canvas
 		g.drawString("APS: " + String.valueOf(vars.APS), 210, 220);
 		///
 
-		// ===========================
+		// #===========================
 
 		// Limpiar g
 		g.dispose();

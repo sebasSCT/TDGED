@@ -18,15 +18,19 @@ public class vars
 	public final static int MARGEN_X = ANCHO_JUEGO / 2 - spriteSize / 2;
 	public final static int MARGEN_Y = ALTO_JUEGO / 2 - spriteSize / 2;
 	public static int FPS, APS;
+	public static double delta;
 	// ==================================
 
 	// Rutas
 	/// etc
 	public final static String icon = "src/resources/img/etc/img.jpeg"; // provisional
 
-	/// map (Guardar en JSON)
-	public final static String map0 = "src/resources/file/map/mapa0.json";
-	public final static String map1 = "src/resources/file/map/mapa1.json";
+	/// JSON mapas
+	public final static int nMaps = 2;
+	public final static String getMapJSON ( String type, String n )
+	{
+		return "src/resources/file/map/" + type + "/mapa" + n + ".json";
+	}
 
 	/// tileset mapas
 	public final static String getTileset ( String n )

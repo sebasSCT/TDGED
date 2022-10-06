@@ -6,6 +6,7 @@ import model.staticTools.vars;
 
 public class SpriteSheetController
 {
+	// guardar Spritesheets?
 
 	private SpriteSheet ss;
 	private int posicionX, posicionY;

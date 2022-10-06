@@ -12,23 +12,18 @@ import model.staticTools.JSONgetters;
 public class MapController
 {
 
-	// Guardar mapas cargados. no recargarlos
-
 	private GameMap mapa;
 	private JSONObject global;
-	private ArrayList<GameMap> mapas; // Puede ser almacenado con algo hash
-										// (modificiar)
-	private GameMap mapaActual;
 
 	public MapController ()
 	{
-		mapa = new GameMap();
-		mapas = new ArrayList<>();
 		System.out.println("Mapcontroller");
 	}
 
 	public void loadMap ( String ruta )
 	{
+		mapa = new GameMap();
+
 		String archivo = GetResources.leerArchivoTxt(ruta);
 
 		global = JSONgetters.getObjectJSON(archivo);
@@ -55,9 +50,6 @@ public class MapController
 						JSONgetters.getObjectJSON(layer.toString()).get("tileset").toString());
 			}
 		}
-
-		mapas.add(mapa);
-		mapaActual = mapa;
 	}
 
 	private void loadLayer ( String[] spriteLy, String tileSet )
@@ -78,18 +70,8 @@ public class MapController
 		mapa.getSpriteLayers().add(sprites);
 	}
 
-	public GameMap getMapaActual ()
+	public GameMap getMapa ()
 	{
-		return mapaActual;
-	}
-
-	public void setMapaActual ( int ind )
-	{
-		mapaActual = mapas.get(ind);
-	}
-
-	public void impm ()
-	{
-		System.out.println(mapas);
+		return mapa;
 	}
 }

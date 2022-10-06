@@ -1,7 +1,6 @@
 package controller;
 
 import java.awt.Point;
-import model.staticTools.vars;
 import view.DrawCanvas;
 import view.Window;
 
@@ -12,26 +11,34 @@ public class DUController
 	private DrawCanvas c;
 	private Window w;
 
-	// mover a scene controller
-	MapController mc = new MapController();
+	private SceneController sc;
 
 	public DUController ( Point size, String title )
 	{
-		mc.loadMap(vars.map0);
-		c = new DrawCanvas(size, mc);
+		c = new DrawCanvas(size);
 		w = new Window(title, c);
+		sc = new SceneController();
 		System.out.println("DUController");
-
 	}
 
+	// private int i = 500;
 	public void update ()
 	{
-
+		// i -= 5;
+		// if ( i == 250 )
+		// {
+		// sc.setCS(1);
+		// }
+		// if ( i == 0 )
+		// {
+		// sc.setCS(0);
+		// i = 500;
+		// }
 	}
 
 	public void draw ()
 	{
-		c.draw();
+		c.draw(sc);
 	}
 
 	// Metodo para cerrar el juego

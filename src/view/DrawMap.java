@@ -4,34 +4,34 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import controller.MapController;
 import javafx.util.Pair;
+import model.scene.GameMap;
 import model.staticTools.vars;
 
 public class DrawMap
 {
 
-	private MapController mc;
+	private GameMap gm;
 	private ArrayList<Pair<Point, BufferedImage>> imgs;
 
-	public DrawMap ( MapController mc )
+	public DrawMap ( GameMap gm )
 	{
-		this.mc = mc;
+		this.gm = gm;
 		imgs = new ArrayList<>();
-		loadMapa();
+		loadImages();
 		System.out.println("DrawMap");
 	}
 
-	private void loadMapa ()
+	private void loadImages ()
 	{
-		for ( ArrayList<BufferedImage> layer : mc.getMapaActual().getSpriteLayers() )
+		for ( ArrayList<BufferedImage> layer : gm.getSpriteLayers() )
 		{
 			int y = 0, x = 0;
 			for ( BufferedImage img : layer )
 			{
 				x++;
-				y += (x == mc.getMapaActual().getWidthTiles()) ? 1 : 0;
-				x = (x == mc.getMapaActual().getWidthTiles()) ? 0 : x;
+				y += (x == gm.getWidthTiles()) ? 1 : 0;
+				x = (x == gm.getWidthTiles()) ? 0 : x;
 
 				int px = x * vars.spriteSize;
 				int py = y * vars.spriteSize;
@@ -41,14 +41,11 @@ public class DrawMap
 		}
 	}
 
-	public void drawMap ( final Graphics g )
+	public void draw ( final Graphics g )
 	{
-
-		for ( int i = 0; i < imgs.size(); i++ )
+		for ( Pair<Point, BufferedImage> img : imgs )
 		{
-			g.drawImage(imgs.get(i).getValue(), imgs.get(i).getKey().x, imgs.get(i).getKey().y,
-					null);
+			g.drawImage(img.getValue(), img.getKey().x, img.getKey().y, null);
 		}
 	}
-
 }
