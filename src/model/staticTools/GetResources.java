@@ -30,11 +30,11 @@ public class GetResources
 		// dentro de buffer.
 
 		Image imagen = null;
+		File file = new File(getPath(ruta));
 
 		try
 		{
-			imagen = ImageIO.read(
-					ClassLoader.class.getResource(getPath("/scr/resources/star_icon.png")));
+			imagen = ImageIO.read(file);
 		} catch ( IOException e )
 		{
 			e.printStackTrace();

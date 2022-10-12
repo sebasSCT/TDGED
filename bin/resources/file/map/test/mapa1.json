@@ -97,5 +97,6 @@
  "version":"1.8",
  "width":12,
  "posiniX": 10,
- "posiniY": 6
+ "posiniY": 6,
+ "background": 0
 }

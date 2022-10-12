@@ -1,13 +1,15 @@
-package controller;
+package controller.scene;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import model.logic.ColisionBox;
 import model.scene.GameMap;
 import model.staticTools.GetResources;
 import model.staticTools.JSONgetters;
+import model.staticTools.vars;
 
 public class MapController
 {
@@ -32,6 +34,7 @@ public class MapController
 		mapa.setHeightTiles(JSONgetters.getIntJSON(global, "height"));
 		mapa.setPosIni(new Point(	JSONgetters.getIntJSON(global, "posiniX"),
 									JSONgetters.getIntJSON(global, "posiniY")));
+		mapa.setBG(vars.getBG(String.valueOf(JSONgetters.getIntJSON(global, "background"))));
 
 		JSONArray layers = JSONgetters.getArrayJSON(global.get("layers").toString());
 
@@ -49,6 +52,30 @@ public class MapController
 				loadLayer(spriteLy,
 						JSONgetters.getObjectJSON(layer.toString()).get("tileset").toString());
 			}
+
+			if ( ly.toString().contains("objectgroup") )
+			{
+
+				JSONObject c = JSONgetters.getObjectJSON(layer.toString());
+				JSONArray colisions = JSONgetters.getArrayJSON(c.get("objects").toString());
+
+				loadColisions(colisions);
+
+			}
+
+		}
+	}
+
+	private void loadColisions ( JSONArray colisions )
+	{
+		for ( Object colision : colisions )
+		{
+			JSONObject box = JSONgetters.getObjectJSON(colision.toString());
+			int w = JSONgetters.getIntJSON(box, "width"),
+					h = JSONgetters.getIntJSON(box, "height"),
+					x = JSONgetters.getIntJSON(box, "x"), y = JSONgetters.getIntJSON(box, "y");
+
+			mapa.getColisions().add(new ColisionBox(w, h, x, y));
 		}
 	}
 

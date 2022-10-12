@@ -1,4 +1,4 @@
-package controller;
+package controller.scene;
 
 import java.awt.image.BufferedImage;
 import model.scene.SpriteSheet;
@@ -11,9 +11,18 @@ public class SpriteSheetController
 	private SpriteSheet ss;
 	private int posicionX, posicionY;
 
+	// Constructor para tilesets
 	public SpriteSheetController ( String tileset )
 	{
 		ss = new SpriteSheet(vars.getTileset(tileset), vars.spriteSize);
+		cargarSS();
+		System.out.println("SpriteSheetController");
+	}
+
+	// Constructor para entidades
+	public SpriteSheetController ( String type, String tileset )
+	{
+		ss = new SpriteSheet(vars.getTilesetE(type, tileset), vars.spriteSize);
 		cargarSS();
 		System.out.println("SpriteSheetController");
 

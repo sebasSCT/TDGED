@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Point;
+import controller.scene.SceneController;
 import view.DrawCanvas;
 import view.Window;
 

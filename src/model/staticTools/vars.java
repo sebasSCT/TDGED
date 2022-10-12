@@ -13,8 +13,8 @@ public class vars
 	public final static int ANCHO_JUEGO = (int) size.x / 2, ALTO_JUEGO = (int) size.y / 2;
 	public final static int CENTRO_X_VENTANA = ANCHO_JUEGO / 2,
 			CENTRO_Y_VENTANA = ALTO_JUEGO / 2;
-	public final static double FACTOR_ESCALADO_X = 2.5;
-	public final static double FACTOR_ESCALADO_Y = 2.5;
+	public final static double FACTOR_ESCALADO_X = 3;
+	public final static double FACTOR_ESCALADO_Y = 3;
 	public final static int MARGEN_X = ANCHO_JUEGO / 2 - spriteSize / 2;
 	public final static int MARGEN_Y = ALTO_JUEGO / 2 - spriteSize / 2;
 	public static int FPS, APS;
@@ -23,10 +23,16 @@ public class vars
 
 	// Rutas
 	/// etc
-	public final static String icon = "src/resources/img/etc/img.jpeg"; // provisional
+	public final static String icon = "src/resources/img/etc/img.jpeg" + ""; // provisional
+
+	/// background
+	public final static String getBG ( String n )
+	{
+		return "src/resources/img/bg/bg_" + n + ".png"; // modificar formato
+	}
 
 	/// JSON mapas
-	public final static int nMaps = 2;
+	public final static int nMaps = 3;
 	public final static String getMapJSON ( String type, String n )
 	{
 		return "src/resources/file/map/" + type + "/mapa" + n + ".json";
@@ -36,6 +42,12 @@ public class vars
 	public final static String getTileset ( String n )
 	{
 		return "src/resources/img/mapTileSet/tileSet_" + n + ".png";
+	}
+
+	/// tileset entidades
+	public final static String getTilesetE ( String t, String n )
+	{
+		return "src/resources/img/entity/" + t + "/" + n + ".png";
 	}
 	// ============================
 

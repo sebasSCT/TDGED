@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
-import controller.SceneController;
+import controller.scene.SceneController;
 import model.staticTools.GetResources;
 import model.staticTools.vars;
 

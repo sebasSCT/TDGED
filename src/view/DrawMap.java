@@ -29,14 +29,14 @@ public class DrawMap
 			int y = 0, x = 0;
 			for ( BufferedImage img : layer )
 			{
-				x++;
-				y += (x == gm.getWidthTiles()) ? 1 : 0;
-				x = (x == gm.getWidthTiles()) ? 0 : x;
-
 				int px = x * vars.spriteSize;
 				int py = y * vars.spriteSize;
 
 				imgs.add(new Pair<Point, BufferedImage>(new Point(px, py), img));
+
+				x++;
+				y += (x == gm.getWidthTiles()) ? 1 : 0;
+				x = (x == gm.getWidthTiles()) ? 0 : x;
 			}
 		}
 	}
