@@ -35,6 +35,7 @@ public class DUController
 		// sc.setCS(0);
 		// i = 500;
 		// }
+		sc.update();
 	}
 
 	public void draw ()

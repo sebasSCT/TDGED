@@ -13,7 +13,6 @@ public class GameScene
 	public GameScene ( GameMap map )
 	{
 		this.map = map;
-		System.out.println(map.getBG());
 		background = GetResources.ciOpaca(map.getBG());
 	}
 

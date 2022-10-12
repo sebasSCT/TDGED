@@ -1,5 +1,6 @@
 package controller.scene;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import controller.entities.PlayerController;
@@ -45,7 +46,7 @@ public class SceneController
 
 	public void update ()
 	{
-
+		// pc.getPlayer(0).setPos(5, 2);
 	}
 
 	public void draw ( final Graphics g )
@@ -55,6 +56,10 @@ public class SceneController
 		g.drawImage(pc.getPlayer(0).getAnimations().get("a1").get(0),
 				pc.getPlayer(0).getPos().x, pc.getPlayer(0).getPos().y, null);
 
+		g.setColor(Color.yellow);
+		g.drawRect(pc.getPlayer(0).getCB().getBox().x, pc.getPlayer(0).getCB().getBox().y,
+				pc.getPlayer(0).getCB().getBox().width,
+				pc.getPlayer(0).getCB().getBox().height);
 	}
 
 	public void setCS ( int ind )

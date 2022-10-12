@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import model.logic.ColisionBox;
+import model.staticTools.vars;
 
 public abstract class Entity
 {
@@ -22,6 +23,7 @@ public abstract class Entity
 		this.pos = pos;
 		this.ps = ps;
 		this.vel = vel;
+		cb = new ColisionBox(5, vars.spriteSize - 6, pos.x + 5, pos.y + 4);// (modificar)
 		animations = new Hashtable<>();
 		System.out.println("Entity");
 	}
@@ -35,6 +37,12 @@ public abstract class Entity
 	{
 		pos.x = x;
 		pos.y = y;
+		cb.setBox(pos.x + 5, pos.y + 4);
+	}
+
+	public ColisionBox getCB ()
+	{
+		return cb;
 	}
 
 	public Point getPos ()
