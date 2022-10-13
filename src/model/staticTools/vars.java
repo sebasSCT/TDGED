@@ -1,5 +1,6 @@
 package model.staticTools;
 
+import java.awt.Font;
 import java.awt.Point;
 
 public class vars
@@ -24,6 +25,10 @@ public class vars
 	// Rutas
 	/// etc
 	public final static String icon = "src/resources/img/etc/img.jpeg" + ""; // provisional
+
+	// fuente
+	public final static Font font = GetResources.cargarFuentes("src/resources/font/font2.ttf",
+			8);
 
 	/// background
 	public final static String getBG ( String n )

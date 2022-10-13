@@ -33,10 +33,10 @@ public abstract class Entity
 		return animations;
 	}
 
-	public void setPos ( int x, int y )
+	public void setPos ( double x, double y )
 	{
-		pos.x = x;
-		pos.y = y;
+		pos.setLocation(x, y);
+		// pos.y = y;
 		cb.setBox(pos.x + 5, pos.y + 4);
 	}
 

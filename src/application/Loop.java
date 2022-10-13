@@ -7,7 +7,7 @@ public class Loop
 {
 
 	private boolean running = true;
-	private double delta;
+	private double delta, delta1;
 
 	public Loop ()
 	{
@@ -22,10 +22,12 @@ public class Loop
 
 		// actualizaciones por segundo objetivo
 		final int APS_OBJETIVO = 60;
+		final int FPS_OBJETIVO = 60;
 
 		// Descubrir cuantos nanosegundos deben transcurrir para que se
 		// actualice segun el objetivo
 		final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
+		final double NS_POR_FRAME = NS_POR_SEGUNDO / FPS_OBJETIVO;
 
 		// Se atribuye una cantidad de tiempo en nanosegundos
 		long referenciaActualizacion = System.nanoTime();
@@ -35,6 +37,7 @@ public class Loop
 
 		// delta time
 		delta = 0;
+		delta1 = 0;
 
 		while ( running )
 		{
@@ -52,6 +55,7 @@ public class Loop
 
 			// almacenar la operacion en delta, cantidades pequeñas
 			delta += tiempoTranscurrido / NS_POR_ACTUALIZACION;
+			vars.delta = delta;
 
 			// ejecutar cuando delta sume 1 para actualizar delta
 			while ( delta >= 1 )
@@ -62,19 +66,27 @@ public class Loop
 				// -----------------
 
 				// Dibujar------------------
-
 				// ------------------
-				vars.delta = delta;
+
 				delta--;
 			}
 
-			duc.draw();
-			fps++;
+			delta1 += tiempoTranscurrido / NS_POR_FRAME;
+
+			// por qué esto está funcionando XDDDD ?????¡¡¡¡
+			while ( delta1 >= 1 )
+			{
+				duc.draw();
+				fps++;
+
+				delta1--;
+			}
 
 			if ( System.nanoTime() - referenciaContador > NS_POR_SEGUNDO )
 			{
 				vars.FPS = fps;
 				vars.APS = aps;
+
 				aps = 0;
 				fps = 0;
 

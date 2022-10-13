@@ -22,19 +22,8 @@ public class DUController
 		System.out.println("DUController");
 	}
 
-	// private int i = 500;
 	public void update ()
 	{
-		// i -= 5;
-		// if ( i == 250 )
-		// {
-		// sc.setCS(1);
-		// }
-		// if ( i == 0 )
-		// {
-		// sc.setCS(0);
-		// i = 500;
-		// }
 		sc.update();
 	}
 

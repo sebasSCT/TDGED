@@ -14,6 +14,7 @@ public class GameScene
 	{
 		this.map = map;
 		background = GetResources.ciOpaca(map.getBG());
+		System.out.println("GameScene");
 	}
 
 	public GameMap getMap ()

@@ -61,6 +61,9 @@ public class DrawCanvas extends Canvas
 		// aqui los Graphics dibujaran dentro del buffer
 		g = (Graphics2D) buffer.getDrawGraphics();
 
+		//
+		g.setFont(vars.font);
+
 		// back
 		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);

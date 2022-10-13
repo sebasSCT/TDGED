@@ -38,7 +38,7 @@ public class MapController
 
 		JSONArray layers = JSONgetters.getArrayJSON(global.get("layers").toString());
 
-		String[] spriteLy = null;
+		String[] spriteLy;
 		for ( Object layer : layers )
 		{
 			Object ly = JSONgetters.getObjectJSON(layer.toString()).get("type").toString();

@@ -13,6 +13,7 @@ public class DrawScene
 	{
 		this.s = s;
 		dm = new DrawMap(s.getMap());
+		System.out.println("DrawScene");
 	}
 
 	public void draw ( final Graphics g )
