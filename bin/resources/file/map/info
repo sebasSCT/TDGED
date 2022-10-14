@@ -1,5 +1,9 @@
-"posiniX": 5,
+ "posiniX": 5,
  "posiniY": 3,
  "background": 0
+ 
+ en cada capa de mapa
+ 
+ "tileset": 0
  
  al final de cada JSON

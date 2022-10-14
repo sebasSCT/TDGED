@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Point;
 import controller.DUController;
 import model.staticTools.vars;
 
@@ -18,7 +19,8 @@ public class TDMain
 	private static void startConfig ()
 	{
 		l = new Loop();
-		duc = new DUController(vars.size, vars.title);
+		duc = new DUController(	new Point((int) vars.W_SCREEN, (int) vars.H_SCREEN),
+								vars.title);
 	}
 
 }

@@ -2,12 +2,12 @@ package model.entities;
 
 import java.awt.Point;
 
-public class Player extends Entity
+public class Player extends Active
 {
 
-	public Player ( String id, Point pos, double ps, double vel )
+	public Player ( String id, Point pos, double ps, double vel, Point offset )
 	{
-		super(id, pos, ps, vel);
+		super(id, pos, ps, vel, offset);
 	}
 
 }

@@ -22,7 +22,7 @@ public class SpriteSheetController
 	// Constructor para entidades
 	public SpriteSheetController ( String type, String tileset )
 	{
-		ss = new SpriteSheet(vars.getTilesetE(type, tileset), vars.spriteSize);
+		ss = new SpriteSheet(vars.getTilesetE(type, tileset), vars.entitySpriteSize);
 		cargarSS();
 		System.out.println("SpriteSheetController");
 

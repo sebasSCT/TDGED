@@ -3,12 +3,10 @@ package view;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
 import controller.scene.SceneController;
-import model.staticTools.GetResources;
 import model.staticTools.vars;
 
 public class DrawCanvas extends Canvas
@@ -95,12 +93,6 @@ public class DrawCanvas extends Canvas
 		// Mostrar el contenido del buffer
 		buffer.show();
 
-	}
-
-	private void test ( Graphics g )
-	{
-		g.drawImage(GetResources.ciTranslucida("src/resources/img/mapTileSet/tileSet_0.png"),
-				0, 0, null);
 	}
 
 	public int getWidth ()

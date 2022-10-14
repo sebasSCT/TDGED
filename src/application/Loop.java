@@ -7,6 +7,7 @@ public class Loop
 {
 
 	private boolean running = true;
+	@ SuppressWarnings ( "unused" )
 	private double delta, delta1;
 
 	public Loop ()
@@ -66,21 +67,21 @@ public class Loop
 				// -----------------
 
 				// Dibujar------------------
+				duc.draw();
+				fps++;
 				// ------------------
 
 				delta--;
 			}
 
-			delta1 += tiempoTranscurrido / NS_POR_FRAME;
-
-			// por qué esto está funcionando XDDDD ?????¡¡¡¡
-			while ( delta1 >= 1 )
-			{
-				duc.draw();
-				fps++;
-
-				delta1--;
-			}
+			// delta1 += tiempoTranscurrido / NS_POR_FRAME;
+			//
+			// // por qué esto está funcionando XDDDD ?????¡¡¡¡
+			// while ( delta1 >= 1 )
+			// {
+			// // Dibujar
+			// delta1--;
+			// }
 
 			if ( System.nanoTime() - referenciaContador > NS_POR_SEGUNDO )
 			{

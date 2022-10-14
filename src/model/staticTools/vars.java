@@ -1,23 +1,25 @@
 package model.staticTools;
 
 import java.awt.Font;
-import java.awt.Point;
 
 public class vars
 {
 
 	// Configuracion inicial
 	public final static String title = "Tower Defenders";
-	public final static Point size = new Point(1280, 720);
-	public final static Point gameSize = new Point((int) size.x / 2, (int) size.y / 2);
+
 	public final static int spriteSize = 16;
-	public final static int ANCHO_JUEGO = (int) size.x / 2, ALTO_JUEGO = (int) size.y / 2;
-	public final static int CENTRO_X_VENTANA = ANCHO_JUEGO / 2,
-			CENTRO_Y_VENTANA = ALTO_JUEGO / 2;
-	public final static double FACTOR_ESCALADO_X = 3;
-	public final static double FACTOR_ESCALADO_Y = 3;
-	public final static int MARGEN_X = ANCHO_JUEGO / 2 - spriteSize / 2;
-	public final static int MARGEN_Y = ALTO_JUEGO / 2 - spriteSize / 2;
+	public final static int entitySpriteSize = 32;
+	// tamaño de personajes
+
+	public final static double scale = 3;
+	public final static double W_SCREEN = 1280, H_SCREEN = 720;
+	public final static double W_GAME = W_SCREEN / scale, H_GAME = H_SCREEN / scale;
+	public final static double FACTOR_ESCALADO_X = W_SCREEN / W_GAME;
+	public final static double FACTOR_ESCALADO_Y = H_SCREEN / H_GAME;
+	public final static double MARGEN_X = W_GAME / 2 - spriteSize / 2;
+	public final static double MARGEN_Y = H_GAME / 2 - spriteSize / 2;
+
 	public static int FPS, APS;
 	public static double delta;
 	// ==================================
@@ -37,7 +39,7 @@ public class vars
 	}
 
 	/// JSON mapas
-	public final static int nMaps = 3;
+	public final static int nMaps = 4;
 	public final static String getMapJSON ( String type, String n )
 	{
 		return "src/resources/file/map/" + type + "/mapa" + n + ".json";
