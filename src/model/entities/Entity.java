@@ -26,8 +26,9 @@ public abstract class Entity
 		this.vel = vel;
 		this.offset = offset;
 		cb = new ColisionBox(	vars.entitySpriteSize - offset.x * 2,
-								vars.entitySpriteSize - offset.y, pos.x + offset.x,
-								pos.y + offset.y);// mas exactitud (modificar)
+								vars.entitySpriteSize + 2 - offset.y, pos.x + offset.x,
+								pos.y + offset.y);// mas exactitud
+													// (modificar)
 		animations = new Hashtable<>();
 		System.out.println("Entity");
 	}

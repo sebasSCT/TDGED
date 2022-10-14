@@ -67,21 +67,22 @@ public class Loop
 				// -----------------
 
 				// Dibujar------------------
-				duc.draw();
-				fps++;
+
 				// ------------------
 
 				delta--;
 			}
 
-			// delta1 += tiempoTranscurrido / NS_POR_FRAME;
-			//
-			// // por qué esto está funcionando XDDDD ?????¡¡¡¡
-			// while ( delta1 >= 1 )
-			// {
-			// // Dibujar
-			// delta1--;
-			// }
+			delta1 += tiempoTranscurrido / NS_POR_FRAME;
+
+			// por qué esto está funcionando XDDDD ?????¡¡¡¡
+			while ( delta1 >= 1 )
+			{
+				// Dibujar
+				duc.draw();
+				fps++;
+				delta1--;
+			}
 
 			if ( System.nanoTime() - referenciaContador > NS_POR_SEGUNDO )
 			{

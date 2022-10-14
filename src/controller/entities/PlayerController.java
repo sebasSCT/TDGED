@@ -1,7 +1,6 @@
 package controller.entities;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import controller.scene.SpriteSheetController;
@@ -56,50 +55,23 @@ public class PlayerController
 
 	public void update ()
 	{
-		colisions();
+
 	}
 
-	private void colisions ()
+	public boolean colisions ( int player )
 	{
-		Rectangle fb[] = new Rectangle[4];
 
-		for ( int i = 0; i < players.length; i++ )
+		for ( ColisionBox cb : cbm )
 		{
-			fb[0] = new Rectangle(	players[i].getCB().getBox().x + 10,
-									players[i].getCB().getBox().y,
-									(int) players[i].getCB().getBox().getWidth(),
-									(int) players[i].getCB().getBox().getHeight());
-			fb[1] = new Rectangle(	players[i].getCB().getBox().x - 10,
-									players[i].getCB().getBox().y,
-									(int) players[i].getCB().getBox().getWidth(),
-									(int) players[i].getCB().getBox().getHeight());
-			fb[2] = new Rectangle(	players[i].getCB().getBox().x,
-									players[i].getCB().getBox().y + 10,
-									(int) players[i].getCB().getBox().getWidth(),
-									(int) players[i].getCB().getBox().getHeight());
-			fb[3] = new Rectangle(	players[i].getCB().getBox().x,
-									players[i].getCB().getBox().y - 10,
-									(int) players[i].getCB().getBox().getWidth(),
-									(int) players[i].getCB().getBox().getHeight());
-
-			for ( int j = 0; j < fb.length; j++ )
+			if ( players[player].getCB().getBox().intersects(cb.getBox()) )
 			{
-				for ( ColisionBox cb : cbm )
-				{
-					if ( fb[j].intersects(cb.getBox()) )
-					{
-						players[i].setInColision(true);
-					}
-
-					else
-					{
-						players[i].setInColision(false);
-					}
-				}
+				players[player].setInColision(true);
+				return true;
 			}
 
-			// if ( >= cbm)
 		}
+
+		return false;
 	}
 
 	public Player getPlayer ( int i )

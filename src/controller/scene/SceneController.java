@@ -2,9 +2,9 @@ package controller.scene;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import controller.entities.PlayerController;
-import model.logic.ColisionBox;
 import model.scene.GameScene;
 import model.staticTools.vars;
 import view.DrawScene;
@@ -50,32 +50,26 @@ public class SceneController
 
 	float tiempo = 0;
 	int i = 0;
+	// 9 * 16, 4 * 16, 128, 128)
+	Rectangle r = new Rectangle(10 * 16, 8 * 16, 16, 16);
+	Rectangle r2 = new Rectangle(9 * 16, 8 * 16, 128, 128);
 	public void update ()
 	{
 
-		// prueba de delta
-		// tiempo += vars.delta;
-
-		// System.out.println(pc.getPlayer(0).isInColision());
-
-		// pc.update();
-
-		// if ( !pc.getPlayer(0).isInColision() )
-		// {
-		pc.getPlayer(0).setPos(10 * vars.spriteSize, i * vars.delta);
-		i += 4;
-		// }
-
-		// else
-		// {
-		// i = 0;
-		// }
-		// pc.getPlayer(0).setPos(10 * vars.spriteSize, 9 * vars.spriteSize);
-
-		// tiempo = 0;
-
-		if ( i > 125 )
+		// Organizar mejor
+		if ( !pc.colisions(0) )
 		{
+			pc.getPlayer(0).setPos(10 * vars.spriteSize, i * vars.delta);
+		}
+		if ( !pc.colisions(1) )
+		{
+			pc.getPlayer(1).setPos(12 * vars.spriteSize, i * vars.delta);
+		}
+		i += 2;
+
+		if ( i > 200 )
+		{
+			pc.getPlayer(0).setPos(10 * vars.spriteSize, 1 * 16);
 			i = 0;
 		}
 
@@ -99,11 +93,13 @@ public class SceneController
 				pc.getPlayer(0).getCB().getBox().height);
 
 		g.setColor(Color.cyan);
-		for ( ColisionBox cb : currentScene.getMap().getColisions() )
-		{
-			g.drawRect(cb.getBox().x, cb.getBox().y, cb.getBox().width, cb.getBox().height);
 
-		}
+		// for ( ColisionBox cb : currentScene.getMap().getColisions() )
+		// {
+		// g.drawRect(cb.getBox().x, cb.getBox().y, cb.getBox().width,
+		// cb.getBox().height);
+		//
+		// }
 
 		// .-----------------------------------------------.
 	}
