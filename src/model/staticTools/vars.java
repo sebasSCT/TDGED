@@ -19,6 +19,7 @@ public class vars
 	public final static double FACTOR_ESCALADO_Y = H_SCREEN / H_GAME;
 	public final static double MARGEN_X = W_GAME / 2 - spriteSize / 2;
 	public final static double MARGEN_Y = H_GAME / 2 - spriteSize / 2;
+	public final static int screenOffSet = 5;
 
 	public static int FPS, APS;
 	public static double delta;

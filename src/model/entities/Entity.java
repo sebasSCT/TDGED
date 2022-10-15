@@ -13,22 +13,21 @@ public abstract class Entity
 	protected String id;
 	protected Point pos;
 	protected ColisionBox cb;
-	protected double ps, vel;
 	protected Point offset;
 
 	protected Hashtable<String, ArrayList<BufferedImage>> animations;
 
-	public Entity ( String id, Point pos, double ps, double vel, Point offset )
+	public Entity ( String id, Point pos, Point offset )
 	{
 		this.id = id;
 		this.pos = new Point(pos.x - offset.x, pos.y - offset.y);
-		this.ps = ps;
-		this.vel = vel;
 		this.offset = offset;
-		cb = new ColisionBox(	vars.entitySpriteSize - offset.x * 2,
+		cb = new ColisionBox(	vars.entitySpriteSize + 8 - offset.x * 2,
 								vars.entitySpriteSize + 2 - offset.y, pos.x + offset.x,
-								pos.y + offset.y);// mas exactitud
-													// (modificar)
+								pos.y + offset.y);
+		// mas exactitud
+		// (modificar)
+		// No valores tan relativos.
 		animations = new Hashtable<>();
 		System.out.println("Entity");
 	}
@@ -42,7 +41,7 @@ public abstract class Entity
 	{
 		pos.setLocation(x - offset.x, y - offset.y);
 		// pos.y = y;
-		cb.setBox(pos.x + offset.x, pos.y + offset.y);
+		cb.setBox(pos.x - 4 + offset.x, pos.y + offset.y);
 	}
 
 	public ColisionBox getCB ()

@@ -1,6 +1,5 @@
 package controller.scene;
 
-import java.awt.image.BufferedImage;
 import model.scene.SpriteSheet;
 import model.staticTools.vars;
 
@@ -9,7 +8,6 @@ public class SpriteSheetController
 	// guardar Spritesheets?
 
 	private SpriteSheet ss;
-	private int posicionX, posicionY;
 
 	// Constructor para tilesets
 	public SpriteSheetController ( String tileset )
@@ -30,7 +28,8 @@ public class SpriteSheetController
 
 	private void cargarSS ()
 	{
-		BufferedImage bi;
+		int posicionX, posicionY;
+
 		for ( int y = 0; y < ss.getHeight(); y++ )
 		{
 			for ( int x = 0; x < ss.getWidth(); x++ )
@@ -38,9 +37,8 @@ public class SpriteSheetController
 				posicionX = x * ss.getSpriteSize();
 				posicionY = y * ss.getSpriteSize();
 
-				bi = ss.getImg().getSubimage(posicionX, posicionY, ss.getSpriteSize(),
-						ss.getSpriteSize());
-				ss.getSprites()[x + y * ss.getWidth()] = bi;
+				ss.getSprites()[x + y * ss.getWidth()] = ss.getImg().getSubimage(posicionX,
+						posicionY, ss.getSpriteSize(), ss.getSpriteSize());
 			}
 		}
 	}

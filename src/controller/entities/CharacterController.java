@@ -8,15 +8,14 @@ import model.entities.Player;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
 
-public class PlayerController
+public class CharacterController extends ActiveEntityController
 {
 
 	private Player[] players;
-	private ArrayList<ColisionBox> cbm;
 
-	public PlayerController ( String id, Point pos, ArrayList<ColisionBox> cbm )
+	public CharacterController ( String id, Point pos, ArrayList<ColisionBox> cbm )
 	{
-		this.cbm = cbm;
+		super(cbm);
 
 		String[] ids = id.split(":");
 
@@ -41,7 +40,7 @@ public class PlayerController
 			{
 				ArrayList<BufferedImage> imgs = new ArrayList<>();
 
-				for ( int a = 0; a < 5; a++ )
+				for ( int a = 0; a < ssc.getSs().getWidth(); a++ )
 				{
 					imgs.add(ssc.getSs().getSprites()[a + (ssc.getSs().getWidth() * e)]);
 				}
@@ -56,22 +55,6 @@ public class PlayerController
 	public void update ()
 	{
 
-	}
-
-	public boolean colisions ( int player )
-	{
-
-		for ( ColisionBox cb : cbm )
-		{
-			if ( players[player].getCB().getBox().intersects(cb.getBox()) )
-			{
-				players[player].setInColision(true);
-				return true;
-			}
-
-		}
-
-		return false;
 	}
 
 	public Player getPlayer ( int i )

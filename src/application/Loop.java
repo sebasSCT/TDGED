@@ -7,7 +7,6 @@ public class Loop
 {
 
 	private boolean running = true;
-	@ SuppressWarnings ( "unused" )
 	private double delta, delta1;
 
 	public Loop ()

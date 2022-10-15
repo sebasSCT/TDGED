@@ -29,7 +29,7 @@ public class DrawMap
 			int y = 0, x = 0;
 			for ( BufferedImage img : layer )
 			{
-				int px = x * vars.spriteSize;
+				int px = x * vars.spriteSize + vars.screenOffSet;
 				int py = y * vars.spriteSize;
 
 				imgs.add(new Pair<Point, BufferedImage>(new Point(px, py), img));

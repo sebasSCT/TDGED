@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.awt.Point;
+import model.entities.active.Active;
 
 public class Player extends Active
 {

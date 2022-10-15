@@ -75,7 +75,7 @@ public class MapController
 					h = JSONgetters.getIntJSON(box, "height"),
 					x = JSONgetters.getIntJSON(box, "x"), y = JSONgetters.getIntJSON(box, "y");
 
-			mapa.getColisions().add(new ColisionBox(w, h, x, y));
+			mapa.getColisions().add(new ColisionBox(w, h, x + vars.screenOffSet, y));
 		}
 	}
 
