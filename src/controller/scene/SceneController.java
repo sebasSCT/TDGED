@@ -29,7 +29,7 @@ public class SceneController
 		loadScenes();
 
 		// Crear forma de elegir personaje
-		pc = new CharacterController(	"test_guy:test_guy", currentScene.getMap().getPosIni(),
+		pc = new CharacterController(	"test_guy", currentScene.getMap().getPosIni(),
 										currentScene.getMap().getColisions());
 		ds = new DrawScene(currentScene);
 		System.out.println("SceneController");
@@ -54,44 +54,95 @@ public class SceneController
 	{
 
 		// Organizar mejor
-		// pc.getPlayer(0).setPos(16 * vars.spriteSize, 6 * vars.spriteSize);
+		// pc.getPlayer(0).setPos(16 * vars.spriteSize, 5 * vars.spriteSize);
+		// pc.getPlayer(0).setPos(10 * vars.spriteSize,
+		// pc.getPlayer(0).getPos().y + 5 * vars.delta);
+
 		if ( !pc.colision((Active) pc.getPlayer(0)) )
 		{
-			pc.getPlayer(0).setPos(10 * vars.spriteSize, i * vars.delta);
+			pc.getPlayer(0).fall();
 		}
-		if ( !pc.colision((Active) pc.getPlayer(1)) )
+
+		if ( vars.kb.a.isPressed() )
 		{
-			pc.getPlayer(1).setPos(i * vars.delta, 10 * vars.spriteSize);
+			pc.getPlayer(0).move("left");
 		}
-		i += 2;
+		if ( vars.kb.d.isPressed() )
+		{
+			pc.getPlayer(0).move("right");
+		}
+		// if ( !pc.colision((Active) pc.getPlayer(1)) )
+		// {
+		// pc.getPlayer(1).setPos(i, 9);
+		// }
+		i += vars.delta;
 
 		if ( i > 200 )
 		{
-			pc.getPlayer(0).setPos(10 * vars.spriteSize, 1 * 16);
+			// pc.getPlayer(0).setPos(10, 1);
+			// pc.getPlayer(1).setPos(0, 9);
 			i = 0;
 		}
 
 	}
 
+	int x = 1;
+	double cont;
 	public void draw ( final Graphics g )
 	{
 		g.drawImage(s.getBG(), 0, 0, null);
 		ds.draw(g);
 
+		// KeyboardController.kb.keyTyped();
+
 		// test
 		// Clase de dibujar jugador (Crear)
-		g.drawImage(pc.getPlayer(0).getAnimations().get("a0").get(0),
-				pc.getPlayer(0).getPos().x, pc.getPlayer(0).getPos().y, null);
-		g.drawImage(pc.getPlayer(1).getAnimations().get("a1").get(0),
-				pc.getPlayer(1).getPos().x, pc.getPlayer(1).getPos().y, null);
+
+		// Animacion
+
+		if ( vars.kb.d.isPressed() )
+		{
+
+			if ( cont > 7.5 )
+			{
+				x++;
+				cont = 0;
+			}
+			if ( x == pc.getPlayer(0).getAnimations().get("a1").size() - 1 )
+			{
+				x = 1;
+			}
+
+			g.drawImage(pc.getPlayer(0).getAnimations().get("a1").get(x),
+					pc.getPlayer(0).getPos().x, pc.getPlayer(0).getPos().y, null);
+			cont += vars.delta;
+		}
+
+		else
+		{
+			x = 1;
+			cont = 0;
+			g.drawImage(pc.getPlayer(0).getAnimations().get("a1").get(0),
+					pc.getPlayer(0).getPos().x, pc.getPlayer(0).getPos().y, null);
+		}
+		if ( vars.kb.a.isPressed() )
+		{
+			// pc.getPlayer(0).move("right");
+		}
+
+		// Animacion
+
+		g.setColor(Color.red);
+		g.drawLine(5 * 16, 10 * 16, 13 * 16, 2 * 16); // GANCHO
 
 		g.setColor(Color.magenta);
 		g.drawRect(pc.getPlayer(0).getCB().getBox().x, pc.getPlayer(0).getCB().getBox().y,
 				pc.getPlayer(0).getCB().getBox().width,
 				pc.getPlayer(0).getCB().getBox().height);
-		g.drawRect(pc.getPlayer(1).getCB().getBox().x, pc.getPlayer(1).getCB().getBox().y,
-				pc.getPlayer(1).getCB().getBox().width,
-				pc.getPlayer(1).getCB().getBox().height);
+		// g.drawRect(pc.getPlayer(1).getCB().getBox().x,
+		// pc.getPlayer(1).getCB().getBox().y,
+		// pc.getPlayer(1).getCB().getBox().width,
+		// pc.getPlayer(1).getCB().getBox().height);
 
 		g.setColor(Color.pink);
 
@@ -100,6 +151,12 @@ public class SceneController
 			g.drawRect(cb.getBox().x, cb.getBox().y, cb.getBox().width, cb.getBox().height);
 
 		}
+
+		g.setColor(Color.white);
+		// for ( Rectangle r : pc.future )
+		// {
+		// g.drawRect(r.x, r.y, r.width, r.height);
+		// }
 
 		// .-----------------------------------------------.
 	}

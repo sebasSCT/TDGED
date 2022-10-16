@@ -35,6 +35,7 @@ public class DrawCanvas extends Canvas
 		setPreferredSize(new Dimension(width, height));
 		setFocusable(true);
 		requestFocus(true);
+		addKeyListener(vars.kb);
 	}
 
 	private BufferStrategy buffer;

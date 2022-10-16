@@ -1,6 +1,7 @@
 package model.staticTools;
 
 import java.awt.Font;
+import model.input.Keyboard;
 
 public class vars
 {
@@ -58,5 +59,17 @@ public class vars
 		return "src/resources/img/entity/" + t + "/" + n + ".png";
 	}
 	// ============================
+
+	// Teclado
+
+	public final static Keyboard kb = new Keyboard();
+
+	//
+
+	// Fisicas
+
+	public final static int gravity = 3;
+
+	//
 
 }

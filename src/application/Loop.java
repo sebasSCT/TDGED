@@ -6,14 +6,10 @@ import model.staticTools.vars;
 public class Loop
 {
 
-	private boolean running = true;
-	private double delta, delta1;
+	private static boolean running = true;
+	private static double delta;
 
-	public Loop ()
-	{
-	}
-
-	public void startLoop ( DUController duc )
+	public static void startLoop ( DUController duc )
 	{
 		int aps = 0, fps = 0;
 
@@ -22,12 +18,12 @@ public class Loop
 
 		// actualizaciones por segundo objetivo
 		final int APS_OBJETIVO = 60;
-		final int FPS_OBJETIVO = 60;
+		// final int FPS_OBJETIVO = 60;
 
 		// Descubrir cuantos nanosegundos deben transcurrir para que se
 		// actualice segun el objetivo
 		final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
-		final double NS_POR_FRAME = NS_POR_SEGUNDO / FPS_OBJETIVO;
+		// final double NS_POR_FRAME = NS_POR_SEGUNDO / FPS_OBJETIVO;
 
 		// Se atribuye una cantidad de tiempo en nanosegundos
 		long referenciaActualizacion = System.nanoTime();
@@ -37,7 +33,6 @@ public class Loop
 
 		// delta time
 		delta = 0;
-		delta1 = 0;
 
 		while ( running )
 		{
@@ -66,21 +61,11 @@ public class Loop
 				// -----------------
 
 				// Dibujar------------------
-
+				duc.draw();
+				fps++;
 				// ------------------
 
 				delta--;
-			}
-
-			delta1 += tiempoTranscurrido / NS_POR_FRAME;
-
-			// por qué esto está funcionando XDDDD ?????¡¡¡¡
-			while ( delta1 >= 1 )
-			{
-				// Dibujar
-				duc.draw();
-				fps++;
-				delta1--;
 			}
 
 			if ( System.nanoTime() - referenciaContador > NS_POR_SEGUNDO )

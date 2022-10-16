@@ -25,14 +25,9 @@ public class CharacterController extends ActiveEntityController
 			players[i] = new Player((i == 1) ? ids[1] : ids[0],
 									new Point(	pos.x * vars.spriteSize,
 												pos.y * vars.spriteSize),
-									10, 10, new Point(14, 17));
-			// OFFSET para
-			// nuevos
-			// sprites y
-			// dependiendo
-			// los
-			// personajes
-			// (enum) ?
+									1, 1, new Point(10, 18));
+			// OFFSET para nuevos sprites y dependiendo los personajes (enum) ?
+
 			SpriteSheetController ssc = new SpriteSheetController("player", (i == 1) ? ids[1]
 					: ids[0]);
 

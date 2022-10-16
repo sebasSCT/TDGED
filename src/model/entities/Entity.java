@@ -21,9 +21,10 @@ public abstract class Entity
 	{
 		this.id = id;
 		this.pos = new Point(pos.x - offset.x, pos.y - offset.y);
+		offset.x += 2;
 		this.offset = offset;
-		cb = new ColisionBox(	vars.entitySpriteSize + 8 - offset.x * 2,
-								vars.entitySpriteSize + 2 - offset.y, pos.x + offset.x,
+		cb = new ColisionBox(	vars.entitySpriteSize - offset.x - 12,
+								vars.entitySpriteSize - offset.y - 1, pos.x + offset.x,
 								pos.y + offset.y);
 		// mas exactitud
 		// (modificar)
@@ -39,9 +40,9 @@ public abstract class Entity
 
 	public void setPos ( double x, double y )
 	{
-		pos.setLocation(x - offset.x, y - offset.y);
-		// pos.y = y;
-		cb.setBox(pos.x - 4 + offset.x, pos.y + offset.y);
+		System.out.println("a");
+		pos.setLocation(x * vars.spriteSize - offset.x, y * vars.spriteSize - offset.y);
+		cb.setBox(pos.x + vars.screenOffSet - 4 + offset.x, pos.y + offset.y);
 	}
 
 	public ColisionBox getCB ()
