@@ -1,0 +1,30 @@
+
+
+
+
+//
+
+intentar mejorar velocidad si es necesario
+
+//
+
+//
+
+saltar de ser necesario
+
+//
+
+mejorar la logica para invocar jugadores
+
+//
+
+enemigos
+
+//
+
+detectar colisiones en cada direccion "independientemente"
+
+//
+
+mejorar clase animacion, llamada una vez por entidad y 
+cargar todas las animaciones allí (si es mas optimo)

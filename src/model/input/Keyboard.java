@@ -2,44 +2,50 @@ package model.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Hashtable;
 
 public class Keyboard implements KeyListener
 {
 
-	public Key a = new Key();
-	public Key d = new Key();
+	private Hashtable<Character, Key> keys = new Hashtable<>();
 
+	public void startKeys ()
+	{
+		// PLAYER 1
+		keys.put('w', new Key());
+		keys.put('a', new Key());
+		keys.put('s', new Key());
+		keys.put('d', new Key());
+
+		// PLAYER 2
+		keys.put('j', new Key());
+		keys.put('l', new Key());
+	}
+
+	// Mejorar con keycode de ser necesario
 	public void keyPressed ( KeyEvent e )
 	{
-		// System.out.println("Pressed: " + e.getKeyCode());
-
-		if ( e.getKeyCode() == KeyEvent.VK_A )
+		if ( keys.containsKey(e.getKeyChar()) )
 		{
-			a.pressed();
+			keys.get(e.getKeyChar()).pressed();
 		}
-		if ( e.getKeyCode() == KeyEvent.VK_D )
-		{
-			d.pressed();
-		}
-
 	}
 
 	public void keyReleased ( KeyEvent e )
 	{
-		// System.out.println("Released: " + e.getKeyCode());
-
-		if ( e.getKeyCode() == KeyEvent.VK_A )
+		if ( keys.containsKey(e.getKeyChar()) )
 		{
-			a.released();
-		}
-		if ( e.getKeyCode() == KeyEvent.VK_D )
-		{
-			d.released();
+			keys.get(e.getKeyChar()).released();
 		}
 	}
 
 	public void keyTyped ( KeyEvent e )
 	{
+	}
+
+	public boolean isPressed ( char key )
+	{
+		return keys.get(key).isPressed();
 	}
 
 }

@@ -40,7 +40,6 @@ public abstract class Entity
 
 	public void setPos ( double x, double y )
 	{
-		System.out.println("a");
 		pos.setLocation(x * vars.spriteSize - offset.x, y * vars.spriteSize - offset.y);
 		cb.setBox(pos.x + vars.screenOffSet - 4 + offset.x, pos.y + offset.y);
 	}

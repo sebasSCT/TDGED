@@ -10,6 +10,8 @@ public class Active extends Entity
 	protected boolean inColision;// Eliminar?
 
 	protected double vel, ps;
+	protected int g = vars.gravity;
+	protected boolean moving;
 
 	public Active ( String id, Point pos, double ps, double vel, Point offset )
 	{
@@ -32,8 +34,9 @@ public class Active extends Entity
 
 	public void fall ()
 	{
-		pos.y += vars.gravity * vars.delta;
+		pos.y += g * vars.delta;
 		cb.setBox(pos.x + offset.x, pos.y + offset.y);
+		moving = true;
 	}
 
 	public void move ( String direction )
@@ -46,12 +49,12 @@ public class Active extends Entity
 				break;
 
 			case "right":
-				pos.x += vel * vars.delta;
+				pos.x += vel;
 				cb.setBox(pos.x + offset.x, pos.y + offset.y);
 				break;
 
 			case "up":
-				pos.y -= vel * vars.delta;
+				pos.y -= vel;
 				cb.setBox(pos.x + offset.x, pos.y + offset.y);
 				break;
 
@@ -80,6 +83,26 @@ public class Active extends Entity
 	public void setPs ( double ps )
 	{
 		this.ps = ps;
+	}
+
+	public int getG ()
+	{
+		return g;
+	}
+
+	public void setG ( int g )
+	{
+		this.g = g;
+	}
+
+	public boolean isMoving ()
+	{
+		return moving;
+	}
+
+	public void setMoving ( boolean moving )
+	{
+		this.moving = moving;
 	}
 
 }
