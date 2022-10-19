@@ -12,17 +12,16 @@ import model.staticTools.vars;
 public class DrawCanvas extends Canvas
 {
 
-	// Clase para configurar y actualizar la pantalla de dibujado
+	private static final long serialVersionUID = 1L;
 
 	// Atributos
-	private static final long serialVersionUID = 1L;
 	private int width, height;
 
 	// Constructor
 	public DrawCanvas ( Point size )
 	{
-		this.width = (int) size.getX();
-		this.height = (int) size.getY();
+		this.width = size.x;
+		this.height = size.y;
 
 		canvasConfig();
 
@@ -70,24 +69,15 @@ public class DrawCanvas extends Canvas
 
 		// Escalado
 		g.scale(vars.FACTOR_ESCALADO_X, vars.FACTOR_ESCALADO_Y);
-		// g.scale(2, 2);
 
-		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-		// # DRAW AREA===================
-
-		/// #test
-		// test(g);
-
+		// Draw
 		sc.draw(g);
 
 		///
-		g.setColor(Color.yellow);
+		g.setColor(Color.white);
 		g.drawString("FPS: " + String.valueOf(vars.FPS), 210, 210);
 		g.drawString("APS: " + String.valueOf(vars.APS), 210, 220);
 		///
-
-		// #===========================
 
 		// Limpiar g
 		g.dispose();

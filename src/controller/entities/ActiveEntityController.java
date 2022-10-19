@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import model.entities.active.Active;
 import model.logic.ColisionBox;
+import model.staticTools.vars;
 import view.DrawAnimation;
 
 public abstract class ActiveEntityController
@@ -20,6 +21,11 @@ public abstract class ActiveEntityController
 	{
 		this.cbm = cbm;
 		this.da = new DrawAnimation();
+	}
+
+	public void startAnim ()
+	{
+		//
 	}
 
 	public void update ()
@@ -38,7 +44,7 @@ public abstract class ActiveEntityController
 			e.fall();
 			return;
 		}
-
+		e.setG(vars.gravity);
 		e.setMoving(false);
 	}
 

@@ -35,6 +35,7 @@ public class Active extends Entity
 	public void fall ()
 	{
 		pos.y += g * vars.delta;
+		g += (g >= 4) ? 0 : 1;
 		cb.setBox(pos.x + offset.x, pos.y + offset.y);
 		moving = true;
 	}

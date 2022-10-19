@@ -6,6 +6,7 @@ import view.DrawCanvas;
 import view.Window;
 
 // App controller o game controller (decision)
+//Draw Update Controller
 public class DUController
 {
 
@@ -22,11 +23,13 @@ public class DUController
 		System.out.println("DUController");
 	}
 
+	// Actualizar
 	public void update ()
 	{
 		sc.update();
 	}
 
+	// Dibujar
 	public void draw ()
 	{
 		c.draw(sc);

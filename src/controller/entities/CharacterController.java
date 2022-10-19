@@ -32,7 +32,6 @@ public class CharacterController extends ActiveEntityController
 
 			SpriteSheetController ssc = new SpriteSheetController("player", (i == 1) ? ids[1]
 					: ids[0]);
-
 			for ( int e = 0; e < ssc.getSs().getHeight(); e++ )
 			{
 				ArrayList<BufferedImage> imgs = new ArrayList<>();
@@ -92,24 +91,24 @@ public class CharacterController extends ActiveEntityController
 		{
 			players[0].move("left");
 			players[0].setMoving(true);
-			da.setAnimation("loop", 1, players[0].getAnimations().get("a0"),
+			da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
 					players[0].getPos());
-			return;
+
 		}
 		if ( vars.kb.isPressed('d') && !colision(players[0], 2) )
 		{
 			players[0].move("right");
 			players[0].setMoving(true);
-			da.setAnimation("loop", 1, players[0].getAnimations().get("a0"),
+			da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
 					players[0].getPos());
-			return;
+
 		}
 		if ( vars.kb.isPressed('w') )
 		{
 			players[0].setPos(1, 0);
-			da.setAnimation("loop", 1, players[0].getAnimations().get("a0"),
-					players[0].getPos());
-			return;
+			// da.setAnimation("loop", 1, players[0].getAnimations().get("a0"),
+			// players[0].getPos());
+
 		}
 	}
 
@@ -119,17 +118,17 @@ public class CharacterController extends ActiveEntityController
 		{
 			players[1].move("left");
 			players[1].setMoving(true);
-			da.setAnimation("loop", 1, players[1].getAnimations().get("a0"),
+			da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
 					players[1].getPos());
-			return;
+
 		}
 		if ( vars.kb.isPressed('l') && !colision(players[1], 2) )
 		{
 			players[1].move("right");
 			players[1].setMoving(true);
-			da.setAnimation("loop", 1, players[1].getAnimations().get("a0"),
+			da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
 					players[1].getPos());
-			return;
+
 		}
 	}
 
