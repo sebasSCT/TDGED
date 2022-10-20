@@ -4,7 +4,7 @@ import java.awt.Point;
 import model.entities.Entity;
 import model.staticTools.vars;
 
-public class Active extends Entity
+public abstract class Active extends Entity
 {
 
 	protected boolean inColision;// Eliminar?

@@ -6,21 +6,18 @@ import java.util.ArrayList;
 import model.entities.active.Active;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
-import view.DrawAnimation;
 
-public abstract class ActiveEntityController
+public abstract class ActiveEntityController extends EntityController
 {
 
 	protected ArrayList<ColisionBox> cbm;
 
-	protected DrawAnimation da;
-
-	public Rectangle future; // Para visualizar (eliminar)
+	private Rectangle future;
 
 	public ActiveEntityController ( ArrayList<ColisionBox> cbm )
 	{
+		super();
 		this.cbm = cbm;
-		this.da = new DrawAnimation();
 	}
 
 	public void startAnim ()
@@ -34,7 +31,7 @@ public abstract class ActiveEntityController
 
 	public void draw ( Graphics g )
 	{
-		da.draw(g);
+		super.draw(g);
 	}
 
 	protected void gravity ( Active e )
@@ -66,7 +63,6 @@ public abstract class ActiveEntityController
 				break;
 			case 2:
 				// DERECHA
-
 				future = new Rectangle(	e.getCB().getBox().x + (int) e.getVel(),
 										e.getCB().getBox().y, e.getCB().getBox().width,
 										e.getCB().getBox().height);

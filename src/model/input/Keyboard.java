@@ -11,6 +11,9 @@ public class Keyboard implements KeyListener
 
 	public void startKeys ()
 	{
+		keys.put('1', new Key());
+		keys.put('2', new Key());
+
 		// PLAYER 1
 		keys.put('w', new Key());
 		keys.put('a', new Key());

@@ -1,69 +1,76 @@
 package view;
 
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import model.entities.active.Active;
 
 // WORK IN PROGRESS NOSIRVE
 public class DrawAnimation
 {
 
-	private int time;
-	private ArrayList<BufferedImage> imgs;
-	private String type;
+	private float time = (float) 0.5;
+	private int ind = 1;
 	private float timeSection;
-	private Point pos;
+	private float cont;
 
-	public DrawAnimation ()
+	private String type;
+
+	private Active e;
+
+	public DrawAnimation ( Active e )
 	{
-		this.imgs = new ArrayList<>();
+		this.e = e;
+
+		timeSection = time / (float) 4;
+
+		System.out.println("DrawAnimation " + e.getID());
 	}
 
-	private float cont;
-	private float ind = 1;
 	public void draw ( Graphics g )
 	{
-		if ( !imgs.isEmpty() )
-		{
-			switch ( type )
-			{
-				case "loop":
-					loopAnim(g);
-					break;
-			}
-		}
+
+		// switch ( type )
+		// {
+		// case "loop":
+		loopAnim(g);
+		// break;
+		// }
+
+		// g.drawString("ind: " + ind, 270, 220);
+		// g.drawString("time: " + timeSection * (float) ind, 270, 230);
+
 	}
 
 	private void loopAnim ( Graphics g )
 	{
 
 		cont += 0.016;
-		// System.out.println("a: " + ind + " cont: " + cont + " timeSection: "
-		// + timeSection);
-		// System.out.println(timeSection * ind);
-		if ( timeSection * ind >= time )
+
+		if ( timeSection * (float) ind > time )
 		{
 			cont = 0;
 			ind = 1;
 		}
-		if ( cont >= timeSection * ind )
+
+		g.drawImage(e.getAnimations().get(type).get(ind - 1), e.getPos().x, e.getPos().y,
+				null);
+
+		if ( cont >= timeSection * (float) ind )
 		{
-			// System.out.println("si");
-			g.drawImage(imgs.get((int) ind - 1), pos.x, pos.y, null);
 			ind++;
 		}
+
 	}
 
-	public void setAnimation (	String type, int time, ArrayList<BufferedImage> imgs,
-								Point pos )
+	// test
+	public boolean equals ( Active e )
+	{
+		return e.equals(this.e);
+	}
+
+	public void setAnimation ( String type )
 	{
 		this.type = type;
-		this.time = time;
-		this.imgs = imgs;
-		this.pos = pos;
 
-		timeSection = (float) time / (float) imgs.size();
 	}
 
 }

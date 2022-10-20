@@ -26,9 +26,6 @@ public abstract class Entity
 		cb = new ColisionBox(	vars.entitySpriteSize - offset.x - 12,
 								vars.entitySpriteSize - offset.y - 1, pos.x + offset.x,
 								pos.y + offset.y);
-		// mas exactitud
-		// (modificar)
-		// No valores tan relativos.
 		animations = new Hashtable<>();
 		System.out.println("Entity");
 	}
@@ -52,6 +49,11 @@ public abstract class Entity
 	public Point getPos ()
 	{
 		return pos;
+	}
+
+	public String getID ()
+	{
+		return id;
 	}
 
 }
