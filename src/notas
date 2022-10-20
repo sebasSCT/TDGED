@@ -26,9 +26,13 @@ enemigos
 
 //
 
-mejorar clase animacion, llamada una vez por entidad y 
-cargar todas las animaciones allí (si es mas optimo)
+
 //
 
-tiempo para cada animacion y tipo de animacion identificable
-(de ser necesario)
+//
+
+Direccion de animaciones o aplicar a las entidades
+
+//
+
+lista enlazada para instrucciones al segundo jugador 

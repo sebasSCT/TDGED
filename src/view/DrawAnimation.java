@@ -29,9 +29,17 @@ public class DrawAnimation
 
 	private void startTypes ()
 	{
-		types.put("a0", (float) 2);
-		types.put("a1", (float) 0.5);
-		types.put("a2", (float) 0);
+		// idle
+		types.put("a0", (float) 2); // right
+		types.put("a1", (float) 2); // left
+
+		// walk
+		types.put("a2", (float) 0.5); // right
+		types.put("a3", (float) 0.5); // left
+
+		// falling
+		types.put("a4", (float) 0); // replace
+		types.put("a5", (float) 0);
 	}
 
 	public void draw ( Graphics g )
@@ -43,14 +51,15 @@ public class DrawAnimation
 		{
 			// LOOPANIMATIONS
 			case "a0":
-				loopAnim(g);
-
 			case "a1":
+			case "a2":
+			case "a3":
 				loopAnim(g);
 				break;
 
 			// STATICANIMATIONS
-			case "a2":
+			case "a4":
+			case "a5":
 				staticAnim(g);
 				break;
 		}

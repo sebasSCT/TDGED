@@ -16,8 +16,8 @@ public class vars
 	public final static double scale = 3;
 	public final static double W_SCREEN = 1280, H_SCREEN = 720;
 	public final static double W_GAME = W_SCREEN / scale, H_GAME = H_SCREEN / scale;
-	public final static double FACTOR_ESCALADO_X = 3; // W_SCREEN / W_GAME
-	public final static double FACTOR_ESCALADO_Y = 3; // H_SCREEN / H_GAME
+	public final static double FACTOR_ESCALADO_X = 2; // W_SCREEN / W_GAME
+	public final static double FACTOR_ESCALADO_Y = 2; // H_SCREEN / H_GAME
 	public final static double MARGEN_X = W_GAME / 2 - spriteSize / 2;
 	public final static double MARGEN_Y = H_GAME / 2 - spriteSize / 2;
 	public final static int screenOffSet = 5;

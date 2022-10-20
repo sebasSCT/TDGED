@@ -26,6 +26,7 @@ public class CharacterController extends ActiveEntityController
 								100, 1, new Point(10, 18)));
 			da.add(new DrawAnimation(ents.get(i)));
 			da.get(i).setAnimation("a0");
+			ents.get(i).setDirection("right");
 		}
 
 		for ( Active p : ents )
@@ -56,6 +57,7 @@ public class CharacterController extends ActiveEntityController
 		g.setColor(Color.yellow);
 		g.drawString("Falling: " + ents.get(0).isFalling(), 270, 210);
 		g.drawString("Walking: " + ents.get(0).isWalking(), 270, 220);
+		g.drawString("Direction: " + ents.get(0).getDirection(), 270, 230);
 
 	}
 
@@ -76,6 +78,7 @@ public class CharacterController extends ActiveEntityController
 		{
 			ents.get(0).move("left");
 			ents.get(0).setWalking(true);
+			ents.get(0).setDirection("left");
 			return;
 			// da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
 			// players[0].getPos());
@@ -85,6 +88,7 @@ public class CharacterController extends ActiveEntityController
 		{
 			ents.get(0).move("right");
 			ents.get(0).setWalking(true);
+			ents.get(0).setDirection("right");
 			return;
 			// da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
 			// players[0].getPos());
@@ -107,6 +111,7 @@ public class CharacterController extends ActiveEntityController
 		{
 			ents.get(1).move("left");
 			ents.get(1).setWalking(true);
+			ents.get(1).setDirection("left");
 			return;
 			// da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
 			// players[1].getPos());
@@ -116,6 +121,7 @@ public class CharacterController extends ActiveEntityController
 		{
 			ents.get(1).move("right");
 			ents.get(1).setWalking(true);
+			ents.get(1).setDirection("right");
 			return;
 			// da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
 			// players[1].getPos());

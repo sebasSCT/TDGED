@@ -32,17 +32,55 @@ public abstract class ActiveEntityController extends EntityController
 
 			if ( ents.get(i).isFalling() )
 			{
-				da.get(i).setAnimation("a2");
+				switch ( ents.get(i).getDirection() )
+				{
+					// Mas sprites de caida y lógica
+					case "left":
+						da.get(i).setAnimation("a5");
+						break;
+
+					case "right":
+						da.get(i).setAnimation("a4");
+						break;
+
+					// abajo (mismo sprite subir escaleras)
+					// arriba
+				}
+
 			}
 
 			if ( !ents.get(i).isFalling() && ents.get(i).isWalking() )
 			{
-				da.get(i).setAnimation("a1");
+				switch ( ents.get(i).getDirection() )
+				{
+					case "left":
+						da.get(i).setAnimation("a3");
+						break;
+
+					case "right":
+						da.get(i).setAnimation("a2");
+						break;
+
+					// abajo (mismo sprite subir escaleras)
+					// arriba
+				}
 			}
 
 			if ( !ents.get(i).isFalling() && !ents.get(i).isWalking() )
 			{
-				da.get(i).setAnimation("a0");
+				switch ( ents.get(i).getDirection() )
+				{
+					case "left":
+						da.get(i).setAnimation("a1");
+						break;
+
+					case "right":
+						da.get(i).setAnimation("a0");
+						break;
+
+					// abajo (mismo sprite subir escaleras)
+					// arriba
+				}
 			}
 
 		}

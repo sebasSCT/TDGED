@@ -14,6 +14,7 @@ public abstract class Entity
 	protected Point pos;
 	protected ColisionBox cb;
 	protected Point offset;
+	protected String direction;
 
 	protected Hashtable<String, ArrayList<BufferedImage>> animations;
 
@@ -54,6 +55,16 @@ public abstract class Entity
 	public String getID ()
 	{
 		return id;
+	}
+
+	public String getDirection ()
+	{
+		return direction;
+	}
+
+	public void setDirection ( String direction )
+	{
+		this.direction = direction;
 	}
 
 }
