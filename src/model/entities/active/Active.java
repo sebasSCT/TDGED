@@ -11,7 +11,7 @@ public abstract class Active extends Entity
 
 	protected double vel, ps;
 	protected int g = vars.gravity;
-	protected boolean moving;
+	protected boolean falling, walking;
 
 	public Active ( String id, Point pos, double ps, double vel, Point offset )
 	{
@@ -37,7 +37,7 @@ public abstract class Active extends Entity
 		pos.y += g * vars.delta;
 		g += (g >= 4) ? 0 : 1;
 		cb.setBox(pos.x + offset.x, pos.y + offset.y);
-		moving = true;
+		falling = true;
 	}
 
 	public void move ( String direction )
@@ -96,14 +96,24 @@ public abstract class Active extends Entity
 		this.g = g;
 	}
 
-	public boolean isMoving ()
+	public boolean isFalling ()
 	{
-		return moving;
+		return falling;
 	}
 
-	public void setMoving ( boolean moving )
+	public void setFalling ( boolean moving )
 	{
-		this.moving = moving;
+		this.falling = moving;
+	}
+
+	public boolean isWalking ()
+	{
+		return walking;
+	}
+
+	public void setWalking ( boolean walking )
+	{
+		this.walking = walking;
 	}
 
 }

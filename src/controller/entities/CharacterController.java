@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import model.entities.active.Active;
 import model.entities.active.Player;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
@@ -12,55 +13,38 @@ import view.DrawAnimation;
 public class CharacterController extends ActiveEntityController
 {
 
-	private Player[] players;
-
 	public CharacterController ( String id, Point pos, ArrayList<ColisionBox> cbm )
 	{
 		super(cbm);
 
 		String[] ids = id.split(":");
 
-		players = new Player[ids.length];
-		da = new DrawAnimation[ids.length];
-		for ( int i = 0; i < players.length; i++ )
+		for ( int i = 0; i < ids.length; i++ )
 		{
-			players[i] = new Player((i == 1) ? ids[1] : ids[0],
-									new Point(	pos.x * vars.spriteSize,
-												pos.y * vars.spriteSize),
-									100, 1, new Point(10, 18));
-			da[i] = new DrawAnimation(players[i]);
+			ents.add(new Player((i == 1) ? ids[1] : ids[0],
+								new Point(pos.x * vars.spriteSize, pos.y * vars.spriteSize),
+								100, 1, new Point(10, 18)));
+			da.add(new DrawAnimation(ents.get(i)));
+			da.get(i).setAnimation("a0");
 		}
 
-		for ( Player p : players )
+		for ( Active p : ents )
 		{
 			loadAnim("player", p.getID(), p);
-
 		}
-		da[0].setAnimation("a0");
-		da[1].setAnimation("a0");
 		System.out.println("PlayerController");
 	}
 
 	public void update ()
 	{
-		for ( Player p : players )
-		{
-			gravity(p);
-		}
 
 		move();
 
-		for ( int i = 0; i < players.length; i++ )
-		{
-			if ( players[i].isMoving() )
-			{
-				da[i].setAnimation("a1");
-			}
+		super.update();
 
-			else
-			{
-				da[i].setAnimation("a0");
-			}
+		for ( Active p : ents )
+		{
+			gravity(p);
 		}
 
 	}
@@ -69,14 +53,16 @@ public class CharacterController extends ActiveEntityController
 	{
 		super.draw(g);
 
-		g.setColor(Color.green);
-		g.drawString("Moving: " + players[0].isMoving(), 270, 210);
+		g.setColor(Color.yellow);
+		g.drawString("Falling: " + ents.get(0).isFalling(), 270, 210);
+		g.drawString("Walking: " + ents.get(0).isWalking(), 270, 220);
+
 	}
 
 	// for para mas de 2 jugadores
 	private void move ()
 	{
-		if ( players.length >= 2 )
+		if ( ents.size() >= 2 )
 		{
 			p2Keys();
 		}
@@ -86,54 +72,55 @@ public class CharacterController extends ActiveEntityController
 
 	private void p1Keys ()
 	{
-		if ( vars.kb.isPressed('a') && !colision(players[0], 3) )
+		if ( vars.kb.isPressed('a') && !colision(ents.get(0), 3) )
 		{
-			players[0].move("left");
-			players[0].setMoving(true);
+			ents.get(0).move("left");
+			ents.get(0).setWalking(true);
+			return;
 			// da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
 			// players[0].getPos());
 
 		}
-		if ( vars.kb.isPressed('d') && !colision(players[0], 2) )
+		if ( vars.kb.isPressed('d') && !colision(ents.get(0), 2) )
 		{
-			players[0].move("right");
-			players[0].setMoving(true);
+			ents.get(0).move("right");
+			ents.get(0).setWalking(true);
+			return;
 			// da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
 			// players[0].getPos());
 
 		}
 		if ( vars.kb.isPressed('w') )
 		{
-			players[0].setPos(1, 0);
+			ents.get(0).setPos(1, 0);
+			ents.get(1).setPos(1, 0);
 			// da.setAnimation("loop", 1, players[0].getAnimations().get("a0"),
 			// players[0].getPos());
 
 		}
+		ents.get(0).setWalking(false);
 	}
 
 	private void p2Keys ()
 	{
-		if ( vars.kb.isPressed('j') && !colision(players[1], 3) )
+		if ( vars.kb.isPressed('j') && !colision(ents.get(1), 3) )
 		{
-			players[1].move("left");
-			players[1].setMoving(true);
+			ents.get(1).move("left");
+			ents.get(1).setWalking(true);
+			return;
 			// da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
 			// players[1].getPos());
 
 		}
-		if ( vars.kb.isPressed('l') && !colision(players[1], 2) )
+		if ( vars.kb.isPressed('l') && !colision(ents.get(1), 2) )
 		{
-			players[1].move("right");
-			players[1].setMoving(true);
+			ents.get(1).move("right");
+			ents.get(1).setWalking(true);
+			return;
 			// da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
 			// players[1].getPos());
 
 		}
+		ents.get(1).setWalking(false);
 	}
-
-	public Player getPlayer ( int i )
-	{
-		return players[i];
-	}
-
 }

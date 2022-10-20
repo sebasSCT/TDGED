@@ -50,79 +50,12 @@ public class SceneController
 		cc.update();
 	}
 
-	int x = 1;
-	double cont;
 	public void draw ( final Graphics g )
 	{
 		g.drawImage(s.getBG(), 0, 0, null);
 		ds.draw(g);
 		cc.draw(g);
 
-		// test
-		// Clase de dibujar jugador (Crear)
-		// Animacion
-
-		// if ( vars.kb.isPressed('d') )
-		// {
-		// if ( cont > 7.5 )
-		// {
-		// x++;
-		// cont = 0;
-		// }
-		// if ( x == cc.getPlayer(0).getAnimations().get("a1").size() - 1 )
-		// {
-		// x = 1;
-		// }
-		//
-		// for ( int i = 0; i < 2; i++ )
-		// {
-		// g.drawImage(cc.getPlayer(i).getAnimations().get("a1").get(x),
-		// cc.getPlayer(i).getPos().x, cc.getPlayer(i).getPos().y, null);
-		// }
-		// cont += vars.delta;
-		// }
-		//
-		// else
-		// {
-		// x = 1;
-		// cont = 0;
-		// for ( int i = 0; i < 2; i++ )
-		// {
-		// g.drawImage(cc.getPlayer(i).getAnimations().get("a1").get(0),
-		// cc.getPlayer(i).getPos().x, cc.getPlayer(i).getPos().y, null);
-		// }
-		// }
-		// if ( vars.kb.isPressed('a') )
-		// {}
-
-		// Animacion end
-
-		// g.setColor(Color.red);
-		// g.drawLine(5 * 16, 10 * 16, 13 * 16, 2 * 16); // GANCHO
-
-		// g.setColor(Color.white);
-		// // for ( Rectangle r : cc.future )
-		// // {
-		// Rectangle r dd= cc.future;
-		// g.drawRect(r.x, r.y, r.width, r.height);
-		// // }
-		//
-		// g.setColor(Color.magenta);
-		// g.drawRect(cc.getPlayer(0).getCB().getBox().x,
-		// cc.getPlayer(0).getCB().getBox().y,
-		// cc.getPlayer(0).getCB().getBox().width,
-		// cc.getPlayer(0).getCB().getBox().height);
-		//
-		// g.setColor(Color.pink);
-		//
-		// for ( ColisionBox cb : currentScene.getMap().getColisions() )
-		// {
-		// g.drawRect(cb.getBox().x, cb.getBox().y, cb.getBox().width,
-		// cb.getBox().height);
-		//
-		// }
-
-		// .-----------------------------------------------.
 	}
 
 	public void setCS ( int ind )

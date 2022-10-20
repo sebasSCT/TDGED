@@ -20,13 +20,32 @@ public abstract class ActiveEntityController extends EntityController
 		this.cbm = cbm;
 	}
 
-	public void startAnim ()
-	{
-		//
-	}
-
 	public void update ()
 	{
+		animate();
+	}
+
+	protected void animate ()
+	{
+		for ( int i = 0; i < ents.size(); i++ )
+		{
+
+			if ( ents.get(i).isFalling() )
+			{
+				da.get(i).setAnimation("a2");
+			}
+
+			if ( !ents.get(i).isFalling() && ents.get(i).isWalking() )
+			{
+				da.get(i).setAnimation("a1");
+			}
+
+			if ( !ents.get(i).isFalling() && !ents.get(i).isWalking() )
+			{
+				da.get(i).setAnimation("a0");
+			}
+
+		}
 	}
 
 	public void draw ( Graphics g )
@@ -42,7 +61,7 @@ public abstract class ActiveEntityController extends EntityController
 			return;
 		}
 		e.setG(vars.gravity);
-		e.setMoving(false);
+		e.setFalling(false);
 	}
 
 	protected boolean colision ( Active e, int side )

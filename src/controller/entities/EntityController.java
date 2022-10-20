@@ -10,10 +10,13 @@ import view.DrawAnimation;
 public abstract class EntityController
 {
 
-	protected DrawAnimation[] da;
+	protected ArrayList<DrawAnimation> da;
+	protected ArrayList<Active> ents;
 
 	public EntityController ()
 	{
+		this.ents = new ArrayList<>();
+		this.da = new ArrayList<>();
 	}
 
 	public void draw ( Graphics g )
@@ -22,6 +25,14 @@ public abstract class EntityController
 		{
 			d.draw(g);
 		}
+	}
+
+	public void update ()
+	{
+	}
+
+	protected void animate ()
+	{
 	}
 
 	protected void loadAnim ( String type, String tileset, Active e )
