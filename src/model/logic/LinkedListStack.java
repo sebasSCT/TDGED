@@ -1,44 +1,19 @@
 package model.logic;
 
-public class LinkedListTail
+public class LinkedListStack
 {
 
 	private Node head;
 	int nodes = 0;
 
-	public LinkedListTail ()
+	public LinkedListStack ()
 	{
 	}
 
 	public void addNode ( Object value )
 	{
-		if ( nodes == 0 )
-		{
-			head = new Node(value, null);
-			nodes++;
-			return;
-		}
-		if ( nodes == 1 )
-		{
-			head.setNext(new Node(value, null));
-			nodes++;
-			return;
-		}
-
-		head.setNext(addTail(value, 0, head));
+		head = new Node(value, head);
 		nodes++;
-	}
-
-	public Node addTail ( Object value, int i, Node aux )
-	{
-		if ( i == nodes - 1 )
-		{
-			return new Node(value, null);
-		}
-		aux = aux.getNext();
-		aux.setNext(addTail(value, i + 1, aux));
-		return aux;
-
 	}
 
 	public void delHead ()
