@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Hashtable;
 import model.entities.active.Active;
@@ -30,8 +31,8 @@ public class DrawAnimation
 	private void startTypes ()
 	{
 		// idle
-		types.put("a0", (float) 2); // right
-		types.put("a1", (float) 2); // left
+		types.put("a0", (float) 1); // right
+		types.put("a1", (float) 1); // left
 
 		// walk
 		types.put("a2", (float) 0.5); // right
@@ -63,6 +64,9 @@ public class DrawAnimation
 				staticAnim(g);
 				break;
 		}
+
+		g.setColor(Color.white);
+		g.drawString("entity", e.getPos().x + 5, e.getPos().y + 5);
 
 	}
 

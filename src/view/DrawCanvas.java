@@ -74,9 +74,9 @@ public class DrawCanvas extends Canvas
 		sc.draw(g);
 
 		///
-		g.setColor(Color.white);
-		g.drawString("FPS: " + String.valueOf(vars.FPS), 210, 210);
-		g.drawString("APS: " + String.valueOf(vars.APS), 210, 220);
+		g.setColor(Color.black);
+		g.drawString("FPS: " + String.valueOf(vars.FPS), 10, 10);
+		g.drawString("APS: " + String.valueOf(vars.APS), 10, 20);
 		///
 
 		// Limpiar g

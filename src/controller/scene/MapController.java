@@ -39,6 +39,7 @@ public class MapController
 		JSONArray layers = JSONgetters.getArrayJSON(global.get("layers").toString());
 
 		String[] spriteLy;
+		int fg = 0;
 		for ( Object layer : layers )
 		{
 			Object ly = JSONgetters.getObjectJSON(layer.toString()).get("type").toString();
@@ -49,8 +50,13 @@ public class MapController
 				sprites = sprites.toString().replace("[", "");
 				sprites = sprites.toString().replace("]", "");
 				spriteLy = sprites.toString().split(",");
-				loadLayer(spriteLy,
-						JSONgetters.getObjectJSON(layer.toString()).get("tileset").toString());
+
+				int tileset = JSONgetters.getIntJSON((JSONObject) layer, "tileset");
+				JSONArray tilesets = JSONgetters.getArrayJSON(
+						global.get("tilesets").toString());
+				fg = JSONgetters.getIntJSON((JSONObject) tilesets.get(tileset), "firstgid");
+
+				loadLayer(spriteLy, tileset, fg);
 			}
 
 			if ( ly.toString().contains("objectgroup") )
@@ -62,7 +68,6 @@ public class MapController
 				loadColisions(colisions);
 
 			}
-
 		}
 	}
 
@@ -79,19 +84,17 @@ public class MapController
 		}
 	}
 
-	private void loadLayer ( String[] spriteLy, String tileSet )
+	private void loadLayer ( String[] spriteLy, int tileSet, int firstgid )
 	{
-		SpriteSheetController ssc = new SpriteSheetController(tileSet);
+		SpriteSheetController ssc = new SpriteSheetController(String.valueOf(tileSet));
 		ArrayList<BufferedImage> sprites = new ArrayList<>();
 		BufferedImage bi;
 		for ( int i = 0; i < spriteLy.length; i++ )
 		{
-			// Puede ser necesario extraer firstgid del archivo JSON para el
-			// (-1)
-
-			bi = (spriteLy[i].equals("0")) ? ssc.getSs().getSprites()[5]
-					: ssc.getSs().getSprites()[Integer.parseInt(spriteLy[i]) - 1];
+			bi = (spriteLy[i].equals("0")) ? ssc.getSs().getSprites()[0]
+					: ssc.getSs().getSprites()[Integer.parseInt(spriteLy[i]) - firstgid];
 			sprites.add(bi);
+
 		}
 
 		mapa.getSpriteLayers().add(sprites);

@@ -25,7 +25,7 @@ public class SceneController
 		loadScenes();
 
 		// Crear forma de elegir personaje
-		cc = new CharacterController(	"test_guy:test_guy", currentScene.getMap().getPosIni(),
+		cc = new CharacterController(	"santy:santy", currentScene.getMap().getPosIni(),
 										currentScene.getMap().getColisions());
 		ds = new DrawScene(currentScene);
 		System.out.println("SceneController");
@@ -42,7 +42,7 @@ public class SceneController
 			scenes.add(s);
 		}
 
-		currentScene = scenes.get(3);
+		currentScene = scenes.get(4);
 	}
 
 	public void update ()

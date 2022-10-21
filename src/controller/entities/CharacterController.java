@@ -54,14 +54,13 @@ public class CharacterController extends ActiveEntityController
 	{
 		super.draw(g);
 
-		g.setColor(Color.yellow);
-		g.drawString("Falling: " + ents.get(0).isFalling(), 270, 210);
-		g.drawString("Walking: " + ents.get(0).isWalking(), 270, 220);
-		g.drawString("Direction: " + ents.get(0).getDirection(), 270, 230);
+		g.setColor(Color.black);
+		g.drawString("Falling: " + ents.get(0).isFalling(), 10, 30);
+		g.drawString("Walking: " + ents.get(0).isWalking(), 10, 40);
+		g.drawString("Direction: " + ents.get(0).getDirection(), 10, 50);
 
 	}
 
-	// for para mas de 2 jugadores
 	private void move ()
 	{
 		if ( ents.size() >= 2 )
@@ -80,8 +79,6 @@ public class CharacterController extends ActiveEntityController
 			ents.get(0).setWalking(true);
 			ents.get(0).setDirection("left");
 			return;
-			// da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
-			// players[0].getPos());
 
 		}
 		if ( vars.kb.isPressed('d') && !colision(ents.get(0), 2) )
@@ -90,16 +87,12 @@ public class CharacterController extends ActiveEntityController
 			ents.get(0).setWalking(true);
 			ents.get(0).setDirection("right");
 			return;
-			// da.setAnimation("loop", 1, players[0].getAnimations().get("a1"),
-			// players[0].getPos());
 
 		}
 		if ( vars.kb.isPressed('w') )
 		{
-			ents.get(0).setPos(1, 0);
-			ents.get(1).setPos(1, 0);
-			// da.setAnimation("loop", 1, players[0].getAnimations().get("a0"),
-			// players[0].getPos());
+			ents.get(0).setPos(19, 1);
+			ents.get(1).setPos(19, 1);
 
 		}
 		ents.get(0).setWalking(false);
@@ -113,8 +106,6 @@ public class CharacterController extends ActiveEntityController
 			ents.get(1).setWalking(true);
 			ents.get(1).setDirection("left");
 			return;
-			// da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
-			// players[1].getPos());
 
 		}
 		if ( vars.kb.isPressed('l') && !colision(ents.get(1), 2) )
@@ -123,8 +114,6 @@ public class CharacterController extends ActiveEntityController
 			ents.get(1).setWalking(true);
 			ents.get(1).setDirection("right");
 			return;
-			// da.setAnimation("loop", 1, players[1].getAnimations().get("a1"),
-			// players[1].getPos());
 
 		}
 		ents.get(1).setWalking(false);
