@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.entities.active.Active;
 import model.entities.active.Player;
 import model.logic.ColisionBox;
+import model.logic.LinkedListTail;
 import model.staticTools.vars;
 import view.DrawAnimation;
 
@@ -33,6 +34,9 @@ public class CharacterController extends ActiveEntityController
 		{
 			loadAnim("player", p.getID(), p);
 		}
+
+		////
+		listIns();
 		System.out.println("PlayerController");
 	}
 
@@ -61,6 +65,8 @@ public class CharacterController extends ActiveEntityController
 
 	}
 
+	boolean startIns = false; // prueba
+	boolean complete = true;
 	private void move ()
 	{
 		if ( ents.size() >= 2 )
@@ -68,6 +74,82 @@ public class CharacterController extends ActiveEntityController
 			p2Keys();
 		}
 		p1Keys();
+
+		// Instrucciones prueba (mover)
+
+		if ( vars.kb.isPressed('s') )
+		{
+			startIns = true;
+		}
+
+		if ( startIns && !ins.equals("empty") )
+		{
+			instructions();
+			if ( time >= 1 )
+			{
+				if ( complete )
+				{
+					ins = list.unstack().toString();
+					time = 0;
+				}
+			}
+
+			time += (float) 0.016;
+		}
+
+	}
+
+	LinkedListTail list = new LinkedListTail(); // prueba
+
+	private void listIns ()
+	{
+		list.addNode("move:left");
+		list.addNode("move:right");
+		list.addNode("move:left");
+		list.addNode("moveto:player1");
+		ins = list.unstack().toString();
+	}
+
+	float time;
+	String ins;
+	private void instructions ()
+	{
+		String[] inspart = ins.split(":");
+		switch ( inspart[0] )
+		{
+			case "move":
+				if ( !ins.equals("empty") )
+				{
+					ents.get(1).move(inspart[1]);
+					ents.get(1).setDirection(inspart[1]);
+					return;
+				}
+				ents.get(1).setWalking(false);
+				break;
+
+			case "moveto":
+				complete = false;
+				if ( ents.get(0).getPos().x != ents.get(1).getPos().x )
+				{
+					if ( ents.get(0).getPos().x < ents.get(1).getPos().x )
+					{
+						ents.get(1).move("left");
+						ents.get(1).setDirection("left");
+					}
+
+					else
+					{
+						ents.get(1).move("right");
+						ents.get(1).setDirection("right");
+					}
+				}
+
+				else
+				{
+					complete = true;
+				}
+				break;
+		}
 
 	}
 

@@ -7,8 +7,6 @@ import model.staticTools.vars;
 public abstract class Active extends Entity
 {
 
-	protected boolean inColision;// Eliminar?
-
 	protected double vel, ps;
 	protected int g = vars.gravity;
 	protected boolean falling, walking;
@@ -19,18 +17,6 @@ public abstract class Active extends Entity
 		this.vel = vel;
 		this.pos = pos;
 	}
-
-	// Eliminar ? ****
-	public boolean isInColision ()
-	{
-		return inColision;
-	}
-
-	public void setInColision ( boolean inColision )
-	{
-		this.inColision = inColision;
-	}
-	// ***********
 
 	public void fall ()
 	{
@@ -47,11 +33,13 @@ public abstract class Active extends Entity
 			case "left":
 				pos.x -= vel;
 				cb.setBox(pos.x + offset.x, pos.y + offset.y);
+				walking = true;
 				break;
 
 			case "right":
 				pos.x += vel;
 				cb.setBox(pos.x + offset.x, pos.y + offset.y);
+				walking = true;
 				break;
 
 			case "up":
