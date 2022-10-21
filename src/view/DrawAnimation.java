@@ -66,7 +66,7 @@ public class DrawAnimation
 		}
 
 		g.setColor(Color.white);
-		g.drawString("entity", e.getPos().x + 5, e.getPos().y + 5);
+		// g.drawString("entity", e.getPos().x + 5, e.getPos().y + 5);
 
 	}
 

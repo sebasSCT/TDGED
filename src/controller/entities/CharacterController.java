@@ -62,6 +62,9 @@ public class CharacterController extends ActiveEntityController
 		g.drawString("Falling: " + ents.get(0).isFalling(), 10, 30);
 		g.drawString("Walking: " + ents.get(0).isWalking(), 10, 40);
 		g.drawString("Direction: " + ents.get(0).getDirection(), 10, 50);
+		g.drawString("entity", ents.get(1).getPos().x + 5, ents.get(1).getPos().y + 5);
+		g.setColor(Color.green);
+		g.drawString("player", ents.get(0).getPos().x + 5, ents.get(0).getPos().y + 5);
 
 	}
 
@@ -85,7 +88,7 @@ public class CharacterController extends ActiveEntityController
 		if ( startIns && !ins.equals("empty") )
 		{
 			instructions();
-			if ( time >= 1 )
+			if ( time >= 3 )
 			{
 				if ( complete )
 				{
@@ -106,7 +109,8 @@ public class CharacterController extends ActiveEntityController
 		list.addNode("move:left");
 		list.addNode("move:right");
 		list.addNode("move:left");
-		list.addNode("moveto:player1");
+		list.addNode("moveto:player");
+		list.addNode("follow:player");
 		list.imprimir();
 		ins = list.unstack().toString();
 	}
@@ -149,6 +153,26 @@ public class CharacterController extends ActiveEntityController
 				{
 					complete = true;
 				}
+				break;
+
+			case "follow":
+				complete = false;
+
+				if ( ents.get(1).getPos().x != ents.get(0).getPos().x )
+				{
+					if ( ents.get(1).getPos().x < ents.get(0).getPos().x - 30 )
+					{
+						ents.get(1).move("right");
+						ents.get(1).setDirection("right");
+					}
+
+					if ( ents.get(1).getPos().x > ents.get(0).getPos().x + 30 )
+					{
+						ents.get(1).move("left");
+						ents.get(1).setDirection("left");
+					}
+				}
+
 				break;
 		}
 
