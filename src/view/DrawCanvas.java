@@ -30,11 +30,17 @@ public class DrawCanvas extends Canvas
 
 	private void canvasConfig ()
 	{
+		// Para que jsvs no refuerce el repintado
 		setIgnoreRepaint(true);
+		// Asginar dimension de lo de adentro
 		setPreferredSize(new Dimension(width, height));
+		// Para que la ventana este en el foco y se pueda interactuar
 		setFocusable(true);
+		// Lo mismo pero pide focos
 		requestFocus(true);
+		// Inicia los controles del pj
 		vars.kb.startKeys();
+		// Agrega las teclas al escuchador
 		addKeyListener(vars.kb);
 	}
 
@@ -49,7 +55,7 @@ public class DrawCanvas extends Canvas
 		buffer = getBufferStrategy();
 
 		// Si el buffer es diferente de null, se crea una nueva estragia de
-		// buffer
+		// buffer, se reinicia al volver a ejecutar la APPPPPPPPPPPP...XXX.
 		if ( buffer == null )
 		{
 			createBufferStrategy(3);
@@ -60,29 +66,29 @@ public class DrawCanvas extends Canvas
 		// aqui los Graphics dibujaran dentro del buffer
 		g = (Graphics2D) buffer.getDrawGraphics();
 
-		//
+		// Fuente
 		g.setFont(vars.font);
 
-		// back
+		// Fondo
 		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
 
-		// Escalado
+		// Escalado en la ventana
 		g.scale(vars.FACTOR_ESCALADO_X, vars.FACTOR_ESCALADO_Y);
 
 		// Draw
 		sc.draw(g);
 
-		///
+		/// Estetica sisi
 		g.setColor(Color.black);
 		g.drawString("FPS: " + String.valueOf(vars.FPS), 10, 10);
 		g.drawString("APS: " + String.valueOf(vars.APS), 10, 20);
 		///
 
-		// Limpiar g
+		// Limpiar g, cada que inicia
 		g.dispose();
 
-		// Mostrar el contenido del buffer
+		// Mostrar el contenido del buffer creado
 		buffer.show();
 
 	}

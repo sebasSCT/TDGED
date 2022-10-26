@@ -1,5 +1,11 @@
-package model.logic;
+package model.logic.dataStructure;
 
+/**
+ * Pachamama
+ * 
+ * @author sebas_awitvuh
+ *
+ */
 public class LinkedListTail
 {
 

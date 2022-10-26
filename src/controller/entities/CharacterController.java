@@ -7,13 +7,31 @@ import java.util.ArrayList;
 import model.entities.active.Active;
 import model.entities.active.Player;
 import model.logic.ColisionBox;
-import model.logic.LinkedListTail;
+import model.logic.dataStructure.LinkedListTail;
 import model.staticTools.vars;
 import view.DrawAnimation;
 
+/**
+ * Controlador del Jugardor, extiende de ActiveEntityController para asignar
+ * fisicas y demas.
+ * 
+ * @author sebas_awitvuh, Juan
+ *
+ */
 public class CharacterController extends ActiveEntityController
 {
 
+	/**
+	 * Contructor de la clase del controlador
+	 * 
+	 * @param id
+	 *            representa el id del personaje y se parte con split para
+	 *            conocer el personaje seleccionado
+	 * @param pos
+	 *            representa la posicion donde estara el peronaje
+	 * @param cbm
+	 *            representa la caja de colisiones con el mapa (todas)
+	 */
 	public CharacterController ( String id, Point pos, ArrayList<ColisionBox> cbm )
 	{
 		super(cbm);
@@ -25,13 +43,16 @@ public class CharacterController extends ActiveEntityController
 			ents.add(new Player((i == 1) ? ids[1] : ids[0],
 								new Point(pos.x * vars.spriteSize, pos.y * vars.spriteSize),
 								100, 1, new Point(10, 18)));
+			// Agrega las animaciones al personaje
 			da.add(new DrawAnimation(ents.get(i)));
+			// Setea animaciones
 			da.get(i).setAnimation("a0");
 			ents.get(i).setDirection("right");
 		}
 
 		for ( Active p : ents )
 		{
+			// Carga las animaciones
 			loadAnim("player", p.getID(), p);
 		}
 
@@ -40,6 +61,9 @@ public class CharacterController extends ActiveEntityController
 		System.out.println("PlayerController");
 	}
 
+	/**
+	 * Actualiza lo referente al personaje
+	 */
 	public void update ()
 	{
 
@@ -54,6 +78,7 @@ public class CharacterController extends ActiveEntityController
 
 	}
 
+	// Dibuja los personaje
 	public void draw ( Graphics g )
 	{
 		super.draw(g);
@@ -62,6 +87,7 @@ public class CharacterController extends ActiveEntityController
 		g.drawString("Falling: " + ents.get(0).isFalling(), 10, 30);
 		g.drawString("Walking: " + ents.get(0).isWalking(), 10, 40);
 		g.drawString("Direction: " + ents.get(0).getDirection(), 10, 50);
+		g.setColor(Color.white);
 		g.drawString("entity", ents.get(1).getPos().x + 5, ents.get(1).getPos().y + 5);
 		g.setColor(Color.green);
 		g.drawString("player", ents.get(0).getPos().x + 5, ents.get(0).getPos().y + 5);
@@ -117,6 +143,8 @@ public class CharacterController extends ActiveEntityController
 
 	float time;
 	String ins;
+
+	// Movimiento del segundo pj "IA".
 	private void instructions ()
 	{
 		String[] inspart = ins.split(":");
@@ -178,6 +206,10 @@ public class CharacterController extends ActiveEntityController
 
 	}
 
+	/**
+	 * Clase que se encarga de gestionar el movimiento del personaje con las
+	 * teclas del jugador 1.
+	 */
 	private void p1Keys ()
 	{
 		if ( vars.kb.isPressed('a') && !colision(ents.get(0), 3) )
@@ -205,6 +237,10 @@ public class CharacterController extends ActiveEntityController
 		ents.get(0).setWalking(false);
 	}
 
+	/**
+	 * Clase que se encarga de gestionar el movimiento del personaje con las
+	 * teclas del jugador 2.
+	 */
 	private void p2Keys ()
 	{
 		if ( vars.kb.isPressed('j') && !colision(ents.get(1), 3) )

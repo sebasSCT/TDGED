@@ -7,9 +7,18 @@ import model.entities.active.Active;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
 
+/**
+ * Clase ActiveEntityController que extiende de EntityController, esta se
+ * encarga de controlar la logica de las entidades activas, como las fisicas,
+ * movimiendo, direcciones, etc.
+ * 
+ * @author sebas_awitvuh
+ *
+ */
 public abstract class ActiveEntityController extends EntityController
 {
 
+	// ArrayList de colisiones
 	protected ArrayList<ColisionBox> cbm;
 
 	private Rectangle future;
@@ -102,6 +111,16 @@ public abstract class ActiveEntityController extends EntityController
 		e.setFalling(false);
 	}
 
+	/**
+	 * Colisiones segundo el movimiento
+	 * 
+	 * @param e
+	 *            instancia de la clase Active la cual contiene datos sobre
+	 *            colisione, fisicas y movimientos.
+	 * @param side
+	 *            un entero que representa un case con cada movimiento.
+	 * @return retorna true si hay colision , false sino.
+	 */
 	protected boolean colision ( Active e, int side )
 	{
 

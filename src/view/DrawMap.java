@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javafx.util.Pair;
+import model.logic.dataStructure.Pair;
 import model.scene.GameMap;
 import model.staticTools.vars;
 
@@ -45,7 +45,7 @@ public class DrawMap
 	{
 		for ( Pair<Point, BufferedImage> img : imgs )
 		{
-			g.drawImage(img.getValue(), img.getKey().x, img.getKey().y, null);
+			g.drawImage(img.getB(), img.getA().x, img.getA().y, null);
 		}
 	}
 }
