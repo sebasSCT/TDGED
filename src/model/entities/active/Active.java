@@ -18,42 +18,6 @@ public abstract class Active extends Entity
 		this.pos = pos;
 	}
 
-	public void fall ()
-	{
-		pos.y += g * vars.delta;
-		g += (g >= 4) ? 0 : 1;
-		cb.setBox(pos.x + offset.x, pos.y + offset.y);
-		falling = true;
-	}
-
-	public void move ( String direction )
-	{
-		switch ( direction )
-		{
-			case "left":
-				pos.x -= vel;
-				cb.setBox(pos.x + offset.x, pos.y + offset.y);
-				walking = true;
-				break;
-
-			case "right":
-				pos.x += vel;
-				cb.setBox(pos.x + offset.x, pos.y + offset.y);
-				walking = true;
-				break;
-
-			case "up":
-				pos.y -= vel;
-				cb.setBox(pos.x + offset.x, pos.y + offset.y);
-				break;
-
-			// case "down":
-			// pos.y += vel * vars.delta;
-			// cb.setBox(pos.x + offset.x, pos.y + offset.y);
-			// break;
-		}
-	}
-
 	public double getVel ()
 	{
 		return vel;

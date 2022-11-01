@@ -67,7 +67,7 @@ public class CharacterController extends ActiveEntityController
 	public void update ()
 	{
 
-		move();
+		actions();
 
 		super.update();
 
@@ -83,20 +83,21 @@ public class CharacterController extends ActiveEntityController
 	{
 		super.draw(g);
 
-		g.setColor(Color.black);
+		g.setColor(Color.white);
 		g.drawString("Falling: " + ents.get(0).isFalling(), 10, 30);
 		g.drawString("Walking: " + ents.get(0).isWalking(), 10, 40);
 		g.drawString("Direction: " + ents.get(0).getDirection(), 10, 50);
 		g.setColor(Color.white);
-		g.drawString("entity", ents.get(1).getPos().x + 5, ents.get(1).getPos().y + 5);
-		g.setColor(Color.green);
+		// g.drawString("entity", ents.get(1).getPos().x + 5,
+		// ents.get(1).getPos().y + 5);
+		g.setColor(Color.yellow);
 		g.drawString("player", ents.get(0).getPos().x + 5, ents.get(0).getPos().y + 5);
 
 	}
 
 	boolean startIns = false; // prueba
 	boolean complete = true;
-	private void move ()
+	private void actions ()
 	{
 		if ( ents.size() >= 2 )
 		{
@@ -153,7 +154,7 @@ public class CharacterController extends ActiveEntityController
 			case "move":
 				if ( !ins.equals("empty") )
 				{
-					ents.get(1).move(inspart[1]);
+					move(inspart[1], ents.get(1));
 					ents.get(1).setDirection(inspart[1]);
 					return;
 				}
@@ -166,13 +167,13 @@ public class CharacterController extends ActiveEntityController
 				{
 					if ( ents.get(0).getPos().x < ents.get(1).getPos().x )
 					{
-						ents.get(1).move("left");
+						move("left", ents.get(1));
 						ents.get(1).setDirection("left");
 					}
 
 					else
 					{
-						ents.get(1).move("right");
+						move("right", ents.get(1));
 						ents.get(1).setDirection("right");
 					}
 				}
@@ -190,13 +191,13 @@ public class CharacterController extends ActiveEntityController
 				{
 					if ( ents.get(1).getPos().x < ents.get(0).getPos().x - 30 )
 					{
-						ents.get(1).move("right");
+						move("right", ents.get(1));
 						ents.get(1).setDirection("right");
 					}
 
 					if ( ents.get(1).getPos().x > ents.get(0).getPos().x + 30 )
 					{
-						ents.get(1).move("left");
+						move("left", ents.get(1));
 						ents.get(1).setDirection("left");
 					}
 				}
@@ -214,7 +215,7 @@ public class CharacterController extends ActiveEntityController
 	{
 		if ( vars.kb.isPressed('a') && !colision(ents.get(0), 3) )
 		{
-			ents.get(0).move("left");
+			move("left", ents.get(0));
 			ents.get(0).setWalking(true);
 			ents.get(0).setDirection("left");
 			return;
@@ -222,7 +223,7 @@ public class CharacterController extends ActiveEntityController
 		}
 		if ( vars.kb.isPressed('d') && !colision(ents.get(0), 2) )
 		{
-			ents.get(0).move("right");
+			move("right", ents.get(0));
 			ents.get(0).setWalking(true);
 			ents.get(0).setDirection("right");
 			return;
@@ -230,8 +231,8 @@ public class CharacterController extends ActiveEntityController
 		}
 		if ( vars.kb.isPressed('w') )
 		{
-			ents.get(0).setPos(19, 1);
-			ents.get(1).setPos(19, 1);
+			ents.get(0).setPosTile(19, 1);
+			// ents.get(1).setPosTile(19, 1);
 
 		}
 		ents.get(0).setWalking(false);
@@ -245,7 +246,7 @@ public class CharacterController extends ActiveEntityController
 	{
 		if ( vars.kb.isPressed('j') && !colision(ents.get(1), 3) )
 		{
-			ents.get(1).move("left");
+			move("left", ents.get(1));
 			ents.get(1).setWalking(true);
 			ents.get(1).setDirection("left");
 			return;
@@ -253,7 +254,7 @@ public class CharacterController extends ActiveEntityController
 		}
 		if ( vars.kb.isPressed('l') && !colision(ents.get(1), 2) )
 		{
-			ents.get(1).move("right");
+			move("right", ents.get(1));
 			ents.get(1).setWalking(true);
 			ents.get(1).setDirection("right");
 			return;

@@ -80,7 +80,7 @@ public class DrawCanvas extends Canvas
 		sc.draw(g);
 
 		/// Estetica sisi
-		g.setColor(Color.black);
+		g.setColor(Color.white);
 		g.drawString("FPS: " + String.valueOf(vars.FPS), 10, 10);
 		g.drawString("APS: " + String.valueOf(vars.APS), 10, 20);
 		///

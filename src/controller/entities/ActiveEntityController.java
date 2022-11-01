@@ -34,6 +34,32 @@ public abstract class ActiveEntityController extends EntityController
 		animate();
 	}
 
+	public void draw ( Graphics g )
+	{
+		super.draw(g);
+	}
+
+	private int acl = 0;
+	protected void gravity ( Active e )
+	{
+		if ( !colision(e, 0) )
+		{
+			fall(e);
+			return;
+		}
+		e.setG(vars.gravity);
+		e.setFalling(false);
+		acl = e.getG();
+	}
+
+	private void fall ( Active e )
+	{
+		e.getPos().y += acl * vars.delta;
+		acl += (acl >= 4) ? 0 : e.getG();
+		e.getCB().setBox(e.getPos().x + e.getOffset().x, e.getPos().y + e.getOffset().y);
+		e.setFalling(true);
+	}
+
 	protected void animate ()
 	{
 		for ( int i = 0; i < ents.size(); i++ )
@@ -95,20 +121,38 @@ public abstract class ActiveEntityController extends EntityController
 		}
 	}
 
-	public void draw ( Graphics g )
+	protected void move ( String direction, Active e )
 	{
-		super.draw(g);
-	}
-
-	protected void gravity ( Active e )
-	{
-		if ( !colision(e, 0) )
+		switch ( direction )
 		{
-			e.fall();
-			return;
+			case "left":
+				e.getPos().x -= e.getVel();
+				e.getCB().setBox(e.getPos().x + e.getOffset().x,
+						e.getPos().y + e.getOffset().y);
+				e.setWalking(true);
+				break;
+
+			case "right":
+				e.getPos().x += e.getVel();
+				e.getCB().setBox(e.getPos().x + e.getOffset().x,
+						e.getPos().y + e.getOffset().y);
+				e.setWalking(true);
+				break;
+
+			case "up":
+				e.getPos().y -= e.getVel();
+				e.getCB().setBox(e.getPos().x + e.getOffset().x,
+						e.getPos().y + e.getOffset().y);
+				e.setWalking(true);
+				break;
+
+			case "down":
+				e.getPos().y += e.getVel();
+				e.getCB().setBox(e.getPos().x + e.getOffset().x,
+						e.getPos().y + e.getOffset().y);
+				e.setWalking(true);
+				break;
 		}
-		e.setG(vars.gravity);
-		e.setFalling(false);
 	}
 
 	/**
@@ -128,7 +172,7 @@ public abstract class ActiveEntityController extends EntityController
 		{
 			case 0:
 				// ABAJO (GRAVEDAD)
-				future = new Rectangle(	e.getCB().getBox().x, e.getCB().getBox().y + e.getG(),
+				future = new Rectangle(	e.getCB().getBox().x, e.getCB().getBox().y + acl,
 										e.getCB().getBox().width, e.getCB().getBox().height);
 				break;
 			case 1:

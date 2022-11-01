@@ -36,12 +36,6 @@ public abstract class Entity
 		return animations;
 	}
 
-	public void setPos ( double x, double y )
-	{
-		pos.setLocation(x * vars.spriteSize - offset.x, y * vars.spriteSize - offset.y);
-		cb.setBox(pos.x + vars.screenOffSet - 4 + offset.x, pos.y + offset.y);
-	}
-
 	public ColisionBox getCB ()
 	{
 		return cb;
@@ -62,9 +56,30 @@ public abstract class Entity
 		return direction;
 	}
 
+	public Point getOffset ()
+	{
+		return offset;
+	}
+
 	public void setDirection ( String direction )
 	{
 		this.direction = direction;
+	}
+
+	public void setPosTile ( double x, double y )
+	{
+		pos.setLocation(x * vars.spriteSize - offset.x, y * vars.spriteSize - offset.y);
+		cb.setBox(pos.x + vars.screenOffSet - 4 + offset.x, pos.y + offset.y);
+	}
+
+	public void setPosX ( int x )
+	{
+		pos.x = x;
+	}
+
+	public void setPosY ( int y )
+	{
+		pos.y = y;
 	}
 
 }

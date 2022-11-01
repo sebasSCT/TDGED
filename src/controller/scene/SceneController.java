@@ -33,7 +33,7 @@ public class SceneController
 
 		// Crear forma de elegir personaje asignandole la posicion inicial en el
 		// mapa y agrega las colisiones del mapa
-		cc = new CharacterController(	"santy:test_guy", currentScene.getMap().getPosIni(),
+		cc = new CharacterController(	"santy:santy", currentScene.getMap().getPosIni(),
 										currentScene.getMap().getColisions());
 		ds = new DrawScene(currentScene);
 		System.out.println("SceneController");
