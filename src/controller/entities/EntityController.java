@@ -31,7 +31,7 @@ public abstract class EntityController
 	{
 	}
 
-	protected void animate ()
+	protected void animDirections ()
 	{
 	}
 
@@ -50,4 +50,24 @@ public abstract class EntityController
 			e.getAnimations().put("a" + x, imgs);
 		}
 	}
+
+	protected void loadSprite ( String tileset, Active e )
+	{
+		SpriteSheetController ssc = new SpriteSheetController("material", tileset);
+
+		for ( int x = 0; x < ssc.getSs().getHeight(); x++ )
+		{
+			for ( int a = 0; a < ssc.getSs().getWidth(); a++ )
+			{
+				BufferedImage img = ssc.getSs().getSprites()[a + (ssc.getSs().getWidth() * x)];
+				e.getSprites().put(x + "" + a, img);
+			}
+		}
+	}
+
+	public ArrayList<Active> getEnts ()
+	{
+		return ents;
+	}
+
 }

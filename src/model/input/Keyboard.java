@@ -19,6 +19,7 @@ public class Keyboard implements KeyListener
 		keys.put('a', new Key());
 		keys.put('s', new Key());
 		keys.put('d', new Key());
+		keys.put('e', new Key());
 
 		// PLAYER 2
 		keys.put('j', new Key());
@@ -49,6 +50,11 @@ public class Keyboard implements KeyListener
 	public boolean isPressed ( char key )
 	{
 		return keys.get(key).isPressed();
+	}
+
+	public boolean isReleased ( char key )
+	{
+		return keys.get(key).isReleased();
 	}
 
 }

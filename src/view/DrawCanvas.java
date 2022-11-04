@@ -55,7 +55,7 @@ public class DrawCanvas extends Canvas
 		buffer = getBufferStrategy();
 
 		// Si el buffer es diferente de null, se crea una nueva estragia de
-		// buffer, se reinicia al volver a ejecutar la APPPPPPPPPPPP...XXX.
+		// buffer, se reinicia al volver a ejecutar la APPPPPPPPPPPP
 		if ( buffer == null )
 		{
 			createBufferStrategy(3);

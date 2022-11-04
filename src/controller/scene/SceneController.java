@@ -1,8 +1,13 @@
 package controller.scene;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import controller.entities.CharacterController;
+import controller.entities.MaterialController;
+import model.entities.active.Material;
+import model.entities.active.Player;
 import model.scene.GameScene;
 import model.staticTools.vars;
 import view.DrawScene;
@@ -16,6 +21,8 @@ public class SceneController
 	private GameScene currentScene;
 	// Instancia los controles de los personajes
 	private CharacterController cc;
+
+	private MaterialController mtc;
 	// Instancia la clase de las escenas
 	private GameScene s;
 	// Instancia el controlador del mapa
@@ -35,6 +42,12 @@ public class SceneController
 		// mapa y agrega las colisiones del mapa
 		cc = new CharacterController(	"santy:santy", currentScene.getMap().getPosIni(),
 										currentScene.getMap().getColisions());
+
+		mtc = new MaterialController(currentScene.getMap().getColisions());
+		mtc.addMaterial("cannonball", new Point(19, 10));
+		mtc.addMaterial("cannonball2", new Point(21, 10));
+		mtc.addMaterial("santy", new Point(23, 10));
+
 		ds = new DrawScene(currentScene);
 		System.out.println("SceneController");
 	}
@@ -59,6 +72,8 @@ public class SceneController
 	public void update ()
 	{
 		cc.update();
+		mtc.update();
+		carryMaterial();
 	}
 
 	// Dibuja todos los elementos de la escena
@@ -66,7 +81,64 @@ public class SceneController
 	{
 		g.drawImage(s.getBG(), 0, 0, null);
 		ds.draw(g);
+		mtc.draw(g);
 		cc.draw(g);
+		g.setColor(Color.white);
+		g.drawString(vars.kb.isPressed('e') + " " + vars.kb.isReleased('e'), 10, 100);
+
+	}
+
+	// clase para logica (?)
+	float time;
+	boolean pressed;
+	private void carryMaterial ()
+	{
+
+		Player a = (Player) cc.getEnts().get(0);
+
+		if ( a.isCarrying() )
+		{
+			mtc.carrying(a.getPos(), a.getCarry());
+		}
+
+		if ( pressed )
+		{
+			time += (float) 0.016;
+			if ( time >= (float) 0.2 )
+			{
+				pressed = false;
+			}
+		}
+
+		if ( vars.kb.isPressed('e') && !pressed )
+		{
+			time = 0;
+			pressed = true;
+			if ( !a.isCarrying() )
+			{
+				for ( int i = 0; i < mtc.getEnts().size(); i++ )
+				{
+					if ( mtc.getEnts().get(i).getCB().getBox()
+							.intersects(cc.getEnts().get(0).getCB().getBox()) )
+					{
+						Material m = (Material) mtc.getEnts().get(i);
+						m.setCarry(true);
+						a.setCarrying(true);
+						a.setCarry(i);
+					}
+				}
+				return;
+			}
+
+			Material m = (Material) mtc.getEnts().get(a.getCarry());
+			if ( a.isWalking() )
+			{
+				m.setVel(a.getVel() * 5);
+				m.setDirection(a.getDirection());
+			}
+			m.setCarry(false);
+			a.setCarrying(false);
+		}
 
 	}
 

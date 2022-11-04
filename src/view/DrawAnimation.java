@@ -1,9 +1,11 @@
+
 package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Hashtable;
 import model.entities.active.Active;
+import model.entities.active.Material;
 
 public class DrawAnimation
 {
@@ -28,6 +30,8 @@ public class DrawAnimation
 		System.out.println("DrawAnimation " + e.getID());
 	}
 
+	// add materials
+
 	private void startTypes ()
 	{
 		// idle
@@ -45,8 +49,18 @@ public class DrawAnimation
 
 	public void draw ( Graphics g )
 	{
-		time = (float) types.get(type);
-		timeSection = time / (float) 4;
+
+		if ( e instanceof Material )
+		{
+			staticSprite(g);
+			return;
+		}
+
+		if ( types.get(type) != null )
+		{
+			time = (float) types.get(type);
+			timeSection = time / (float) 4;
+		}
 
 		switch ( type )
 		{
@@ -73,6 +87,11 @@ public class DrawAnimation
 	private void staticAnim ( Graphics g )
 	{
 		g.drawImage(e.getAnimations().get(type).get(0), e.getPos().x, e.getPos().y, null);
+	}
+
+	private void staticSprite ( Graphics g )
+	{
+		g.drawImage(e.getSprite(), e.getPos().x, e.getPos().y, null);
 	}
 
 	private void loopAnim ( Graphics g )

@@ -6,7 +6,7 @@ import model.staticTools.vars;
 public class Loop
 {
 
-	private static boolean running = true;
+	private static boolean running = true, run = false;
 	private static double delta;
 
 	public static void startLoop ( DUController duc )
@@ -34,6 +34,7 @@ public class Loop
 		// delta time
 		delta = 0;
 
+		int loops = 0;
 		while ( running )
 		{
 			// toma el valor en nanosegundos diferente al anterior system nano
@@ -53,7 +54,7 @@ public class Loop
 			vars.delta = delta;
 
 			// ejecutar cuando delta sume 1 para actualizar delta
-			while ( delta >= 1 )
+			while ( delta >= 1 && run )
 			{
 				// Actualizar-----------------
 				duc.update();
@@ -80,6 +81,10 @@ public class Loop
 				// en el sigueinte ciclo
 				referenciaContador = System.nanoTime();
 			}
+
+			// dentro para hacer una pantalla de carga
+			loops = (loops >= 100) ? loops : loops + 1;
+			run = (loops >= 100);
 
 		}
 	}

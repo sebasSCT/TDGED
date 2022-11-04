@@ -31,7 +31,10 @@ public abstract class ActiveEntityController extends EntityController
 
 	public void update ()
 	{
-		animate();
+		for ( Active p : ents )
+		{
+			gravity(p);
+		}
 	}
 
 	public void draw ( Graphics g )
@@ -39,28 +42,27 @@ public abstract class ActiveEntityController extends EntityController
 		super.draw(g);
 	}
 
-	private int acl = 0;
 	protected void gravity ( Active e )
 	{
-		if ( !colision(e, 0) )
+		if ( colision(e, "down") )
 		{
-			fall(e);
+			e.setAcl(1);
+			e.setFalling(false);
 			return;
 		}
-		e.setG(vars.gravity);
-		e.setFalling(false);
-		acl = e.getG();
+		fall(e);
+
 	}
 
 	private void fall ( Active e )
 	{
-		e.getPos().y += acl * vars.delta;
-		acl += (acl >= 4) ? 0 : e.getG();
+		e.getPos().y += e.getAcl() * vars.delta;
+		e.setAcl((e.getAcl() >= e.getMaxVel()) ? e.getAcl() : e.getAcl() + e.getG());
 		e.getCB().setBox(e.getPos().x + e.getOffset().x, e.getPos().y + e.getOffset().y);
 		e.setFalling(true);
 	}
 
-	protected void animate ()
+	protected void animDirections ()
 	{
 		for ( int i = 0; i < ents.size(); i++ )
 		{
@@ -165,29 +167,30 @@ public abstract class ActiveEntityController extends EntityController
 	 *            un entero que representa un case con cada movimiento.
 	 * @return retorna true si hay colision , false sino.
 	 */
-	protected boolean colision ( Active e, int side )
+	protected boolean colision ( Active e, String side )
 	{
 
 		switch ( side )
 		{
-			case 0:
+			case "down":
 				// ABAJO (GRAVEDAD)
-				future = new Rectangle(	e.getCB().getBox().x, e.getCB().getBox().y + acl,
+				future = new Rectangle(	e.getCB().getBox().x,
+										e.getCB().getBox().y + (int) e.getAcl(),
 										e.getCB().getBox().width, e.getCB().getBox().height);
 				break;
-			case 1:
+			case "up":
 				// ARRIBA
 				future = new Rectangle(	e.getCB().getBox().x,
 										e.getCB().getBox().y - (int) e.getVel(),
 										e.getCB().getBox().width, e.getCB().getBox().height);
 				break;
-			case 2:
+			case "right":
 				// DERECHA
 				future = new Rectangle(	e.getCB().getBox().x + (int) e.getVel(),
 										e.getCB().getBox().y, e.getCB().getBox().width,
 										e.getCB().getBox().height);
 				break;
-			case 3:
+			case "left":
 				// IZQUIERDA
 				future = new Rectangle(	e.getCB().getBox().x - (int) e.getVel(),
 										e.getCB().getBox().y, e.getCB().getBox().width,

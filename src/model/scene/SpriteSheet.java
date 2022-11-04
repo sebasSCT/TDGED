@@ -13,7 +13,6 @@ public class SpriteSheet
 
 	public SpriteSheet ( String ruta, int spriteSize )
 	{
-
 		img = GetResources.ciTranslucida(ruta);
 		width = img.getWidth() / spriteSize;
 		height = img.getHeight() / spriteSize;
