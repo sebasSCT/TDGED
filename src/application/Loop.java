@@ -56,6 +56,7 @@ public class Loop
 			// ejecutar cuando delta sume 1 para actualizar delta
 			while ( delta >= 1 && run )
 			{
+
 				// Actualizar-----------------
 				duc.update();
 				aps++;

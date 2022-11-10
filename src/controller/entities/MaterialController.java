@@ -1,6 +1,5 @@
 package controller.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -37,19 +36,13 @@ public class MaterialController extends ActiveEntityController
 
 	public void update ()
 	{
-		inertia();
+		// inertia(); //ta complejo
 		super.update();
 	}
 
 	public void draw ( Graphics g )
 	{
 		super.draw(g);
-		g.setColor(Color.green);
-		for ( Active e : ents )
-		{
-			g.drawRect(e.getCB().getBox().x, e.getCB().getBox().y, e.getCB().getBox().width,
-					e.getCB().getBox().height);
-		}
 	}
 
 	float time = 0;

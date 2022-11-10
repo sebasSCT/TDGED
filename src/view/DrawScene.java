@@ -20,4 +20,9 @@ public class DrawScene
 	{
 		dm.draw(g);
 	}
+
+	public void drawColisions ( Graphics g )
+	{
+		dm.drawColisions(g);
+	}
 }

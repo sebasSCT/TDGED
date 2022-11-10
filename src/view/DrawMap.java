@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import model.logic.ColisionBox;
 import model.logic.dataStructure.Pair;
 import model.scene.GameMap;
 import model.staticTools.vars;
@@ -46,6 +47,14 @@ public class DrawMap
 		for ( Pair<Point, BufferedImage> img : imgs )
 		{
 			g.drawImage(img.getB(), img.getA().x, img.getA().y, null);
+		}
+	}
+
+	public void drawColisions ( Graphics g )
+	{
+		for ( ColisionBox cb : gm.getColisions() )
+		{
+			g.drawRect(cb.getBox().x, cb.getBox().y, cb.getBox().width, cb.getBox().height);
 		}
 	}
 }

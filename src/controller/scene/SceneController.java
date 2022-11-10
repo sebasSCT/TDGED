@@ -2,12 +2,8 @@ package controller.scene;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.ArrayList;
-import controller.entities.CharacterController;
-import controller.entities.MaterialController;
-import model.entities.active.Material;
-import model.entities.active.Player;
+import controller.entities.EntityLogic;
 import model.scene.GameScene;
 import model.staticTools.vars;
 import view.DrawScene;
@@ -19,15 +15,14 @@ public class SceneController
 	private ArrayList<GameScene> scenes;
 	// Escena actual "seleccionada"
 	private GameScene currentScene;
-	// Instancia los controles de los personajes
-	private CharacterController cc;
-
-	private MaterialController mtc;
 	// Instancia la clase de las escenas
 	private GameScene s;
 	// Instancia el controlador del mapa
 	private MapController mc;
 	// Instancia la clase del dibujado de escena
+
+	private EntityLogic el;
+
 	private DrawScene ds;
 
 	public SceneController ()
@@ -38,17 +33,10 @@ public class SceneController
 		scenes = new ArrayList<>();
 		loadScenes();
 
-		// Crear forma de elegir personaje asignandole la posicion inicial en el
-		// mapa y agrega las colisiones del mapa
-		cc = new CharacterController(	"santy:santy", currentScene.getMap().getPosIni(),
-										currentScene.getMap().getColisions());
-
-		mtc = new MaterialController(currentScene.getMap().getColisions());
-		mtc.addMaterial("cannonball", new Point(19, 10));
-		mtc.addMaterial("cannonball2", new Point(21, 10));
-		mtc.addMaterial("santy", new Point(23, 10));
+		el = new EntityLogic("santy:santy", currentScene.getMap());
 
 		ds = new DrawScene(currentScene);
+
 		System.out.println("SceneController");
 	}
 
@@ -63,7 +51,6 @@ public class SceneController
 			scenes.add(s);
 		}
 
-		// Asigna las escena numero 4
 		currentScene = scenes.get(4);
 	}
 
@@ -71,9 +58,10 @@ public class SceneController
 	// todo segun corresponda
 	public void update ()
 	{
-		cc.update();
-		mtc.update();
-		carryMaterial();
+		if ( vars.kb.isActive('m') )
+		{
+			el.update();
+		}
 	}
 
 	// Dibuja todos los elementos de la escena
@@ -81,64 +69,18 @@ public class SceneController
 	{
 		g.drawImage(s.getBG(), 0, 0, null);
 		ds.draw(g);
-		mtc.draw(g);
-		cc.draw(g);
+		el.draw(g);
+
+		// DEV
+		if ( vars.kb.isActive('}') )
+		{
+			ds.drawColisions(g);
+			el.drawColisions(g);
+		}
+
+		///
 		g.setColor(Color.white);
 		g.drawString(vars.kb.isPressed('e') + " " + vars.kb.isReleased('e'), 10, 100);
-
-	}
-
-	// clase para logica (?)
-	float time;
-	boolean pressed;
-	private void carryMaterial ()
-	{
-
-		Player a = (Player) cc.getEnts().get(0);
-
-		if ( a.isCarrying() )
-		{
-			mtc.carrying(a.getPos(), a.getCarry());
-		}
-
-		if ( pressed )
-		{
-			time += (float) 0.016;
-			if ( time >= (float) 0.2 )
-			{
-				pressed = false;
-			}
-		}
-
-		if ( vars.kb.isPressed('e') && !pressed )
-		{
-			time = 0;
-			pressed = true;
-			if ( !a.isCarrying() )
-			{
-				for ( int i = 0; i < mtc.getEnts().size(); i++ )
-				{
-					if ( mtc.getEnts().get(i).getCB().getBox()
-							.intersects(cc.getEnts().get(0).getCB().getBox()) )
-					{
-						Material m = (Material) mtc.getEnts().get(i);
-						m.setCarry(true);
-						a.setCarrying(true);
-						a.setCarry(i);
-					}
-				}
-				return;
-			}
-
-			Material m = (Material) mtc.getEnts().get(a.getCarry());
-			if ( a.isWalking() )
-			{
-				m.setVel(a.getVel() * 5);
-				m.setDirection(a.getDirection());
-			}
-			m.setCarry(false);
-			a.setCarrying(false);
-		}
 
 	}
 
@@ -147,8 +89,7 @@ public class SceneController
 	{
 		currentScene = scenes.get(ind);
 		ds = new DrawScene(currentScene);
-		cc = new CharacterController(	"test_guy:test_guy", currentScene.getMap().getPosIni(),
-										currentScene.getMap().getColisions());
+		el = new EntityLogic("santy:santy", currentScene.getMap());
 	}
 
 	// Retorna la escena

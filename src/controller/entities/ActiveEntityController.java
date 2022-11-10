@@ -35,6 +35,8 @@ public abstract class ActiveEntityController extends EntityController
 		{
 			gravity(p);
 		}
+
+		super.update();
 	}
 
 	public void draw ( Graphics g )

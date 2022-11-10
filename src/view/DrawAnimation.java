@@ -1,16 +1,16 @@
 
 package view;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Hashtable;
 import model.entities.active.Active;
 import model.entities.active.Material;
+import model.logic.dataStructure.Pair;
 
 public class DrawAnimation
 {
 
-	private Hashtable<String, Float> types;
+	private Hashtable<String, Pair<String, Float>> types;
 
 	private float time;
 	private int ind = 1;
@@ -35,16 +35,18 @@ public class DrawAnimation
 	private void startTypes ()
 	{
 		// idle
-		types.put("a0", (float) 1); // right
-		types.put("a1", (float) 1); // left
+		types.put("a0", new Pair<String, Float>("loop", (float) 1)); // right
+		types.put("a1", new Pair<String, Float>("loop", (float) 1)); // left
 
 		// walk
-		types.put("a2", (float) 0.5); // right
-		types.put("a3", (float) 0.5); // left
+		types.put("a2", new Pair<String, Float>("loop", (float) 0.5)); // right
+		types.put("a3", new Pair<String, Float>("loop", (float) 0.5)); // left
 
 		// falling
-		types.put("a4", (float) 0); // replace
-		types.put("a5", (float) 0);
+		types.put("a4", new Pair<String, Float>("static", (float) 0)); // replace
+		types.put("a5", new Pair<String, Float>("static", (float) 0));
+
+		// materials
 	}
 
 	public void draw ( Graphics g )
@@ -58,29 +60,20 @@ public class DrawAnimation
 
 		if ( types.get(type) != null )
 		{
-			time = (float) types.get(type);
+			time = (float) types.get(type).getB();
 			timeSection = time / (float) 4;
 		}
 
-		switch ( type )
+		switch ( types.get(type).getA() )
 		{
-			// LOOPANIMATIONS
-			case "a0":
-			case "a1":
-			case "a2":
-			case "a3":
+			case "loop":
 				loopAnim(g);
 				break;
 
-			// STATICANIMATIONS
-			case "a4":
-			case "a5":
+			case "static":
 				staticAnim(g);
 				break;
 		}
-
-		g.setColor(Color.white);
-		// g.drawString("entity", e.getPos().x + 5, e.getPos().y + 5);
 
 	}
 
