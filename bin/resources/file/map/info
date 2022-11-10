@@ -2,6 +2,20 @@
  "posiniY": 3,
  "background": 0
  
+ "structures":
+ [
+ 	{
+ 	"type": "cannon",
+ 	"posX": 18,
+ 	"posY": 10
+ 	},
+ 	{
+ 	"type": "cannon",
+ 	"posX": 20,
+ 	"posY": 10
+ 	}
+ ]
+ 
  en cada capa de mapa
  
  "tileset": 0
