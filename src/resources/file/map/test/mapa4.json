@@ -166,13 +166,18 @@
  [
    {
    "type": "cannon",
-   "posX": 12,
+   "posX": 13,
    "posY": 20
    },
    {
    "type": "cannon",
-   "posX": 26,
+   "posX": 25,
    "posY": 20
+   }
+   {
+   "type": "cannon",
+   "posX": 19,
+   "posY": 5
    }
  ],
  "nextlayerid":6,

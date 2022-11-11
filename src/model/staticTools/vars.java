@@ -13,7 +13,7 @@ public class vars
 	public final static int entitySpriteSize = 32;
 	// tamaño de personajes
 
-	public final static double scale = 2;
+	public final static double scale = 1;
 	public final static double W_SCREEN = 1280, H_SCREEN = 720;
 	public final static double W_GAME = W_SCREEN / scale, H_GAME = H_SCREEN / scale;
 	public final static double FACTOR_ESCALADO_X = 2; // W_SCREEN / W_GAME
