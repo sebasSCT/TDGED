@@ -3,8 +3,9 @@ package controller.entities;
 import java.awt.Graphics;
 import java.awt.Point;
 import controller.Controller;
+import model.entities.active.Character;
 import model.entities.active.Material;
-import model.entities.active.Player;
+import model.logic.dataStructure.Pair;
 import model.scene.GameMap;
 import model.staticTools.vars;
 
@@ -16,6 +17,7 @@ public class EntityLogic implements Controller
 
 	private CharacterController cc;
 	private MaterialController mtc;
+	private StructureController stc;
 
 	public EntityLogic ( String players, GameMap map )
 	{
@@ -23,30 +25,41 @@ public class EntityLogic implements Controller
 
 		cc = new CharacterController(this.players, map.getPosIni(), map.getColisions());
 		mtc = new MaterialController(map.getColisions());
+		stc = new StructureController();
 
-		mtc.addMaterial("cannonball2", new Point(15, 5));
+		mtc.addMaterial("cannonball2", new Point(20, 10));
+		mtc.addMaterial("cannonball2", new Point(22, 10));
+		mtc.addMaterial("santy", new Point(18, 10));
+		mtc.addMaterial("cannonball", new Point(12, 10));
+
+		for ( Pair<String, Point> st : map.getStructures() )
+		{
+			stc.addStructure(st.getA(), st.getB());
+		}
 	}
 
 	public void update ()
 	{
 		carryMaterial();
+		stc.update();
 		mtc.update();
 		cc.update();
 	}
 
 	public void draw ( Graphics g )
 	{
+		stc.draw(g);
 		mtc.draw(g);
 		cc.draw(g);
 	}
 
 	private boolean pressed;
 	private Material m;
-	private Player p;
+	private Character p;
 	private void carryMaterial ()
 	{
 
-		p = (Player) cc.getEnts().get(0);
+		p = (Character) cc.getEnts().get(0);
 
 		if ( p.isCarrying() )
 		{
@@ -96,6 +109,7 @@ public class EntityLogic implements Controller
 
 	public void drawColisions ( Graphics g )
 	{
+		stc.drawColisions(g);
 		mtc.drawColisions(g);
 		cc.drawColisions(g);
 	}

@@ -3,7 +3,6 @@ package controller.entities;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import controller.scene.SpriteSheetController;
 import model.entities.active.Active;
 import model.entities.active.Material;
@@ -13,14 +12,12 @@ import view.DrawAnimation;
 public class MaterialController extends ActiveEntityController
 {
 
-	private Hashtable<String, String> materials;
-	private SpriteSheetController ssc;
-
 	public MaterialController ( ArrayList<ColisionBox> cbm )
 	{
 		super(cbm);
-		materials = new Hashtable<>();
-		ssc = new SpriteSheetController("material", "materials");
+		entType = "material";
+
+		ssc = new SpriteSheetController(entType, "materials");
 		startList();
 
 		System.out.println("Material Controller");
@@ -29,9 +26,9 @@ public class MaterialController extends ActiveEntityController
 	private void startList ()
 	{
 		// (id)-(peso)-(offsetX)-(offsetY)
-		materials.put("cannonball", "00-3-12-24");
-		materials.put("cannonball2", "01-3-9-18");
-		materials.put("santy", "04-3-10-18");
+		objList.put("cannonball", "00-3-12-24");
+		objList.put("cannonball2", "01-3-9-18");
+		objList.put("santy", "04-3-10-18");
 	}
 
 	public void update ()
@@ -45,8 +42,21 @@ public class MaterialController extends ActiveEntityController
 		super.draw(g);
 	}
 
+	public void addMaterial ( String name, Point pos )
+	{
+		String[] data = objList.get(name).split("-");
+
+		ents.add(new Material(data[0], pos, Double.parseDouble(
+				data[1]), new Point(Integer.parseInt(data[2]), Integer.parseInt(data[3]))));
+
+		ents.get(ents.size() - 1).setSprite(
+				ssc.getSs().getSprites()[Integer.parseInt(ents.get(ents.size() - 1).getID())]);
+		da.add(new DrawAnimation(ents.get(ents.size() - 1)));
+	}
+
 	float time = 0;
 	boolean up = false;
+	@ SuppressWarnings ( "unused" )
 	private void inertia ()
 	{
 		for ( Active e : ents )
@@ -81,19 +91,7 @@ public class MaterialController extends ActiveEntityController
 
 	public void carrying ( Point pos, int ind )
 	{
-		ents.get(ind).setPos(new Point(pos.x, pos.y - 30));
-	}
-
-	public void addMaterial ( String name, Point pos )
-	{
-		String[] data = materials.get(name).split("-");
-
-		ents.add(new Material(data[0], pos, Double.parseDouble(
-				data[1]), new Point(Integer.parseInt(data[2]), Integer.parseInt(data[3]))));
-
-		ents.get(ents.size() - 1).setSprite(
-				ssc.getSs().getSprites()[Integer.parseInt(ents.get(ents.size() - 1).getID())]);
-		da.add(new DrawAnimation(ents.get(ents.size() - 1)));
+		ents.get(ind).setPos(new Point(pos.x, pos.y - 27));
 	}
 
 }

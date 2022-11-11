@@ -22,13 +22,13 @@ public abstract class Entity
 	public Entity ( String id, Point pos, Point offset )
 	{
 		this.id = id;
-		this.pos = new Point(	(pos.x * vars.spriteSize) - offset.x,
-								(pos.y * vars.spriteSize) - offset.y);
+		this.pos = new Point(	pos.x * vars.spriteSize - offset.x,
+								pos.y * vars.spriteSize - offset.y);
 		offset.x += 2;
 		this.offset = offset;
 		cb = new ColisionBox(	vars.entitySpriteSize - offset.x - 12,
-								vars.entitySpriteSize - offset.y - 1, pos.x + offset.x,
-								pos.y + offset.y);
+								vars.entitySpriteSize - offset.y - 1, this.pos.x + offset.x,
+								this.pos.y + offset.y);
 		animations = new Hashtable<>();
 		sprites = new Hashtable<>();
 		System.out.println("Entity");

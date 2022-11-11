@@ -5,8 +5,7 @@ import controller.scene.SceneController;
 import view.DrawCanvas;
 import view.Window;
 
-// App controller o game controller (decision)
-//Draw Update Controller
+//Draw & Update Controller
 public class DUController
 {
 
@@ -36,5 +35,4 @@ public class DUController
 	}
 
 	// Metodo para cerrar el juego
-	// metodo drawDebug ?????
 }

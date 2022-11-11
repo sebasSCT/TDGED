@@ -66,9 +66,9 @@ public abstract class ActiveEntityController extends EntityController
 
 	protected void animDirections ()
 	{
+
 		for ( int i = 0; i < ents.size(); i++ )
 		{
-
 			if ( ents.get(i).isFalling() )
 			{
 				switch ( ents.get(i).getDirection() )
@@ -93,10 +93,20 @@ public abstract class ActiveEntityController extends EntityController
 				switch ( ents.get(i).getDirection() )
 				{
 					case "left":
+						if ( ents.get(i).isCarrying() )
+						{
+							da.get(i).setAnimation("a7");
+							break;
+						}
 						da.get(i).setAnimation("a3");
 						break;
 
 					case "right":
+						if ( ents.get(i).isCarrying() )
+						{
+							da.get(i).setAnimation("a6");
+							break;
+						}
 						da.get(i).setAnimation("a2");
 						break;
 
@@ -110,10 +120,20 @@ public abstract class ActiveEntityController extends EntityController
 				switch ( ents.get(i).getDirection() )
 				{
 					case "left":
+						if ( ents.get(i).isCarrying() )
+						{
+							da.get(i).setAnimation("a9");
+							break;
+						}
 						da.get(i).setAnimation("a1");
 						break;
 
 					case "right":
+						if ( ents.get(i).isCarrying() )
+						{
+							da.get(i).setAnimation("a8");
+							break;
+						}
 						da.get(i).setAnimation("a0");
 						break;
 

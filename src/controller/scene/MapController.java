@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import model.logic.ColisionBox;
+import model.logic.dataStructure.Pair;
 import model.scene.GameMap;
 import model.staticTools.GetResources;
 import model.staticTools.JSONgetters;
@@ -30,14 +31,32 @@ public class MapController
 
 		global = JSONgetters.getObjectJSON(archivo);
 
+		// Propiedades del mapa
 		mapa.setWidthTiles(JSONgetters.getIntJSON(global, "width"));
 		mapa.setHeightTiles(JSONgetters.getIntJSON(global, "height"));
-		mapa.setPosIni(new Point(	JSONgetters.getIntJSON(global, "posiniX"),
-									JSONgetters.getIntJSON(global, "posiniY")));
 		mapa.setBG(vars.getBG(String.valueOf(JSONgetters.getIntJSON(global, "background"))));
 
-		JSONArray layers = JSONgetters.getArrayJSON(global.get("layers").toString());
+		// Punto inicial de los jugadores
+		mapa.setPosIni(new Point(	JSONgetters.getIntJSON(global, "posiniX"),
+									JSONgetters.getIntJSON(global, "posiniY")));
 
+		// Extraer estructuras y sus posiciones
+		if ( global.get("structures") != null )
+		{
+			JSONArray structures = JSONgetters.getArrayJSON(
+					global.get("structures").toString());
+			for ( Object structure : structures )
+			{
+				Object stc = JSONgetters.getObjectJSON(structure.toString()).get("type");
+				int x = JSONgetters.getIntJSON((JSONObject) structure, "posX");
+				int y = JSONgetters.getIntJSON((JSONObject) structure, "posY");
+				mapa.getStructures()
+					.add(new Pair<String, Point>(stc.toString(), new Point(x, y)));
+			}
+		}
+
+		// Extraer las capas de sprites y las capas de colisiones
+		JSONArray layers = JSONgetters.getArrayJSON(global.get("layers").toString());
 		String[] spriteLy;
 		int fg = 0;
 		for ( Object layer : layers )
@@ -69,6 +88,7 @@ public class MapController
 
 			}
 		}
+
 	}
 
 	private void loadColisions ( JSONArray colisions )

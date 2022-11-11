@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import model.entities.active.Active;
-import model.entities.active.Player;
+import model.entities.active.Character;
 import model.logic.ColisionBox;
 import model.logic.dataStructure.LinkedListTail;
 import model.staticTools.vars;
@@ -21,27 +21,17 @@ import view.DrawAnimation;
 public class CharacterController extends ActiveEntityController
 {
 
-	/**
-	 * Contructor de la clase del controlador
-	 * 
-	 * @param id
-	 *            representa el id del personaje y se parte con split para
-	 *            conocer el personaje seleccionado
-	 * @param pos
-	 *            representa la posicion donde estara el peronaje
-	 * @param cbm
-	 *            representa la caja de colisiones con el mapa (todas)
-	 */
 	public CharacterController ( String id, Point pos, ArrayList<ColisionBox> cbm )
 	{
 		super(cbm);
+		entType = "character";
 
 		String[] ids = id.split(":");
 
 		for ( int i = 0; i < ids.length; i++ )
 		{
-			ents.add(
-					new Player((i == 1) ? ids[1] : ids[0], pos, 100, 1, 4, new Point(10, 18)));
+			ents.add(new Character(	(i == 1) ? ids[1] : ids[0], pos, 100, 1, 4,
+									new Point(10, 18)));
 			// Agrega las animaciones al personaje
 			da.add(new DrawAnimation(ents.get(i)));
 			// Setea animaciones
@@ -52,12 +42,12 @@ public class CharacterController extends ActiveEntityController
 		for ( Active p : ents )
 		{
 			// Carga las animaciones
-			loadAnim("player", p.getID(), p);
+			loadAnim(p.getID(), p);
 		}
 
 		////
 		listIns();
-		System.out.println("PlayerController");
+		System.out.println("CharacterController");
 	}
 
 	/**
@@ -75,7 +65,7 @@ public class CharacterController extends ActiveEntityController
 	// Dibuja los personaje
 	public void draw ( Graphics g )
 	{
-		Player a = (Player) ents.get(0);
+		Character a = (Character) ents.get(0);
 		super.draw(g);
 
 		// Debug (mover)
@@ -88,7 +78,8 @@ public class CharacterController extends ActiveEntityController
 		// g.drawString("entity", ents.get(1).getPos().x + 5,
 		// ents.get(1).getPos().y + 5);
 		g.setColor(Color.yellow);
-		g.drawString("player", ents.get(0).getPos().x + 5, ents.get(0).getPos().y + 5);
+		// g.drawString("player", ents.get(0).getPos().x + 5,
+		// ents.get(0).getPos().y + 5);
 		g.drawString(
 				"Pos X: " + ents.get(0).getPos().x + "  Tile: " + ents.get(0).getPos().x / 16,
 				10, 80);
@@ -115,10 +106,6 @@ public class CharacterController extends ActiveEntityController
 		p1Keys();
 
 		// Tomar Material
-		if ( vars.kb.isPressed('e') )
-		{
-
-		}
 
 		// Instrucciones prueba (mover)
 
@@ -153,7 +140,7 @@ public class CharacterController extends ActiveEntityController
 		list.addNode("move:left");
 		list.addNode("moveto:player");
 		list.addNode("follow:player");
-		list.imprimir();
+		// list.imprimir();
 		ins = list.unstack().toString();
 	}
 
@@ -283,4 +270,5 @@ public class CharacterController extends ActiveEntityController
 		}
 		ents.get(1).setWalking(false);
 	}
+
 }

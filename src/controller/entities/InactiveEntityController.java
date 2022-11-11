@@ -1,5 +1,7 @@
 package controller.entities;
 
+import java.awt.Graphics;
+
 public abstract class InactiveEntityController extends EntityController
 {
 
@@ -7,4 +9,15 @@ public abstract class InactiveEntityController extends EntityController
 	{
 		super();
 	}
+
+	public void update ()
+	{
+		super.update();
+	}
+
+	public void draw ( Graphics g )
+	{
+		super.draw(g);
+	}
+
 }

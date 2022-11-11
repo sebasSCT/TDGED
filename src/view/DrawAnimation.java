@@ -3,8 +3,10 @@ package view;
 
 import java.awt.Graphics;
 import java.util.Hashtable;
+import model.entities.Entity;
 import model.entities.active.Active;
 import model.entities.active.Material;
+import model.entities.inactive.Inactive;
 import model.logic.dataStructure.Pair;
 
 public class DrawAnimation
@@ -19,9 +21,18 @@ public class DrawAnimation
 
 	private String type;
 
-	private Active e;
+	private Entity e;
 
 	public DrawAnimation ( Active e )
+	{
+		this.e = e;
+		this.types = new Hashtable<>();
+		startTypes();
+
+		System.out.println("DrawAnimation " + e.getID());
+	}
+
+	public DrawAnimation ( Inactive e )
 	{
 		this.e = e;
 		this.types = new Hashtable<>();
@@ -45,6 +56,14 @@ public class DrawAnimation
 		// falling
 		types.put("a4", new Pair<String, Float>("static", (float) 0)); // replace
 		types.put("a5", new Pair<String, Float>("static", (float) 0));
+
+		// carrying
+		types.put("a6", new Pair<String, Float>("loop", (float) 0.5)); // right
+		types.put("a7", new Pair<String, Float>("loop", (float) 0.5)); // left
+
+		// carrying idle
+		types.put("a8", new Pair<String, Float>("loop", (float) 1)); // right
+		types.put("a9", new Pair<String, Float>("loop", (float) 1)); // left
 
 		// materials
 	}

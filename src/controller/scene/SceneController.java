@@ -78,9 +78,17 @@ public class SceneController
 			el.drawColisions(g);
 		}
 
+		if ( !vars.kb.isActive('m') )
+		{
+			g.setColor(Color.red);
+			g.drawString("PAUSE", 300, 200);
+		}
+
 		///
 		g.setColor(Color.white);
 		g.drawString(vars.kb.isPressed('e') + " " + vars.kb.isReleased('e'), 10, 100);
+
+		g.drawString("Pause: " + !vars.kb.isActive('m'), 10, 110);
 
 	}
 

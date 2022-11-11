@@ -9,8 +9,8 @@ public abstract class Active extends Entity
 
 	protected double vel, ps, acl;
 	protected double wg;
-	protected int g = vars.gravity;
-	protected boolean falling, walking;
+	protected int g = vars.gravity, carry;
+	protected boolean falling, walking, carrying;
 
 	public Active ( String id, Point pos, double ps, double vel, double maxVel, Point offset )
 	{
@@ -19,6 +19,26 @@ public abstract class Active extends Entity
 		this.wg = maxVel;
 		this.ps = ps;
 		this.acl = 0;
+	}
+
+	public boolean isCarrying ()
+	{
+		return carrying;
+	}
+
+	public void setCarrying ( boolean carrying )
+	{
+		this.carrying = carrying;
+	}
+
+	public int getCarry ()
+	{
+		return carry;
+	}
+
+	public void setCarry ( int carry )
+	{
+		this.carry = carry;
 	}
 
 	public double getMaxVel ()
