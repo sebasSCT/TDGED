@@ -65,26 +65,27 @@ public class EntityLogic implements Controller
 
 			if ( p[i].isCarrying() )
 			{
-				mtc.carrying(p[i].getPos(), p[i].getCarry());
+				mtc.carrying(p[i].getPos(), p[i].getCarry(), p[i].getOffset().y);
 			}
 
 			if ( pressed[i] )
 			{
 				time[i] += (float) 0.016;
-				if ( time[i] >= (float) 0.2 )
+				if ( time[i] >= (float) 0.3 )
 				{
 					pressed[i] = false;
+					time[i] = 0;
 				}
 			}
 		}
 
-		if ( vars.kb.isPressed("interact") )
+		if ( vars.kb.isPressed("interact") && !pressed[0] )
 		{
 			setCarry(p[0]);
 			pressed[0] = true;
 		}
 
-		if ( vars.kb.isPressed("interact1") )
+		if ( vars.kb.isPressed("interact1") && !pressed[1] )
 		{
 			setCarry(p[1]);
 			pressed[1] = true;

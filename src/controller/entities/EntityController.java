@@ -16,7 +16,7 @@ import view.DrawAnimation;
 public abstract class EntityController implements Controller
 {
 
-	protected Hashtable<String, String> objList;
+	protected Hashtable<String, String> entList;
 	protected SpriteSheetController ssc;
 
 	protected ArrayList<DrawAnimation> da;
@@ -32,7 +32,7 @@ public abstract class EntityController implements Controller
 		this.ents = new ArrayList<>();
 		this.entsI = new ArrayList<>();
 		this.da = new ArrayList<>();
-		objList = new Hashtable<>();
+		entList = new Hashtable<>();
 	}
 
 	public void draw ( Graphics g )

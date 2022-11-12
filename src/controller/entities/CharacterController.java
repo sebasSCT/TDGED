@@ -24,14 +24,20 @@ public class CharacterController extends ActiveEntityController
 	public CharacterController ( String id, Point pos, ArrayList<ColisionBox> cbm )
 	{
 		super(cbm);
+		startList();
 		entType = "character";
 
 		String[] ids = id.split(":");
+		String[][] data =
+		{ entList.get(ids[0]).split("-"), entList.get(ids[1]).split("-") };
 
 		for ( int i = 0; i < ids.length; i++ )
 		{
-			ents.add(new Character(	(i == 1) ? ids[1] : ids[0], pos, 100, 1, 4,
-									new Point(10, 18)));
+			ents.add(new Character(	data[i][0], pos, Integer.parseInt(data[i][1]),
+									Integer.parseInt(data[i][2]), Integer.parseInt(data[i][3]),
+									new Point(	Integer.parseInt(data[i][4]),
+												Integer.parseInt(data[i][5]))));
+
 			// Agrega las animaciones al personaje
 			da.add(new DrawAnimation(ents.get(i)));
 			// Setea animaciones
@@ -48,6 +54,15 @@ public class CharacterController extends ActiveEntityController
 		////
 		listIns();
 		System.out.println("CharacterController");
+	}
+
+	private void startList ()
+	{
+		// (id)-(ps)-(vel)-(maxVel)-(offsetX)-(offsetY)
+		entList.put("santy", "santy-100-1-4-10-19");
+		entList.put("juan", "juan-100-1-4-12-15");
+		entList.put("beto", "beto-100-1-4-10-18");
+		entList.put("sebas", "sebas-100-1-4-10-18");
 	}
 
 	/**

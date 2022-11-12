@@ -33,7 +33,7 @@ public class SceneController
 		scenes = new ArrayList<>();
 		loadScenes();
 
-		el = new EntityLogic("juan:santy", currentScene.getMap());
+		el = new EntityLogic("santy:juan", currentScene.getMap());
 
 		ds = new DrawScene(currentScene);
 

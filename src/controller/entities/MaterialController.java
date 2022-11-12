@@ -26,9 +26,9 @@ public class MaterialController extends ActiveEntityController
 	private void startList ()
 	{
 		// (id)-(peso)-(offsetX)-(offsetY)
-		objList.put("cannonball", "00-3-12-24");
-		objList.put("cannonball2", "01-3-9-18");
-		objList.put("santy", "04-3-10-18");
+		entList.put("cannonball", "00-3-12-24");
+		entList.put("cannonball2", "01-3-9-18");
+		entList.put("santy", "04-3-10-18");
 	}
 
 	public void update ()
@@ -44,7 +44,7 @@ public class MaterialController extends ActiveEntityController
 
 	public void addMaterial ( String name, Point pos )
 	{
-		String[] data = objList.get(name).split("-");
+		String[] data = entList.get(name).split("-");
 
 		ents.add(new Material(data[0], pos, Double.parseDouble(
 				data[1]), new Point(Integer.parseInt(data[2]), Integer.parseInt(data[3]))));
@@ -89,9 +89,9 @@ public class MaterialController extends ActiveEntityController
 		}
 	}
 
-	public void carrying ( Point pos, int ind )
+	public void carrying ( Point pos, int ind, int offsety )
 	{
-		ents.get(ind).setPos(new Point(pos.x, pos.y - 27));
+		ents.get(ind).setPos(new Point(pos.x, pos.y - offsety - 5));
 	}
 
 }

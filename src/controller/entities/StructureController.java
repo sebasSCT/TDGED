@@ -22,7 +22,7 @@ public class StructureController extends InactiveEntityController
 	private void startList ()
 	{
 		// (id)-(offsetX)-(offsetY)
-		objList.put("cannon", "00-6-15");
+		entList.put("cannon", "00-6-15");
 	}
 
 	public void update ()
@@ -37,7 +37,7 @@ public class StructureController extends InactiveEntityController
 
 	public void addStructure ( String name, Point pos, String direction )
 	{
-		String[] data = objList.get(name).split("-");
+		String[] data = entList.get(name).split("-");
 		ssc = new SpriteSheetController(entType, name);
 
 		entsI.add(new Structure(data[0], pos, new Point(Integer.parseInt(data[1]),
