@@ -61,9 +61,7 @@ public class vars
 	// ============================
 
 	// Teclado
-
 	public final static Keyboard kb = new Keyboard();
-
 	//
 
 	// Fisicas

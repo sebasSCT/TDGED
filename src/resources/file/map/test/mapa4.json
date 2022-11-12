@@ -167,17 +167,20 @@
    {
    "type": "cannon",
    "posX": 13,
-   "posY": 20
+   "posY": 20,
+   "direction": "left"
    },
    {
    "type": "cannon",
    "posX": 25,
-   "posY": 20
-   }
+   "posY": 20,
+   "direction": "right"
+   },
    {
    "type": "cannon",
    "posX": 19,
-   "posY": 5
+   "posY": 5,
+   "direction": "left"
    }
  ],
  "nextlayerid":6,

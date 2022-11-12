@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import model.logic.ColisionBox;
-import model.logic.dataStructure.Pair;
+import model.logic.dataStructure.Triplet;
 
 public class GameMap
 {
@@ -13,7 +13,7 @@ public class GameMap
 	private Point posIni;
 	private ArrayList<ArrayList<BufferedImage>> spriteLayers;
 	private ArrayList<ColisionBox> colisions;
-	private ArrayList<Pair<String, Point>> structures;
+	private ArrayList<Triplet<String, Point, String>> structures;
 	private String bg;
 
 	public GameMap ()
@@ -74,7 +74,7 @@ public class GameMap
 		return colisions;
 	}
 
-	public ArrayList<Pair<String, Point>> getStructures ()
+	public ArrayList<Triplet<String, Point, String>> getStructures ()
 	{
 		return structures;
 	}

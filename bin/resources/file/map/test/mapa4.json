@@ -162,6 +162,24 @@
          "x":0,
          "y":0
         }],
+"structures":
+ [
+   {
+   "type": "cannon",
+   "posX": 13,
+   "posY": 20
+   },
+   {
+   "type": "cannon",
+   "posX": 25,
+   "posY": 20
+   }
+   {
+   "type": "cannon",
+   "posX": 19,
+   "posY": 5
+   }
+ ],
  "nextlayerid":6,
  "nextobjectid":17,
  "orientation":"orthogonal",

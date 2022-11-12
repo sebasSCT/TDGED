@@ -7,12 +7,14 @@
  	{
  	"type": "cannon",
  	"posX": 18,
- 	"posY": 10
+ 	"posY": 10,
+ 	"direction": "left"
  	},
  	{
  	"type": "cannon",
  	"posX": 20,
- 	"posY": 10
+ 	"posY": 10,
+ 	"direction": "right
  	}
  ]
  

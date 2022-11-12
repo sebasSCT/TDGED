@@ -5,7 +5,7 @@ import java.awt.Point;
 import controller.Controller;
 import model.entities.active.Character;
 import model.entities.active.Material;
-import model.logic.dataStructure.Pair;
+import model.logic.dataStructure.Triplet;
 import model.scene.GameMap;
 import model.staticTools.vars;
 
@@ -13,7 +13,6 @@ public class EntityLogic implements Controller
 {
 
 	String players;
-	private float time;
 
 	private CharacterController cc;
 	private MaterialController mtc;
@@ -32,9 +31,9 @@ public class EntityLogic implements Controller
 		mtc.addMaterial("santy", new Point(18, 10));
 		mtc.addMaterial("cannonball", new Point(12, 10));
 
-		for ( Pair<String, Point> st : map.getStructures() )
+		for ( Triplet<String, Point, String> st : map.getStructures() )
 		{
-			stc.addStructure(st.getA(), st.getB());
+			stc.addStructure(st.getA(), st.getB(), st.getC());
 		}
 	}
 
@@ -53,58 +52,66 @@ public class EntityLogic implements Controller
 		cc.draw(g);
 	}
 
-	private boolean pressed;
 	private Material m;
-	private Character p;
+	private boolean[] pressed = new boolean[2];
+	private float[] time = new float[2];
+	private Character[] p = new Character[2];
 	private void carryMaterial ()
 	{
 
-		p = (Character) cc.getEnts().get(0);
-
-		if ( p.isCarrying() )
+		for ( int i = 0; i < p.length; i++ )
 		{
-			mtc.carrying(p.getPos(), p.getCarry());
-		}
+			p[i] = (Character) cc.getEnts().get(i);
 
-		if ( pressed )
-		{
-			time += (float) 0.016;
-			if ( time >= (float) 0.2 )
+			if ( p[i].isCarrying() )
 			{
-				pressed = false;
+				mtc.carrying(p[i].getPos(), p[i].getCarry());
 			}
-		}
 
-		if ( vars.kb.isPressed('e') && !pressed )
-		{
-			time = 0;
-			pressed = true;
-			if ( !p.isCarrying() )
+			if ( pressed[i] )
 			{
-				for ( int i = 0; i < mtc.getEnts().size(); i++ )
+				time[i] += (float) 0.016;
+				if ( time[i] >= (float) 0.2 )
 				{
-					if ( mtc.getEnts().get(i).getCB().getBox()
-							.intersects(cc.getEnts().get(0).getCB().getBox()) )
-					{
-						m = (Material) mtc.getEnts().get(i);
-						m.setCarry(true);
-						p.setCarrying(true);
-						p.setCarry(i);
-					}
+					pressed[i] = false;
 				}
-				return;
 			}
-
-			m = (Material) mtc.getEnts().get(p.getCarry());
-			// if ( p.isWalking() )
-			// {
-			// m.setVel(p.getVel() * 5);
-			// m.setDirection(p.getDirection());
-			// }
-			m.setCarry(false);
-			p.setCarrying(false);
 		}
 
+		if ( vars.kb.isPressed("interact") )
+		{
+			setCarry(p[0]);
+			pressed[0] = true;
+		}
+
+		if ( vars.kb.isPressed("interact1") )
+		{
+			setCarry(p[1]);
+			pressed[1] = true;
+		}
+
+	}
+
+	private void setCarry ( Character p )
+	{
+		if ( !p.isCarrying() )
+		{
+			for ( int i = 0; i < mtc.getEnts().size(); i++ )
+			{
+				if ( mtc.getEnts().get(i).getCB().getBox().intersects(p.getCB().getBox()) )
+				{
+					m = (Material) mtc.getEnts().get(i);
+					m.setCarry(true);
+					p.setCarrying(true);
+					p.setCarry(i);
+				}
+			}
+			return;
+		}
+
+		m = (Material) mtc.getEnts().get(p.getCarry());
+		m.setCarry(false);
+		p.setCarrying(false);
 	}
 
 	public void drawColisions ( Graphics g )

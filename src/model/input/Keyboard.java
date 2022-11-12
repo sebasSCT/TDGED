@@ -3,41 +3,64 @@ package model.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Hashtable;
+import java.util.Map.Entry;
 
 public class Keyboard implements KeyListener
 {
 
-	private Hashtable<Object, Key> keys = new Hashtable<>();
+	private Hashtable<Character, Key> keys;
+	private Hashtable<String, Character> actions;
+
+	public Keyboard ()
+	{
+		keys = new Hashtable<>();
+
+		actions = putKeys();
+		startKeys();
+
+		System.out.println("Keyboard");
+	}
+
+	public Hashtable<String, Character> putKeys ()
+	{
+		Hashtable<String, Character> k = new Hashtable<>();
+
+		// Player 1
+		k.put("down", 's');
+		k.put("up", 'w');
+		k.put("left", 'a');
+		k.put("right", 'd');
+		k.put("interact", 'e');
+		// *************
+
+		// Player 2
+		k.put("down1", '5');
+		k.put("up1", '8');
+		k.put("left1", '4');
+		k.put("right1", '6');
+		k.put("interact1", '7');
+		// *************
+
+		// DEV
+		k.put("showCols", '}');
+		k.put("pause", '-');
+		k.put("teleport", '+');
+		k.put("instructions", '*');
+		// *************
+
+		return k;
+	}
 
 	public void startKeys ()
 	{
-		keys.put('1', new Key());
-		keys.put('2', new Key());
 
-		keys.put('m', new Key());
+		for ( Entry<String, Character> c : actions.entrySet() )
+		{
+			keys.put(c.getValue(), new Key());
+		}
 
-		// CONTROL ARROWS (unnused)
-		keys.put(KeyEvent.VK_LEFT, new Key());
-		keys.put(KeyEvent.VK_RIGHT, new Key());
-		keys.put(KeyEvent.VK_UP, new Key());
-		keys.put(KeyEvent.VK_DOWN, new Key());
-
-		// PLAYER 1
-		keys.put('w', new Key());
-		keys.put('a', new Key());
-		keys.put('s', new Key());
-		keys.put('d', new Key());
-		keys.put('e', new Key());
-
-		// PLAYER 2
-		keys.put('j', new Key());
-		keys.put('l', new Key());
-
-		// DEV
-		keys.put('}', new Key());
 	}
 
-	// Mejorar con keycode de ser necesario
 	public void keyPressed ( KeyEvent e )
 	{
 		if ( keys.containsKey(e.getKeyChar()) )
@@ -59,55 +82,30 @@ public class Keyboard implements KeyListener
 	{
 	}
 
-	public boolean isPressed ( char key )
+	public boolean isPressed ( String action )
 	{
-		return keys.get(key).isPressed();
+		verify(action);
+		return keys.get(actions.get(action)).isPressed();
 	}
 
-	public boolean isReleased ( char key )
+	public boolean isReleased ( String action )
 	{
-		return keys.get(key).isReleased();
+		verify(action);
+		return keys.get(actions.get(action)).isReleased();
 	}
 
-	public boolean isActive ( char key )
+	public boolean isActive ( String action )
 	{
-		return keys.get(key).isActive();
+		verify(action);
+		return keys.get(actions.get(action)).isActive();
 	}
 
-	// public boolean isPressed ( String key )
-	// {
-	// return keys.get(code(key)).isPressed();
-	// }
-	//
-	// public boolean isReleased ( String key )
-	// {
-	// return keys.get(code(key)).isReleased();
-	// }
-	//
-	// public boolean isActive ( String key )
-	// {
-	// return keys.get(code(key)).isActive();
-	// }
-	//
-	// private int code ( String key )
-	// {
-	// switch (key)
-	// {
-	// case "a_left":
-	// return KeyEvent.VK_LEFT;
-	//
-	// case "a_right":
-	// return KeyEvent.VK_LEFT;
-	//
-	// case "a_right":
-	// return KeyEvent.VK_LEFT;
-	//
-	// case "a_left":
-	// return KeyEvent.VK_LEFT;
-	//
-	// default:
-	// return 0;
-	// }
-	// }
+	private void verify ( String action )
+	{
+		if ( !actions.containsKey(action) )
+		{
+			System.err.println("INVALID COMMAND ACTION! : " + action);
+		}
+	}
 
 }

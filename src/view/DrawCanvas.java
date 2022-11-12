@@ -38,8 +38,6 @@ public class DrawCanvas extends Canvas
 		setFocusable(true);
 		// Lo mismo pero pide focos
 		requestFocus(true);
-		// Inicia los controles del pj
-		vars.kb.startKeys();
 		// Agrega las teclas al escuchador
 		addKeyListener(vars.kb);
 	}

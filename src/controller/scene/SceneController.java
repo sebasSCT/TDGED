@@ -33,7 +33,7 @@ public class SceneController
 		scenes = new ArrayList<>();
 		loadScenes();
 
-		el = new EntityLogic("santy:santy", currentScene.getMap());
+		el = new EntityLogic("juan:santy", currentScene.getMap());
 
 		ds = new DrawScene(currentScene);
 
@@ -58,7 +58,7 @@ public class SceneController
 	// todo segun corresponda
 	public void update ()
 	{
-		if ( vars.kb.isActive('m') )
+		if ( vars.kb.isActive("pause") )
 		{
 			el.update();
 		}
@@ -72,13 +72,13 @@ public class SceneController
 		el.draw(g);
 
 		// DEV
-		if ( vars.kb.isActive('}') )
+		if ( vars.kb.isActive("showCols") )
 		{
 			ds.drawColisions(g);
 			el.drawColisions(g);
 		}
 
-		if ( !vars.kb.isActive('m') )
+		if ( !vars.kb.isActive("pause") )
 		{
 			g.setColor(Color.red);
 			g.drawString("PAUSE", 300, 200);
@@ -86,9 +86,7 @@ public class SceneController
 
 		///
 		g.setColor(Color.white);
-		g.drawString(vars.kb.isPressed('e') + " " + vars.kb.isReleased('e'), 10, 100);
-
-		g.drawString("Pause: " + !vars.kb.isActive('m'), 10, 110);
+		g.drawString("Pause: " + !vars.kb.isActive("pause"), 10, 110);
 
 	}
 
@@ -97,7 +95,7 @@ public class SceneController
 	{
 		currentScene = scenes.get(ind);
 		ds = new DrawScene(currentScene);
-		el = new EntityLogic("santy:santy", currentScene.getMap());
+		el = new EntityLogic("test_guy:test_guy", currentScene.getMap());
 	}
 
 	// Retorna la escena

@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import model.logic.ColisionBox;
-import model.logic.dataStructure.Pair;
+import model.logic.dataStructure.Duplet;
 import model.scene.GameMap;
 import model.staticTools.vars;
 
@@ -13,7 +13,7 @@ public class DrawMap
 {
 
 	private GameMap gm;
-	private ArrayList<Pair<Point, BufferedImage>> imgs;
+	private ArrayList<Duplet<Point, BufferedImage>> imgs;
 
 	public DrawMap ( GameMap gm )
 	{
@@ -33,7 +33,7 @@ public class DrawMap
 				int px = x * vars.spriteSize + vars.screenOffSet;
 				int py = y * vars.spriteSize;
 
-				imgs.add(new Pair<Point, BufferedImage>(new Point(px, py), img));
+				imgs.add(new Duplet<Point, BufferedImage>(new Point(px, py), img));
 
 				x++;
 				y += (x == gm.getWidthTiles()) ? 1 : 0;
@@ -44,7 +44,7 @@ public class DrawMap
 
 	public void draw ( final Graphics g )
 	{
-		for ( Pair<Point, BufferedImage> img : imgs )
+		for ( Duplet<Point, BufferedImage> img : imgs )
 		{
 			g.drawImage(img.getB(), img.getA().x, img.getA().y, null);
 		}

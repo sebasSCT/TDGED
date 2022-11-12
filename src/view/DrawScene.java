@@ -6,6 +6,7 @@ import model.scene.GameScene;
 public class DrawScene
 {
 
+	@ SuppressWarnings ( "unused" )
 	private GameScene s;
 	private DrawMap dm;
 

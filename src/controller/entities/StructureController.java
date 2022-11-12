@@ -35,7 +35,7 @@ public class StructureController extends InactiveEntityController
 		super.draw(g);
 	}
 
-	public void addStructure ( String name, Point pos )
+	public void addStructure ( String name, Point pos, String direction )
 	{
 		String[] data = objList.get(name).split("-");
 		ssc = new SpriteSheetController(entType, name);
@@ -47,7 +47,18 @@ public class StructureController extends InactiveEntityController
 				entsI.get(entsI.size() - 1).getID())]);
 		loadAnim(ssc, entsI.get(entsI.size() - 1));
 		da.add(new DrawAnimation(entsI.get(entsI.size() - 1)));
-		da.get(entsI.size() - 1).setAnimation("a4");
+
+		switch ( direction )
+		{
+			case "right":
+				da.get(entsI.size() - 1).setAnimation("a4");
+				break;
+
+			case "left":
+				da.get(entsI.size() - 1).setAnimation("a5");
+				break;
+		}
+
 	}
 
 }

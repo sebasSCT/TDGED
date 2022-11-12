@@ -7,12 +7,12 @@ import model.entities.Entity;
 import model.entities.active.Active;
 import model.entities.active.Material;
 import model.entities.inactive.Inactive;
-import model.logic.dataStructure.Pair;
+import model.logic.dataStructure.Duplet;
 
 public class DrawAnimation
 {
 
-	private Hashtable<String, Pair<String, Float>> types;
+	private Hashtable<String, Duplet<String, Float>> types;
 
 	private float time;
 	private int ind = 1;
@@ -46,24 +46,24 @@ public class DrawAnimation
 	private void startTypes ()
 	{
 		// idle
-		types.put("a0", new Pair<String, Float>("loop", (float) 1)); // right
-		types.put("a1", new Pair<String, Float>("loop", (float) 1)); // left
+		types.put("a0", new Duplet<String, Float>("loop", (float) 1)); // right
+		types.put("a1", new Duplet<String, Float>("loop", (float) 1)); // left
 
 		// walk
-		types.put("a2", new Pair<String, Float>("loop", (float) 0.5)); // right
-		types.put("a3", new Pair<String, Float>("loop", (float) 0.5)); // left
+		types.put("a2", new Duplet<String, Float>("loop", (float) 0.5)); // right
+		types.put("a3", new Duplet<String, Float>("loop", (float) 0.5)); // left
 
 		// falling
-		types.put("a4", new Pair<String, Float>("static", (float) 0)); // replace
-		types.put("a5", new Pair<String, Float>("static", (float) 0));
+		types.put("a4", new Duplet<String, Float>("static", (float) 0)); // replace
+		types.put("a5", new Duplet<String, Float>("static", (float) 0));
 
 		// carrying
-		types.put("a6", new Pair<String, Float>("loop", (float) 0.5)); // right
-		types.put("a7", new Pair<String, Float>("loop", (float) 0.5)); // left
+		types.put("a6", new Duplet<String, Float>("loop", (float) 0.5)); // right
+		types.put("a7", new Duplet<String, Float>("loop", (float) 0.5)); // left
 
 		// carrying idle
-		types.put("a8", new Pair<String, Float>("loop", (float) 1)); // right
-		types.put("a9", new Pair<String, Float>("loop", (float) 1)); // left
+		types.put("a8", new Duplet<String, Float>("loop", (float) 1)); // right
+		types.put("a9", new Duplet<String, Float>("loop", (float) 1)); // left
 
 		// materials
 	}

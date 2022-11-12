@@ -44,7 +44,7 @@ public abstract class EntityController implements Controller
 
 		g.setColor(Color.red);
 
-		if ( vars.kb.isActive('}') )
+		if ( vars.kb.isActive("showCols") )
 		{
 			g.drawString("ShowColisionsON", 10, 280);
 			drawColisions(g);

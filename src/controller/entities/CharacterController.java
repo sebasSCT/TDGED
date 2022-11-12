@@ -39,9 +39,9 @@ public class CharacterController extends ActiveEntityController
 			ents.get(i).setDirection("right");
 		}
 
+		// Carga las animaciones
 		for ( Active p : ents )
 		{
-			// Carga las animaciones
 			loadAnim(p.getID(), p);
 		}
 
@@ -105,11 +105,21 @@ public class CharacterController extends ActiveEntityController
 		}
 		p1Keys();
 
-		// Tomar Material
+		// DEV
+		if ( vars.kb.isPressed("teleport") )
+		{
+			ents.get(0).setPosTile(19, 1);
+
+			if ( ents.size() >= 1 )
+			{
+				ents.get(1).setPosTile(19, 1);
+			}
+
+		}
 
 		// Instrucciones prueba (mover)
 
-		if ( vars.kb.isPressed('s') )
+		if ( vars.kb.isPressed("instructions") )
 		{
 			startIns = true;
 		}
@@ -221,15 +231,14 @@ public class CharacterController extends ActiveEntityController
 	 */
 	private void p1Keys ()
 	{
-		if ( vars.kb.isPressed('a') && !colision(ents.get(0), "left") )
+		if ( vars.kb.isPressed("left") && !colision(ents.get(0), "left") )
 		{
 			move("left", ents.get(0));
 			ents.get(0).setWalking(true);
 			ents.get(0).setDirection("left");
 			return;
-
 		}
-		if ( vars.kb.isPressed('d') && !colision(ents.get(0), "right") )
+		if ( vars.kb.isPressed("right") && !colision(ents.get(0), "right") )
 		{
 			move("right", ents.get(0));
 			ents.get(0).setWalking(true);
@@ -237,12 +246,7 @@ public class CharacterController extends ActiveEntityController
 			return;
 
 		}
-		if ( vars.kb.isPressed('w') )
-		{
-			ents.get(0).setPosTile(19, 1);
-			// ents.get(1).setPosTile(19, 1);
 
-		}
 		ents.get(0).setWalking(false);
 	}
 
@@ -252,7 +256,7 @@ public class CharacterController extends ActiveEntityController
 	 */
 	private void p2Keys ()
 	{
-		if ( vars.kb.isPressed('j') && !colision(ents.get(1), "left") )
+		if ( vars.kb.isPressed("left1") && !colision(ents.get(1), "left") )
 		{
 			move("left", ents.get(1));
 			ents.get(1).setWalking(true);
@@ -260,7 +264,7 @@ public class CharacterController extends ActiveEntityController
 			return;
 
 		}
-		if ( vars.kb.isPressed('l') && !colision(ents.get(1), "right") )
+		if ( vars.kb.isPressed("right1") && !colision(ents.get(1), "right") )
 		{
 			move("right", ents.get(1));
 			ents.get(1).setWalking(true);
