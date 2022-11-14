@@ -14,8 +14,13 @@ public class DrawScene
 	{
 		this.s = s;
 		dm = new DrawMap(s.getMap());
-		da = new DrawAnimation(s.getHud().getMenus().get(0));
-		da.setAnimation("a2");
+
+		if ( !s.getHud().getMenus().isEmpty() )
+		{
+			da = new DrawAnimation(s.getHud().getMenus().get(0));
+			da.setAnimation("a2");
+		}
+
 		System.out.println("DrawScene");
 	}
 
@@ -23,7 +28,11 @@ public class DrawScene
 	{
 		g.drawImage(s.getBG(), 0, 0, null);
 		dm.draw(g);
-		da.draw(g);
+
+		if ( !s.getHud().getMenus().isEmpty() )
+		{
+			da.draw(g);
+		}
 	}
 
 	public void drawColisions ( Graphics g )

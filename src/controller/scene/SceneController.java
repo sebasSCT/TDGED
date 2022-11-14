@@ -106,12 +106,7 @@ public class SceneController
 		currentScene = scenes.get(ind);
 		ds = new DrawScene(currentScene);
 
-		if ( el != null )
-		{
-			el = new EntityLogic("test_guy:test_guy", currentScene.getMap());
-		}
-
-		else
+		if ( el == null )
 		{
 			el = new EntityLogic("sebas:juan", currentScene.getMap());
 		}
