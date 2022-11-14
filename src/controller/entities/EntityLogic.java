@@ -28,8 +28,7 @@ public class EntityLogic implements Controller
 
 		mtc.addMaterial("cannonball2", new Point(20, 10));
 		mtc.addMaterial("cannonball2", new Point(22, 10));
-		mtc.addMaterial("santy", new Point(18, 10));
-		mtc.addMaterial("cannonball", new Point(12, 10));
+		mtc.addMaterial("cannonball", new Point(24, 10));
 
 		for ( Triplet<String, Point, String> st : map.getStructures() )
 		{

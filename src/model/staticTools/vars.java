@@ -11,6 +11,7 @@ public class vars
 
 	public final static int spriteSize = 16;
 	public final static int entitySpriteSize = 32;
+	public final static int presentationSize = 48;
 	// tamaño de personajes
 
 	public final static double scale = 1;
@@ -54,6 +55,7 @@ public class vars
 	}
 
 	/// tileset entidades
+	public final static int nCharacters = 4;
 	public final static String getTilesetE ( String t, String n )
 	{
 		return "src/resources/img/entity/" + t + "/" + n + ".png";

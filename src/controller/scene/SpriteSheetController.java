@@ -26,6 +26,15 @@ public class SpriteSheetController
 
 	}
 
+	// Constructor para otros
+	public SpriteSheetController ( String type, String tileset, int spriteSize )
+	{
+		ss = new SpriteSheet(vars.getTilesetE(type, tileset), spriteSize);
+		cargarSS();
+		System.out.println("SpriteSheetController");
+
+	}
+
 	private void cargarSS ()
 	{
 		int posicionX, posicionY;

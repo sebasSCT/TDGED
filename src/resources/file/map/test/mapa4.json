@@ -179,7 +179,7 @@
    {
    "type": "cannon",
    "posX": 19,
-   "posY": 5,
+   "posY": 3,
    "direction": "left"
    }
  ],
@@ -204,5 +204,5 @@
  "width":40,
  "posiniX": 19,
  "posiniY": 16,
- "background": 0
+ "background": 2
 }

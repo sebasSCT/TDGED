@@ -6,20 +6,24 @@ import model.scene.GameScene;
 public class DrawScene
 {
 
-	@ SuppressWarnings ( "unused" )
 	private GameScene s;
 	private DrawMap dm;
+	private DrawAnimation da;
 
 	public DrawScene ( GameScene s )
 	{
 		this.s = s;
 		dm = new DrawMap(s.getMap());
+		da = new DrawAnimation(s.getHud().getMenus().get(0));
+		da.setAnimation("a2");
 		System.out.println("DrawScene");
 	}
 
 	public void draw ( final Graphics g )
 	{
+		g.drawImage(s.getBG(), 0, 0, null);
 		dm.draw(g);
+		da.draw(g);
 	}
 
 	public void drawColisions ( Graphics g )

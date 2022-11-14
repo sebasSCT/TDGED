@@ -10,6 +10,16 @@ public class GameScene
 
 	private GameMap map;
 
+	private HUD hud;
+
+	public GameScene ( GameMap map, HUD hud )
+	{
+		this.map = map;
+		this.hud = hud;
+		background = GetResources.ciOpaca(map.getBG());
+		System.out.println("GameScene");
+	}
+
 	public GameScene ( GameMap map )
 	{
 		this.map = map;
@@ -25,6 +35,11 @@ public class GameScene
 	public BufferedImage getBG ()
 	{
 		return background;
+	}
+
+	public HUD getHud ()
+	{
+		return hud;
 	}
 
 }

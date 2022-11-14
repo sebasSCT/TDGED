@@ -72,6 +72,22 @@ public abstract class EntityController implements Controller
 		}
 	}
 
+	protected void loadAnim ( String tileset, Entity e, int size )
+	{
+		SpriteSheetController ssc = new SpriteSheetController(entType, tileset, size);
+
+		for ( int x = 0; x < ssc.getSs().getHeight(); x++ )
+		{
+			ArrayList<BufferedImage> imgs = new ArrayList<>();
+
+			for ( int a = 0; a < ssc.getSs().getWidth(); a++ )
+			{
+				imgs.add(ssc.getSs().getSprites()[a + (ssc.getSs().getWidth() * x)]);
+			}
+			e.getAnimations().put("a" + x, imgs);
+		}
+	}
+
 	protected void loadAnim ( SpriteSheetController ssc, Entity e )
 	{
 

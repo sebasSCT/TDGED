@@ -46,6 +46,7 @@ public class Keyboard implements KeyListener
 		k.put("pause", '-');
 		k.put("teleport", '+');
 		k.put("instructions", '*');
+		k.put("next", 'k');
 		// *************
 
 		return k;

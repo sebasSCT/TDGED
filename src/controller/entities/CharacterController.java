@@ -36,7 +36,8 @@ public class CharacterController extends ActiveEntityController
 			ents.add(new Character(	data[i][0], pos, Integer.parseInt(data[i][1]),
 									Integer.parseInt(data[i][2]), Integer.parseInt(data[i][3]),
 									new Point(	Integer.parseInt(data[i][4]),
-												Integer.parseInt(data[i][5]))));
+												Integer.parseInt(data[i][5])),
+									data[i][0]));
 
 			// Agrega las animaciones al personaje
 			da.add(new DrawAnimation(ents.get(i)));
@@ -60,9 +61,9 @@ public class CharacterController extends ActiveEntityController
 	{
 		// (id)-(ps)-(vel)-(maxVel)-(offsetX)-(offsetY)
 		entList.put("santy", "santy-100-1-4-10-19");
-		entList.put("juan", "juan-100-1-4-12-15");
-		entList.put("beto", "beto-100-1-4-10-18");
-		entList.put("sebas", "sebas-100-1-4-10-18");
+		entList.put("juan", "juan-100-1-4-10-15");
+		entList.put("beto", "beto-100-1-4-10-20");
+		entList.put("sebas", "sebas-100-1-4-10-20");
 	}
 
 	/**
@@ -78,12 +79,25 @@ public class CharacterController extends ActiveEntityController
 	}
 
 	// Dibuja los personaje
+	private Character a;
 	public void draw ( Graphics g )
 	{
-		Character a = (Character) ents.get(0);
+
+		for ( Active e : ents )
+		{
+			a = (Character) e;
+			g.setColor(Color.black);
+			g.drawString(a.getPlayerName(), a.getPos().x + 6,
+					(a.isCarrying()) ? a.getPos().y - 6 : a.getPos().y + 6);
+			g.setColor(Color.orange);
+			g.drawString(a.getPlayerName(), a.getPos().x + 6,
+					(a.isCarrying()) ? a.getPos().y - 5 : a.getPos().y + 5);
+		}
+
 		super.draw(g);
 
 		// Debug (mover)
+		a = (Character) ents.get(0);
 		g.setColor(Color.white);
 		g.drawString("Falling: " + ents.get(0).isFalling(), 10, 30);
 		g.drawString("Walking: " + ents.get(0).isWalking(), 10, 40);
@@ -93,8 +107,7 @@ public class CharacterController extends ActiveEntityController
 		// g.drawString("entity", ents.get(1).getPos().x + 5,
 		// ents.get(1).getPos().y + 5);
 		g.setColor(Color.yellow);
-		// g.drawString("player", ents.get(0).getPos().x + 5,
-		// ents.get(0).getPos().y + 5);
+
 		g.drawString(
 				"Pos X: " + ents.get(0).getPos().x + "  Tile: " + ents.get(0).getPos().x / 16,
 				10, 80);
@@ -102,14 +115,12 @@ public class CharacterController extends ActiveEntityController
 				"Pos Y: " + ents.get(0).getPos().y + "  Tile: " + ents.get(0).getPos().y / 16,
 				10, 90);
 
-		// g.drawRect(ents.get(0).getCB().getBox().x,
-		// ents.get(0).getCB().getBox().y,
-		// ents.get(0).getCB().getBox().width,
-		// ents.get(0).getCB().getBox().height);
+		// g.drawString("player", ents.get(0).getPos().x + 5,
+		// ents.get(0).getPos().y + 5);
 
 	}
 
-	boolean startIns = false; // prueba
+	boolean startIns = false; // prueba de instrucciones
 	boolean complete = true;
 	private void actions ()
 	{

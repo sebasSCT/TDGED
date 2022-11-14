@@ -20,6 +20,7 @@ public class SceneController
 	// Instancia el controlador del mapa
 	private MapController mc;
 	// Instancia la clase del dibujado de escena
+	private HUDController hc;
 
 	private EntityLogic el;
 
@@ -29,11 +30,10 @@ public class SceneController
 	{
 		// Se crea un nuevo MapController inicializandolo en el constructor
 		mc = new MapController();
+		hc = new HUDController();
 		// Inicializar el ArrayList de escenas en el controlador
 		scenes = new ArrayList<>();
 		loadScenes();
-
-		el = new EntityLogic("santy:juan", currentScene.getMap());
 
 		ds = new DrawScene(currentScene);
 
@@ -47,29 +47,39 @@ public class SceneController
 		{
 			mc.loadMap(vars.getMapJSON("test", String.valueOf(x)));
 
-			s = new GameScene(mc.getMapa());
+			s = new GameScene(mc.getMapa(), hc.getHuds().get(x));
 			scenes.add(s);
 		}
 
-		currentScene = scenes.get(4);
+		currentScene = scenes.get(0);
+		ds = new DrawScene(currentScene);
 	}
 
 	// Actualiza todos los elementos de la escena para asignar la posicion de
 	// todo segun corresponda
 	public void update ()
 	{
-		if ( vars.kb.isActive("pause") )
+		if ( vars.kb.isActive("pause") && el != null )
 		{
 			el.update();
+		}
+
+		// switch scene
+		if ( vars.kb.isPressed("next") )
+		{
+			setCS(4);
 		}
 	}
 
 	// Dibuja todos los elementos de la escena
 	public void draw ( final Graphics g )
 	{
-		g.drawImage(s.getBG(), 0, 0, null);
 		ds.draw(g);
-		el.draw(g);
+
+		if ( el != null )
+		{
+			el.draw(g);
+		}
 
 		// DEV
 		if ( vars.kb.isActive("showCols") )
@@ -78,7 +88,7 @@ public class SceneController
 			el.drawColisions(g);
 		}
 
-		if ( !vars.kb.isActive("pause") )
+		if ( !vars.kb.isActive("pause") && el != null )
 		{
 			g.setColor(Color.red);
 			g.drawString("PAUSE", 300, 200);
@@ -95,7 +105,17 @@ public class SceneController
 	{
 		currentScene = scenes.get(ind);
 		ds = new DrawScene(currentScene);
-		el = new EntityLogic("test_guy:test_guy", currentScene.getMap());
+
+		if ( el != null )
+		{
+			el = new EntityLogic("test_guy:test_guy", currentScene.getMap());
+		}
+
+		else
+		{
+			el = new EntityLogic("sebas:juan", currentScene.getMap());
+		}
+
 	}
 
 	// Retorna la escena

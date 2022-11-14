@@ -2,6 +2,8 @@
  "posiniY": 3,
  "background": 0
  
+ al final de cada JSON
+ 
  "structures":
  [
  	{
@@ -22,4 +24,4 @@
  
  "tileset": 0
  
- al final de cada JSON
+ 
