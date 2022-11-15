@@ -25,10 +25,9 @@ public class MaterialController extends ActiveEntityController
 
 	private void startList ()
 	{
-		// (id)-(peso)-(offsetX)-(offsetY)
-		entList.put("cannonball", "00-3-12-24");
-		entList.put("cannonball2", "01-3-9-18");
-		entList.put("santy", "04-3-10-18");
+		// (id)-(peso)-(offsetX)-(offsetY)-(idanim)
+		entList.put("cannonball", "00-3-12-24-a0");
+		entList.put("cannonball2", "02-3-9-18-a0");
 	}
 
 	public void update ()
@@ -42,6 +41,18 @@ public class MaterialController extends ActiveEntityController
 		super.draw(g);
 	}
 
+	public void border ( boolean active, int ind )
+	{
+		if ( active )
+		{
+			da.get(ind).setAnimation(ents.get(ind).getIDA(), "static",
+					Integer.parseInt(ents.get(ind).getID()) + 1);
+			return;
+		}
+		da.get(ind).setAnimation(ents.get(ind).getIDA(), "static",
+				Integer.parseInt(ents.get(ind).getID()));
+	}
+
 	public void addMaterial ( String name, Point pos )
 	{
 		String[] data = entList.get(name).split("-");
@@ -49,9 +60,10 @@ public class MaterialController extends ActiveEntityController
 		ents.add(new Material(data[0], pos, Double.parseDouble(
 				data[1]), new Point(Integer.parseInt(data[2]), Integer.parseInt(data[3]))));
 
-		ents.get(ents.size() - 1).setSprite(
-				ssc.getSs().getSprites()[Integer.parseInt(ents.get(ents.size() - 1).getID())]);
+		loadAnim("materials", ents.get(ents.size() - 1));
 		da.add(new DrawAnimation(ents.get(ents.size() - 1)));
+		da.get(ents.size() - 1).setAnimation(data[4], "static", Integer.parseInt(data[0]));
+		ents.get(ents.size() - 1).setIdanim(data[4]);
 	}
 
 	float time = 0;

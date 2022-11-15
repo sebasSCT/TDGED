@@ -4,20 +4,20 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import controller.scene.SpriteSheetController;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
 
 public abstract class Entity
 {
 
-	protected String id;
+	protected String id, direction, idanim;
 	protected Point pos, offset;
 	protected ColisionBox cb;
-	protected String direction;
 
 	protected Hashtable<String, ArrayList<BufferedImage>> animations;
 	protected Hashtable<String, BufferedImage> sprites;
-	private BufferedImage sprite;
+	protected SpriteSheetController ssc;
 
 	public Entity ( String id, Point pos, Point offset )
 	{
@@ -32,16 +32,6 @@ public abstract class Entity
 		animations = new Hashtable<>();
 		sprites = new Hashtable<>();
 		System.out.println("Entity");
-	}
-
-	public BufferedImage getSprite ()
-	{
-		return sprite;
-	}
-
-	public void setSprite ( BufferedImage sprite )
-	{
-		this.sprite = sprite;
 	}
 
 	public Hashtable<String, ArrayList<BufferedImage>> getAnimations ()
@@ -79,6 +69,16 @@ public abstract class Entity
 		return offset;
 	}
 
+	public SpriteSheetController getSSC ()
+	{
+		return ssc;
+	}
+
+	public String getIDA ()
+	{
+		return idanim;
+	}
+
 	public void setDirection ( String direction )
 	{
 		this.direction = direction;
@@ -113,6 +113,11 @@ public abstract class Entity
 	{
 		pos.y = y;
 		cb.setBox(this.pos.x, this.pos.y + offset.y);
+	}
+
+	public void setIdanim ( String idanim )
+	{
+		this.idanim = idanim;
 	}
 
 }

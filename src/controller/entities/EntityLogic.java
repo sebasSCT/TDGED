@@ -65,6 +65,12 @@ public class EntityLogic implements Controller
 			if ( p[i].isCarrying() )
 			{
 				mtc.carrying(p[i].getPos(), p[i].getCarry(), p[i].getOffset().y);
+				mtc.border(true, p[i].getCarry());
+			}
+
+			else
+			{
+				border(p[i]);
 			}
 
 			if ( pressed[i] )
@@ -112,6 +118,19 @@ public class EntityLogic implements Controller
 		m = (Material) mtc.getEnts().get(p.getCarry());
 		m.setCarry(false);
 		p.setCarrying(false);
+	}
+
+	private void border ( Character p )
+	{
+		for ( int i = 0; i < mtc.getEnts().size(); i++ )
+		{
+			if ( mtc.getEnts().get(i).getCB().getBox().intersects(p.getCB().getBox()) )
+			{
+				mtc.border(true, i);
+				return;
+			}
+			mtc.border(false, i);
+		}
 	}
 
 	public void drawColisions ( Graphics g )

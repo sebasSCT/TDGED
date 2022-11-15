@@ -2,7 +2,6 @@ package controller.entities;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import controller.scene.SpriteSheetController;
 import model.entities.inactive.Structure;
 import view.DrawAnimation;
 
@@ -21,7 +20,7 @@ public class StructureController extends InactiveEntityController
 
 	private void startList ()
 	{
-		// (id)-(offsetX)-(offsetY)
+		// (id)-(offsetX)-(offsetY)-(anim)
 		entList.put("cannon", "00-6-15");
 	}
 
@@ -38,24 +37,21 @@ public class StructureController extends InactiveEntityController
 	public void addStructure ( String name, Point pos, String direction )
 	{
 		String[] data = entList.get(name).split("-");
-		ssc = new SpriteSheetController(entType, name);
 
 		entsI.add(new Structure(data[0], pos, new Point(Integer.parseInt(data[1]),
 														Integer.parseInt(data[2]))));
+		loadAnim(name, entsI.get(entsI.size() - 1));
 
-		entsI.get(entsI.size() - 1).setSprite(ssc.getSs().getSprites()[Integer.parseInt(
-				entsI.get(entsI.size() - 1).getID())]);
-		loadAnim(ssc, entsI.get(entsI.size() - 1));
 		da.add(new DrawAnimation(entsI.get(entsI.size() - 1)));
 
 		switch ( direction )
 		{
 			case "right":
-				da.get(entsI.size() - 1).setAnimation("a4");
+				da.get(entsI.size() - 1).setAnimation("a0", "static", 0);
 				break;
 
 			case "left":
-				da.get(entsI.size() - 1).setAnimation("a5");
+				da.get(entsI.size() - 1).setAnimation("a0", "static", 1);
 				break;
 		}
 

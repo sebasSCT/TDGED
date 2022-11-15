@@ -12,27 +12,25 @@ public class SpriteSheetController
 	// Constructor para tilesets
 	public SpriteSheetController ( String tileset )
 	{
+		System.out.println("SpriteSheetController: " + vars.getTileset(tileset));
 		ss = new SpriteSheet(vars.getTileset(tileset), vars.spriteSize);
 		cargarSS();
-		System.out.println("SpriteSheetController");
 	}
 
 	// Constructor para entidades
 	public SpriteSheetController ( String type, String tileset )
 	{
+		System.out.println("SpriteSheetController: " + vars.getTilesetE(type, tileset));
 		ss = new SpriteSheet(vars.getTilesetE(type, tileset), vars.entitySpriteSize);
 		cargarSS();
-		System.out.println("SpriteSheetController");
-
 	}
 
 	// Constructor para otros
 	public SpriteSheetController ( String type, String tileset, int spriteSize )
 	{
+		System.out.println("SpriteSheetController: " + vars.getTilesetE(type, tileset));
 		ss = new SpriteSheet(vars.getTilesetE(type, tileset), spriteSize);
 		cargarSS();
-		System.out.println("SpriteSheetController");
-
 	}
 
 	private void cargarSS ()

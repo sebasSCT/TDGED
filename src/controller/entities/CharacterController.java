@@ -42,7 +42,7 @@ public class CharacterController extends ActiveEntityController
 			// Agrega las animaciones al personaje
 			da.add(new DrawAnimation(ents.get(i)));
 			// Setea animaciones
-			da.get(i).setAnimation("a0");
+			da.get(i).setAnimation("a0", "loop", 1);
 			ents.get(i).setDirection("right");
 		}
 

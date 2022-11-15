@@ -58,7 +58,7 @@ public abstract class EntityController implements Controller
 
 	protected void loadAnim ( String tileset, Entity e )
 	{
-		SpriteSheetController ssc = new SpriteSheetController(entType, tileset);
+		ssc = new SpriteSheetController(entType, tileset);
 
 		for ( int x = 0; x < ssc.getSs().getHeight(); x++ )
 		{
@@ -72,9 +72,9 @@ public abstract class EntityController implements Controller
 		}
 	}
 
-	protected void loadAnim ( String tileset, Entity e, int size )
+	protected void loadAnim ( String tileset, Entity e, int size, String key )
 	{
-		SpriteSheetController ssc = new SpriteSheetController(entType, tileset, size);
+		ssc = new SpriteSheetController(entType, tileset, size);
 
 		for ( int x = 0; x < ssc.getSs().getHeight(); x++ )
 		{
@@ -84,36 +84,7 @@ public abstract class EntityController implements Controller
 			{
 				imgs.add(ssc.getSs().getSprites()[a + (ssc.getSs().getWidth() * x)]);
 			}
-			e.getAnimations().put("a" + x, imgs);
-		}
-	}
-
-	protected void loadAnim ( SpriteSheetController ssc, Entity e )
-	{
-
-		for ( int x = 0; x < ssc.getSs().getHeight(); x++ )
-		{
-			ArrayList<BufferedImage> imgs = new ArrayList<>();
-
-			for ( int a = 0; a < ssc.getSs().getWidth(); a++ )
-			{
-				imgs.add(ssc.getSs().getSprites()[a + (ssc.getSs().getWidth() * x)]);
-			}
-			e.getAnimations().put("a" + x, imgs);
-		}
-	}
-
-	protected void loadSprite ( String tileset, Active e )
-	{
-		SpriteSheetController ssc = new SpriteSheetController(entType, tileset);
-
-		for ( int x = 0; x < ssc.getSs().getHeight(); x++ )
-		{
-			for ( int a = 0; a < ssc.getSs().getWidth(); a++ )
-			{
-				BufferedImage img = ssc.getSs().getSprites()[a + (ssc.getSs().getWidth() * x)];
-				e.getSprites().put(x + "" + a, img);
-			}
+			e.getAnimations().put(key + x, imgs);
 		}
 	}
 
@@ -145,6 +116,11 @@ public abstract class EntityController implements Controller
 	public String getEntType ()
 	{
 		return entType;
+	}
+
+	public ArrayList<DrawAnimation> getDa ()
+	{
+		return da;
 	}
 
 }

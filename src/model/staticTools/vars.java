@@ -11,7 +11,7 @@ public class vars
 
 	public final static int spriteSize = 16;
 	public final static int entitySpriteSize = 32;
-	public final static int presentationSize = 48;
+	public final static int presentationSize = 48 * 2;
 	// tamaño de personajes
 
 	public final static double scale = 1;
@@ -71,5 +71,4 @@ public class vars
 	public final static int gravity = 1;
 
 	//
-
 }

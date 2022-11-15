@@ -75,11 +75,11 @@ public abstract class ActiveEntityController extends EntityController
 				{
 					// Mas sprites de caida y lógica
 					case "left":
-						da.get(i).setAnimation("a5");
+						da.get(i).setAnimation("a5", "static", 0);
 						break;
 
 					case "right":
-						da.get(i).setAnimation("a4");
+						da.get(i).setAnimation("a4", "static", 0);
 						break;
 
 					// abajo (mismo sprite subir escaleras)
@@ -95,19 +95,19 @@ public abstract class ActiveEntityController extends EntityController
 					case "left":
 						if ( ents.get(i).isCarrying() )
 						{
-							da.get(i).setAnimation("a7");
+							da.get(i).setAnimation("a7", "loop", (float) 0.5);
 							break;
 						}
-						da.get(i).setAnimation("a3");
+						da.get(i).setAnimation("a3", "loop", (float) 0.5);
 						break;
 
 					case "right":
 						if ( ents.get(i).isCarrying() )
 						{
-							da.get(i).setAnimation("a6");
+							da.get(i).setAnimation("a6", "loop", (float) 0.5);
 							break;
 						}
-						da.get(i).setAnimation("a2");
+						da.get(i).setAnimation("a2", "loop", (float) 0.5);
 						break;
 
 					// abajo (mismo sprite subir escaleras)
@@ -122,19 +122,19 @@ public abstract class ActiveEntityController extends EntityController
 					case "left":
 						if ( ents.get(i).isCarrying() )
 						{
-							da.get(i).setAnimation("a9");
+							da.get(i).setAnimation("a9", "loop", (float) 1);
 							break;
 						}
-						da.get(i).setAnimation("a1");
+						da.get(i).setAnimation("a1", "loop", (float) 1);
 						break;
 
 					case "right":
 						if ( ents.get(i).isCarrying() )
 						{
-							da.get(i).setAnimation("a8");
+							da.get(i).setAnimation("a8", "loop", (float) 1);
 							break;
 						}
-						da.get(i).setAnimation("a0");
+						da.get(i).setAnimation("a0", "loop", (float) 1);
 						break;
 
 					// abajo (mismo sprite subir escaleras)

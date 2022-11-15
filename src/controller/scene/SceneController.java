@@ -30,6 +30,7 @@ public class SceneController
 	{
 		// Se crea un nuevo MapController inicializandolo en el constructor
 		mc = new MapController();
+		//
 		hc = new HUDController();
 		// Inicializar el ArrayList de escenas en el controlador
 		scenes = new ArrayList<>();
@@ -51,8 +52,9 @@ public class SceneController
 			scenes.add(s);
 		}
 
-		currentScene = scenes.get(0);
+		currentScene = scenes.get(4);
 		ds = new DrawScene(currentScene);
+		el = new EntityLogic("sebas:beto", currentScene.getMap());
 	}
 
 	// Actualiza todos los elementos de la escena para asignar la posicion de
@@ -75,6 +77,7 @@ public class SceneController
 	public void draw ( final Graphics g )
 	{
 		ds.draw(g);
+		// hc.draw(g);
 
 		if ( el != null )
 		{

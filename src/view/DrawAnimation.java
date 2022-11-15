@@ -2,108 +2,52 @@
 package view;
 
 import java.awt.Graphics;
-import java.util.Hashtable;
 import model.entities.Entity;
-import model.entities.active.Active;
-import model.entities.active.Material;
-import model.entities.inactive.Inactive;
-import model.logic.dataStructure.Duplet;
 
 public class DrawAnimation
 {
 
-	private Hashtable<String, Duplet<String, Float>> types;
+	// Deprecated
+	// private Hashtable<String, Duplet<String, Float>> types;
+	// private Triplet<String, String, Object> animation;
 
-	private float time;
-	private int ind = 1;
-	private float timeSection;
-	private float cont;
-
-	private String type;
+	private float time, timeSection, cont, animTime;
+	private String type, anim;
+	private int ind = 1, frames = 4;
 
 	private Entity e;
 
-	public DrawAnimation ( Active e )
+	public DrawAnimation ( Entity e )
 	{
 		this.e = e;
-		this.types = new Hashtable<>();
-		startTypes();
 
 		System.out.println("DrawAnimation " + e.getID());
-	}
-
-	public DrawAnimation ( Inactive e )
-	{
-		this.e = e;
-		this.types = new Hashtable<>();
-		startTypes();
-
-		System.out.println("DrawAnimation " + e.getID());
-	}
-
-	// add materials
-
-	private void startTypes ()
-	{
-		// idle
-		types.put("a0", new Duplet<String, Float>("loop", (float) 1)); // right
-		types.put("a1", new Duplet<String, Float>("loop", (float) 1)); // left
-
-		// walk
-		types.put("a2", new Duplet<String, Float>("loop", (float) 0.5)); // right
-		types.put("a3", new Duplet<String, Float>("loop", (float) 0.5)); // left
-
-		// falling
-		types.put("a4", new Duplet<String, Float>("static", (float) 0)); // replace
-		types.put("a5", new Duplet<String, Float>("static", (float) 0));
-
-		// carrying
-		types.put("a6", new Duplet<String, Float>("loop", (float) 0.5)); // right
-		types.put("a7", new Duplet<String, Float>("loop", (float) 0.5)); // left
-
-		// carrying idle
-		types.put("a8", new Duplet<String, Float>("loop", (float) 1)); // right
-		types.put("a9", new Duplet<String, Float>("loop", (float) 1)); // left
-
-		// materials
 	}
 
 	public void draw ( Graphics g )
 	{
-
-		if ( e instanceof Material )
+		if ( type != null )
 		{
-			staticSprite(g);
-			return;
+			time = (float) animTime;
+			timeSection = (float) time / (float) frames;
+
+			switch ( anim )
+			{
+				case "loop":
+					loopAnim(g);
+					break;
+
+				case "static":
+					staticSprite(g);
+					break;
+			}
 		}
-
-		if ( types.get(type) != null )
-		{
-			time = (float) types.get(type).getB();
-			timeSection = time / (float) 4;
-		}
-
-		switch ( types.get(type).getA() )
-		{
-			case "loop":
-				loopAnim(g);
-				break;
-
-			case "static":
-				staticAnim(g);
-				break;
-		}
-
-	}
-
-	private void staticAnim ( Graphics g )
-	{
-		g.drawImage(e.getAnimations().get(type).get(0), e.getPos().x, e.getPos().y, null);
 	}
 
 	private void staticSprite ( Graphics g )
 	{
-		g.drawImage(e.getSprite(), e.getPos().x, e.getPos().y, null);
+		g.drawImage(e.getAnimations().get(type).get((int) animTime), e.getPos().x,
+				e.getPos().y, null);
 	}
 
 	private void loopAnim ( Graphics g )
@@ -116,7 +60,6 @@ public class DrawAnimation
 			cont = 0;
 			ind = 1;
 		}
-
 		g.drawImage(e.getAnimations().get(type).get(ind - 1), e.getPos().x, e.getPos().y,
 				null);
 
@@ -127,10 +70,25 @@ public class DrawAnimation
 
 	}
 
-	public void setAnimation ( String type )
+	public void setAnimation ( String type, String anim, float input )
 	{
 		this.type = type;
-
+		this.anim = anim;
+		this.animTime = (float) input;
 	}
+
+	public void setAnimation ( String type, String anim, float input, int frames )
+	{
+		this.type = type;
+		this.anim = anim;
+		this.animTime = (float) input;
+		this.frames = frames;
+	}
+
+	// deprecated
+	// public void setAnimation ( String type )
+	// {
+	// this.type = type;
+	// }
 
 }
