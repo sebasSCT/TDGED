@@ -7,10 +7,6 @@ import model.entities.Entity;
 public class DrawAnimation
 {
 
-	// Deprecated
-	// private Hashtable<String, Duplet<String, Float>> types;
-	// private Triplet<String, String, Object> animation;
-
 	private float time, timeSection, cont, animTime;
 	private String type, anim;
 	private int ind = 1, frames = 4;
@@ -84,11 +80,4 @@ public class DrawAnimation
 		this.animTime = (float) input;
 		this.frames = frames;
 	}
-
-	// deprecated
-	// public void setAnimation ( String type )
-	// {
-	// this.type = type;
-	// }
-
 }
