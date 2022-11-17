@@ -61,6 +61,8 @@ public class SceneController
 	// todo segun corresponda
 	public void update ()
 	{
+		// hc.update();
+
 		if ( vars.kb.isActive("pause") && el != null )
 		{
 			el.update();

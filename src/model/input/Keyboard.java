@@ -8,54 +8,56 @@ import java.util.Map.Entry;
 public class Keyboard implements KeyListener
 {
 
-	private Hashtable<Character, Key> keys;
-	private Hashtable<String, Character> actions;
+	private Hashtable<String, Key> keys;
+	private Hashtable<String, String> actions;
 
 	public Keyboard ()
 	{
 		keys = new Hashtable<>();
+		actions = new Hashtable<>();
 
-		actions = putKeys();
+		putKeys();
 		startKeys();
 
 		System.out.println("Keyboard");
 	}
 
-	public Hashtable<String, Character> putKeys ()
+	public void putKeys ()
 	{
-		Hashtable<String, Character> k = new Hashtable<>();
 
 		// Player 1
-		k.put("down", 's');
-		k.put("up", 'w');
-		k.put("left", 'a');
-		k.put("right", 'd');
-		k.put("interact", 'e');
+		actions.put("down", "s");
+		actions.put("up", "w");
+		actions.put("left", "a");
+		actions.put("right", "d");
+		actions.put("interact", "e");
 		// *************
 
 		// Player 2
-		k.put("down1", '5');
-		k.put("up1", '8');
-		k.put("left1", '4');
-		k.put("right1", '6');
-		k.put("interact1", '7');
+		actions.put("down1", "5");
+		actions.put("up1", "8");
+		actions.put("left1", "4");
+		actions.put("right1", "6");
+		actions.put("interact1", "7");
 		// *************
+
+		// Menu
+		actions.put("a_right", "39");
+		actions.put("a_left", "37");
 
 		// DEV
-		k.put("showCols", '}');
-		k.put("pause", '-');
-		k.put("teleport", '+');
-		k.put("instructions", '*');
-		k.put("next", 'k');
+		actions.put("showCols", "}");
+		actions.put("pause", "-");
+		actions.put("teleport", "+");
+		actions.put("instructions", "*");
+		actions.put("next", "k");
 		// *************
-
-		return k;
 	}
 
 	public void startKeys ()
 	{
 
-		for ( Entry<String, Character> c : actions.entrySet() )
+		for ( Entry<String, String> c : actions.entrySet() )
 		{
 			keys.put(c.getValue(), new Key());
 		}
@@ -64,18 +66,28 @@ public class Keyboard implements KeyListener
 
 	public void keyPressed ( KeyEvent e )
 	{
-		if ( keys.containsKey(e.getKeyChar()) )
+		if ( keys.containsKey(String.valueOf(e.getKeyChar())) )
 		{
-			keys.get(e.getKeyChar()).pressed();
+			keys.get(String.valueOf(e.getKeyChar())).pressed();
+		}
+
+		if ( keys.containsKey(String.valueOf(e.getKeyCode())) )
+		{
+			keys.get(String.valueOf(e.getKeyCode())).pressed();
 		}
 
 	}
 
 	public void keyReleased ( KeyEvent e )
 	{
-		if ( keys.containsKey(e.getKeyChar()) )
+		if ( keys.containsKey(String.valueOf(e.getKeyChar())) )
 		{
-			keys.get(e.getKeyChar()).released();
+			keys.get(String.valueOf(e.getKeyChar())).released();
+		}
+
+		if ( keys.containsKey(String.valueOf(e.getKeyCode())) )
+		{
+			keys.get(String.valueOf(e.getKeyCode())).released();
 		}
 	}
 
@@ -85,22 +97,23 @@ public class Keyboard implements KeyListener
 
 	public boolean isPressed ( String action )
 	{
-		verify(action);
+		// verify(action);
 		return keys.get(actions.get(action)).isPressed();
 	}
 
 	public boolean isReleased ( String action )
 	{
-		verify(action);
+		// verify(action);
 		return keys.get(actions.get(action)).isReleased();
 	}
 
 	public boolean isActive ( String action )
 	{
-		verify(action);
+		// verify(action);
 		return keys.get(actions.get(action)).isActive();
 	}
 
+	@ SuppressWarnings ( "unused" )
 	private void verify ( String action )
 	{
 		if ( !actions.containsKey(action) )
