@@ -190,10 +190,9 @@ public class CharacterController extends ActiveEntityController
 		switch ( inspart[0] )
 		{
 			case "move":
-				if ( !ins.equals("empty") && !colision(ents.get(1), inspart[1]) )
+				if ( !ins.equals("empty") )
 				{
 					move(inspart[1], ents.get(1));
-					ents.get(1).setDirection(inspart[1]);
 					return;
 				}
 				ents.get(1).setWalking(false);
@@ -203,11 +202,9 @@ public class CharacterController extends ActiveEntityController
 				complete = false;
 				if ( ents.get(0).getPos().x != ents.get(1).getPos().x )
 				{
-					if ( ents.get(0).getPos().x < ents.get(1).getPos().x
-							&& !colision(ents.get(1), "left") )
+					if ( ents.get(0).getPos().x < ents.get(1).getPos().x )
 					{
 						move("left", ents.get(1));
-						ents.get(1).setDirection("left");
 					}
 
 					else
@@ -231,18 +228,14 @@ public class CharacterController extends ActiveEntityController
 
 				if ( ents.get(1).getPos().x != ents.get(0).getPos().x )
 				{
-					if ( ents.get(1).getPos().x < ents.get(0).getPos().x - 30
-							&& !colision(ents.get(1), "right") )
+					if ( ents.get(1).getPos().x < ents.get(0).getPos().x - 30 )
 					{
 						move("right", ents.get(1));
-						ents.get(1).setDirection("right");
 					}
 
-					if ( ents.get(1).getPos().x > ents.get(0).getPos().x + 30
-							&& !colision(ents.get(1), "left") )
+					if ( ents.get(1).getPos().x > ents.get(0).getPos().x + 30 )
 					{
 						move("left", ents.get(1));
-						ents.get(1).setDirection("left");
 					}
 				}
 
@@ -257,18 +250,16 @@ public class CharacterController extends ActiveEntityController
 	 */
 	private void p1Keys ()
 	{
-		if ( vars.kb.isPressed("left") && !colision(ents.get(0), "left") )
+		if ( vars.kb.isPressed("left") )
 		{
 			move("left", ents.get(0));
 			ents.get(0).setWalking(true);
-			ents.get(0).setDirection("left");
 			return;
 		}
-		if ( vars.kb.isPressed("right") && !colision(ents.get(0), "right") )
+		if ( vars.kb.isPressed("right") )
 		{
 			move("right", ents.get(0));
 			ents.get(0).setWalking(true);
-			ents.get(0).setDirection("right");
 			return;
 
 		}
@@ -282,19 +273,17 @@ public class CharacterController extends ActiveEntityController
 	 */
 	private void p2Keys ()
 	{
-		if ( vars.kb.isPressed("left1") && !colision(ents.get(1), "left") )
+		if ( vars.kb.isPressed("left1") )
 		{
 			move("left", ents.get(1));
 			ents.get(1).setWalking(true);
-			ents.get(1).setDirection("left");
 			return;
 
 		}
-		if ( vars.kb.isPressed("right1") && !colision(ents.get(1), "right") )
+		if ( vars.kb.isPressed("right1") )
 		{
 			move("right", ents.get(1));
 			ents.get(1).setWalking(true);
-			ents.get(1).setDirection("right");
 			return;
 
 		}

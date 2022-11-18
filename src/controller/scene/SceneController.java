@@ -15,8 +15,6 @@ public class SceneController
 	private ArrayList<GameScene> scenes;
 	// Escena actual "seleccionada"
 	private GameScene currentScene;
-	// Instancia la clase de las escenas
-	private GameScene s;
 	// Instancia el controlador del mapa
 	private MapController mc;
 	// Instancia la clase del dibujado de escena
@@ -48,11 +46,10 @@ public class SceneController
 		{
 			mc.loadMap(vars.getMapJSON("test", String.valueOf(x)));
 
-			s = new GameScene(mc.getMapa(), hc.getHuds().get(x));
-			scenes.add(s);
+			scenes.add(new GameScene(mc.getMapa(), hc.getHuds().get(x)));
 		}
 
-		currentScene = scenes.get(4);
+		currentScene = scenes.get(5);
 		ds = new DrawScene(currentScene);
 		el = new EntityLogic("sebas:santy", currentScene.getMap());
 	}

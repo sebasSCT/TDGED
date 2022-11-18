@@ -112,5 +112,6 @@
  "width":26,
  "posiniX": 5,
  "posiniY": 7,
- "background": 0
+ "background": 0,
+  "towerps": 1000
 }

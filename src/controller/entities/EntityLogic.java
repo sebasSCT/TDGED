@@ -1,7 +1,10 @@
 package controller.entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import controller.Controller;
 import model.entities.active.Character;
 import model.entities.active.Material;
@@ -12,36 +15,52 @@ import model.staticTools.vars;
 public class EntityLogic implements Controller
 {
 
-	String players;
+	private String players;
+	private ArrayList<Rectangle> tower;
+	private int towerPS;
 
 	private CharacterController cc;
+	private EnemyController ec;
 	private MaterialController mtc;
 	private StructureController stc;
 
 	public EntityLogic ( String players, GameMap map )
 	{
 		this.players = players;
+		this.tower = map.getTC();
+		this.towerPS = map.getTowerPS();
 
 		cc = new CharacterController(this.players, map.getPosIni(), map.getColisions());
+		ec = new EnemyController(map.getColisions());
 		mtc = new MaterialController(map.getColisions());
 		stc = new StructureController();
+		mtc.addMaterial("cannonball2", new Point(15, 14));
+		mtc.addMaterial("cannonball2", new Point(23, 14));
 
-		mtc.addMaterial("cannonball2", new Point(20, 10));
-		mtc.addMaterial("cannonball2", new Point(22, 10));
-		mtc.addMaterial("cannonball", new Point(24, 10));
+		ec.addEnemy("one", new Point(0, 19));
+		ec.addEnemy("one", new Point(5, 19));
+		ec.addEnemy("one", new Point(10, 19));
+		ec.addEnemy("one", new Point(30, 19));
+		ec.addEnemy("one", new Point(35, 19));
+		ec.addEnemy("one", new Point(40, 19));
 
 		for ( Triplet<String, Point, String> st : map.getStructures() )
 		{
 			stc.addStructure(st.getA(), st.getB(), st.getC());
 		}
+
+		System.out.println("Entity Logic");
 	}
 
 	public void update ()
 	{
 		carryMaterial();
+		enemyAttack();
+
 		stc.update();
 		mtc.update();
 		cc.update();
+		ec.update();
 	}
 
 	public void draw ( Graphics g )
@@ -49,11 +68,35 @@ public class EntityLogic implements Controller
 		stc.draw(g);
 		mtc.draw(g);
 		cc.draw(g);
+		ec.draw(g);
+
+		g.setColor(Color.black);
+		g.drawString("TOWERPS: " + towerPS, 300, 5);
+		g.setColor(Color.red);
+	}
+
+	private void enemyAttack ()
+	{
+		time[2] += 0.016;
+
+		if ( time[2] >= 1 )
+		{
+			for ( Rectangle r : tower )
+			{
+				System.out.println("damage: " + ec.attack(r));
+				towerPS -= ec.attack(r);
+			}
+		}
+
+		if ( time[2] >= 1 )
+		{
+			time[2] = 0;
+		}
 	}
 
 	private Material m;
 	private boolean[] pressed = new boolean[2];
-	private float[] time = new float[2];
+	private float[] time = new float[3];
 	private Character[] p = new Character[2];
 	private void carryMaterial ()
 	{
@@ -138,6 +181,12 @@ public class EntityLogic implements Controller
 		stc.drawColisions(g);
 		mtc.drawColisions(g);
 		cc.drawColisions(g);
+
+		g.setColor(Color.orange);
+		for ( Rectangle r : tower )
+		{
+			g.drawRect(r.x, r.y, r.width, r.height);
+		}
 	}
 
 }

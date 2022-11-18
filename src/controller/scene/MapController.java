@@ -1,6 +1,7 @@
 package controller.scene;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
@@ -58,6 +59,24 @@ public class MapController
 															direction.toString()));
 			}
 		}
+
+		// Area de daño de la torre
+		if ( global.get("towerColisions") != null )
+		{
+			JSONArray recs = JSONgetters.getArrayJSON(global.get("towerColisions").toString());
+			for ( Object rec : recs )
+			{
+				int x = JSONgetters.getIntJSON((JSONObject) rec, "x");
+				int y = JSONgetters.getIntJSON((JSONObject) rec, "y");
+				int width = JSONgetters.getIntJSON((JSONObject) rec, "width");
+				int height = JSONgetters.getIntJSON((JSONObject) rec, "height");
+
+				mapa.getTC().add(new Rectangle(x, y, width, height));
+			}
+		}
+
+		// vida de la torre
+		mapa.setTowerPS(JSONgetters.getIntJSON(global, "towerps"));
 
 		// Extraer las capas de sprites y las capas de colisiones
 		JSONArray layers = JSONgetters.getArrayJSON(global.get("layers").toString());

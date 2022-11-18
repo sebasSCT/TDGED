@@ -42,7 +42,7 @@ public class vars
 	}
 
 	/// JSON mapas
-	public final static int nMaps = 5;
+	public final static int nMaps = 6;
 	public final static String getMapJSON ( String type, String n )
 	{
 		return "src/resources/file/map/" + type + "/mapa" + n + ".json";

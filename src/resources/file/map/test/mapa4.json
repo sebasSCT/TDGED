@@ -204,5 +204,6 @@
  "width":40,
  "posiniX": 19,
  "posiniY": 16,
- "background": 3
+ "background": 3,
+  "towerps": 1000,
 }

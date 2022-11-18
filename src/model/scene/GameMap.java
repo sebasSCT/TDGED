@@ -1,6 +1,7 @@
 package model.scene;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import model.logic.ColisionBox;
@@ -9,11 +10,12 @@ import model.logic.dataStructure.Triplet;
 public class GameMap
 {
 
-	private int widthTiles, heightTiles;
+	private int widthTiles, heightTiles, towerPS;
 	private Point posIni;
 	private ArrayList<ArrayList<BufferedImage>> spriteLayers;
 	private ArrayList<ColisionBox> colisions;
 	private ArrayList<Triplet<String, Point, String>> structures;
+	private ArrayList<Rectangle> towerColisions;
 	private String bg;
 
 	public GameMap ()
@@ -21,6 +23,8 @@ public class GameMap
 		spriteLayers = new ArrayList<>();
 		colisions = new ArrayList<>();
 		structures = new ArrayList<>();
+		towerColisions = new ArrayList<>();
+
 		System.out.println("GameMap");
 	}
 
@@ -64,6 +68,16 @@ public class GameMap
 		this.posIni = posIni;
 	}
 
+	public int getTowerPS ()
+	{
+		return towerPS;
+	}
+
+	public void setTowerPS ( int towerPS )
+	{
+		this.towerPS = towerPS;
+	}
+
 	public ArrayList<ArrayList<BufferedImage>> getSpriteLayers ()
 	{
 		return spriteLayers;
@@ -77,6 +91,11 @@ public class GameMap
 	public ArrayList<Triplet<String, Point, String>> getStructures ()
 	{
 		return structures;
+	}
+
+	public ArrayList<Rectangle> getTC ()
+	{
+		return towerColisions;
 	}
 
 }

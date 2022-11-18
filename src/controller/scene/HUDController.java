@@ -36,6 +36,7 @@ public class HUDController extends InactiveEntityController
 		huds.add(new HUD());
 		huds.add(new HUD());
 		huds.add(new HUD());
+		huds.add(new HUD());
 	}
 
 	private void selectPlayerHUD ()

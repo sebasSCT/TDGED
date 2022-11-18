@@ -51,6 +51,7 @@ public class Keyboard implements KeyListener
 		actions.put("teleport", "+");
 		actions.put("instructions", "*");
 		actions.put("next", "k");
+		actions.put("delEnemy", "b");
 		// *************
 	}
 

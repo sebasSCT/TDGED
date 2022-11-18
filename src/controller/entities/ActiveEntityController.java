@@ -150,31 +150,47 @@ public abstract class ActiveEntityController extends EntityController
 		switch ( direction )
 		{
 			case "left":
-				e.getPos().x -= e.getVel();
-				e.getCB().setBox(e.getPos().x + e.getOffset().x,
-						e.getPos().y + e.getOffset().y);
-				e.setWalking(true);
+				if ( !colision(e, "left") )
+				{
+					e.getPos().x -= e.getVel();
+					e.getCB().setBox(e.getPos().x + e.getOffset().x,
+							e.getPos().y + e.getOffset().y);
+					e.setWalking(true);
+					e.setDirection("left");
+				}
 				break;
 
 			case "right":
-				e.getPos().x += e.getVel();
-				e.getCB().setBox(e.getPos().x + e.getOffset().x,
-						e.getPos().y + e.getOffset().y);
-				e.setWalking(true);
+				if ( !colision(e, "right") )
+				{
+					e.getPos().x += e.getVel();
+					e.getCB().setBox(e.getPos().x + e.getOffset().x,
+							e.getPos().y + e.getOffset().y);
+					e.setWalking(true);
+					e.setDirection("right");
+				}
 				break;
 
 			case "up":
-				e.getPos().y -= e.getVel();
-				e.getCB().setBox(e.getPos().x + e.getOffset().x,
-						e.getPos().y + e.getOffset().y);
-				e.setWalking(true);
+				if ( !colision(e, "up") )
+				{
+					e.getPos().y -= e.getVel();
+					e.getCB().setBox(e.getPos().x + e.getOffset().x,
+							e.getPos().y + e.getOffset().y);
+					e.setWalking(true);
+					e.setDirection("up");
+				}
 				break;
 
 			case "down":
-				e.getPos().y += e.getVel();
-				e.getCB().setBox(e.getPos().x + e.getOffset().x,
-						e.getPos().y + e.getOffset().y);
-				e.setWalking(true);
+				if ( !colision(e, "down") )
+				{
+					e.getPos().y += e.getVel();
+					e.getCB().setBox(e.getPos().x + e.getOffset().x,
+							e.getPos().y + e.getOffset().y);
+					e.setWalking(true);
+					e.setDirection("down");
+				}
 				break;
 		}
 	}

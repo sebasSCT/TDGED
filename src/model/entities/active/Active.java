@@ -7,12 +7,12 @@ import model.staticTools.vars;
 public abstract class Active extends Entity
 {
 
-	protected double vel, ps, acl;
+	protected double vel, acl;
 	protected double wg;
-	protected int g = vars.gravity, carry;
+	protected int g = vars.gravity, carry, ps;
 	protected boolean falling, walking, carrying;
 
-	public Active ( String id, Point pos, double ps, double vel, double maxVel, Point offset )
+	public Active ( String id, Point pos, int ps, double vel, double maxVel, Point offset )
 	{
 		super(id, pos, offset);
 		this.vel = vel;
@@ -66,12 +66,12 @@ public abstract class Active extends Entity
 		this.vel = vel;
 	}
 
-	public double getPs ()
+	public int getPs ()
 	{
 		return ps;
 	}
 
-	public void setPs ( double ps )
+	public void setPs ( int ps )
 	{
 		this.ps = ps;
 	}
