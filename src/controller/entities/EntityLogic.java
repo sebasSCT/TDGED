@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import controller.Controller;
-import model.entities.active.Character;
+import model.entities.active.GameCharacter;
 import model.entities.active.Material;
 import model.logic.dataStructure.Triplet;
 import model.scene.GameMap;
@@ -35,6 +35,8 @@ public class EntityLogic implements Controller
 		ec = new EnemyController(map.getColisions());
 		mtc = new MaterialController(map.getColisions());
 		stc = new StructureController();
+
+		// precarga
 		mtc.addMaterial("cannonball2", new Point(15, 14));
 		mtc.addMaterial("cannonball2", new Point(23, 14));
 
@@ -67,14 +69,14 @@ public class EntityLogic implements Controller
 	public void draw ( Graphics g )
 	{
 		stc.draw(g);
-		mtc.draw(g);
 		cc.draw(g);
+		mtc.draw(g);
 		ec.draw(g);
 
 		g.setColor(Color.black);
-		g.drawString("TOWERPS: " + towerPS, 300, 50);
-		g.setColor(Color.red);
-		g.drawString("TOWERPS: " + towerPS, 300, 51);
+		g.drawString("TOWER: " + towerPS, 300, 100);
+		g.setColor(Color.white);
+		g.drawString("TOWER: " + towerPS, 300, 101);
 	}
 
 	private void enemyAttack ()
@@ -98,24 +100,24 @@ public class EntityLogic implements Controller
 	private Material m;
 	private boolean[] pressed = new boolean[2];
 	private float[] time = new float[3];
-	private Character[] p = new Character[2];
+	private GameCharacter[] p = new GameCharacter[2];
 	private void carryMaterial ()
 	{
 
 		for ( int i = 0; i < p.length; i++ )
 		{
-			p[i] = (Character) cc.getEnts().get(i);
+			p[i] = (GameCharacter) cc.getEnts().get(i);
 
 			if ( p[i].isCarrying() )
 			{
 				mtc.carrying(p[i].getPos(), p[i].getCarry(), p[i].getOffset().y);
-				mtc.border(true, p[i].getCarry());
+				// mtc.borderOn(p[i].getCarry());
 			}
 
-			else
-			{
-				border(p[i]);
-			}
+			// else
+			// {
+
+			// }
 
 			if ( pressed[i] )
 			{
@@ -127,6 +129,8 @@ public class EntityLogic implements Controller
 				}
 			}
 		}
+
+		mtc.border(p);
 
 		if ( vars.kb.isPressed("interact") && !pressed[0] )
 		{
@@ -142,7 +146,7 @@ public class EntityLogic implements Controller
 
 	}
 
-	private void setCarry ( Character p )
+	private void setCarry ( GameCharacter p )
 	{
 		if ( !p.isCarrying() )
 		{
@@ -154,6 +158,7 @@ public class EntityLogic implements Controller
 					m.setCarry(true);
 					p.setCarrying(true);
 					p.setCarry(i);
+					return;
 				}
 			}
 			return;
@@ -162,19 +167,7 @@ public class EntityLogic implements Controller
 		m = (Material) mtc.getEnts().get(p.getCarry());
 		m.setCarry(false);
 		p.setCarrying(false);
-	}
 
-	private void border ( Character p )
-	{
-		for ( int i = 0; i < mtc.getEnts().size(); i++ )
-		{
-			if ( mtc.getEnts().get(i).getCB().getBox().intersects(p.getCB().getBox()) )
-			{
-				mtc.border(true, i);
-				return;
-			}
-			mtc.border(false, i);
-		}
 	}
 
 	public void drawColisions ( Graphics g )

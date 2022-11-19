@@ -26,7 +26,7 @@ public class EnemyController extends ActiveEntityController
 	private void startList ()
 	{
 		// (id)-(ps)-(vel)-(maxVel)-(offsetX)-(offsetY)-(damage)
-		entList.put("one", "00-100-1-4-10-19-1");
+		entList.put("one", "00-100-1-4-10-19-2");
 	}
 
 	boolean pressed = false;

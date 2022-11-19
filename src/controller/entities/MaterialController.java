@@ -41,16 +41,33 @@ public class MaterialController extends ActiveEntityController
 		super.draw(g);
 	}
 
-	public void border ( boolean active, int ind )
+	private boolean border;
+	public void border ( Active[] e )
 	{
-		if ( active )
+		for ( int i = 0; i < getEnts().size(); i++ )
 		{
-			da.get(ind).setAnimation(ents.get(ind).getIDA(), "static",
-					Integer.parseInt(ents.get(ind).getID()) + 1);
-			return;
+			border = false;
+			for ( Active ee : e )
+			{
+				if ( getEnts().get(i).getCB().getBox().intersects(ee.getCB().getBox()) )
+				{
+					border = true;
+					break;
+				}
+			}
+
+			if ( border )
+			{
+				da.get(i).setAnimation(ents.get(i).getIDA(), "static",
+						Integer.parseInt(ents.get(i).getID()) + 1);
+			}
+
+			else
+			{
+				da.get(i).setAnimation(ents.get(i).getIDA(), "static",
+						Integer.parseInt(ents.get(i).getID()));
+			}
 		}
-		da.get(ind).setAnimation(ents.get(ind).getIDA(), "static",
-				Integer.parseInt(ents.get(ind).getID()));
 	}
 
 	public void addMaterial ( String name, Point pos )

@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import model.entities.active.Active;
-import model.entities.active.Character;
+import model.entities.active.GameCharacter;
 import model.logic.ColisionBox;
 import model.logic.dataStructure.LinkedListTail;
 import model.staticTools.vars;
@@ -38,7 +38,7 @@ public class CharacterController extends ActiveEntityController
 
 		for ( int i = 0; i < ids.length; i++ )
 		{
-			ents.add(new Character(	data[i][0], pos, Integer.parseInt(data[i][1]),
+			ents.add(new GameCharacter(	data[i][0], pos, Integer.parseInt(data[i][1]),
 									Integer.parseInt(data[i][2]), Integer.parseInt(data[i][3]),
 									new Point(	Integer.parseInt(data[i][4]),
 												Integer.parseInt(data[i][5])),
@@ -84,13 +84,13 @@ public class CharacterController extends ActiveEntityController
 	}
 
 	// Dibuja los personaje
-	private Character a;
+	private GameCharacter a;
 	public void draw ( Graphics g )
 	{
 
 		for ( Active e : ents )
 		{
-			a = (Character) e;
+			a = (GameCharacter) e;
 			g.setColor(Color.black);
 			g.drawString(a.getPlayerName(), a.getPos().x + 6,
 					(a.isCarrying()) ? a.getPos().y - 6 : a.getPos().y + 6);
@@ -102,7 +102,7 @@ public class CharacterController extends ActiveEntityController
 		super.draw(g);
 
 		// Debug (mover)
-		a = (Character) ents.get(0);
+		a = (GameCharacter) ents.get(0);
 		g.setColor(Color.white);
 		g.drawString("Falling: " + ents.get(0).isFalling(), 10, 30);
 		g.drawString("Walking: " + ents.get(0).isWalking(), 10, 40);
