@@ -27,7 +27,7 @@ public class MaterialController extends ActiveEntityController
 	{
 		// (id)-(peso)-(offsetX)-(offsetY)-(idanim)
 		entList.put("cannonball", "00-3-12-24-a0");
-		entList.put("cannonball2", "02-3-9-18-a0");
+		entList.put("cannonball2", "02-3-12-23-a0");
 	}
 
 	public void update ()

@@ -52,6 +52,7 @@ public abstract class ActiveEntityController extends EntityController
 			e.setFalling(false);
 			return;
 		}
+
 		fall(e);
 
 	}

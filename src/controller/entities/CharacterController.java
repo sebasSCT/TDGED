@@ -3,6 +3,7 @@ package controller.entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import model.entities.active.Active;
 import model.entities.active.Character;
@@ -21,9 +22,13 @@ import view.DrawAnimation;
 public class CharacterController extends ActiveEntityController
 {
 
-	public CharacterController ( String id, Point pos, ArrayList<ColisionBox> cbm )
+	private ArrayList<Rectangle> ladders;
+
+	public CharacterController (	String id, Point pos, ArrayList<ColisionBox> cbm,
+									ArrayList<Rectangle> ladders )
 	{
 		super(cbm);
+		this.ladders = ladders;
 		startList();
 		entType = "character";
 
@@ -180,8 +185,8 @@ public class CharacterController extends ActiveEntityController
 		ins = list.unstack().toString();
 	}
 
-	float time;
-	String ins;
+	private float time;
+	private String ins;
 
 	// Movimiento del segundo pj "IA".
 	private void instructions ()
@@ -250,21 +255,27 @@ public class CharacterController extends ActiveEntityController
 	 */
 	private void p1Keys ()
 	{
-		if ( vars.kb.isPressed("left") )
+		ladder(0);
+
+		if ( !ents.get(0).isLadder() )
 		{
-			move("left", ents.get(0));
-			ents.get(0).setWalking(true);
+			if ( vars.kb.isPressed("left") )
+			{
+				move("left", ents.get(0));
+				ents.get(0).setWalking(true);
+				return;
+			}
+			if ( vars.kb.isPressed("right") )
+			{
+				move("right", ents.get(0));
+				ents.get(0).setWalking(true);
+				return;
+
+			}
+
+			ents.get(0).setWalking(false);
 			return;
 		}
-		if ( vars.kb.isPressed("right") )
-		{
-			move("right", ents.get(0));
-			ents.get(0).setWalking(true);
-			return;
-
-		}
-
-		ents.get(0).setWalking(false);
 	}
 
 	/**
@@ -273,21 +284,79 @@ public class CharacterController extends ActiveEntityController
 	 */
 	private void p2Keys ()
 	{
-		if ( vars.kb.isPressed("left1") )
-		{
-			move("left", ents.get(1));
-			ents.get(1).setWalking(true);
-			return;
+		ladder(1);
 
-		}
-		if ( vars.kb.isPressed("right1") )
+		if ( !ents.get(1).isLadder() )
 		{
-			move("right", ents.get(1));
-			ents.get(1).setWalking(true);
-			return;
+			if ( vars.kb.isPressed("left1") )
+			{
+				move("left", ents.get(1));
+				ents.get(1).setWalking(true);
+				return;
 
+			}
+			if ( vars.kb.isPressed("right1") )
+			{
+				move("right", ents.get(1));
+				ents.get(1).setWalking(true);
+				return;
+
+			}
+			ents.get(1).setWalking(false);
 		}
-		ents.get(1).setWalking(false);
+	}
+
+	private boolean up = false;
+	private void ladder ( int ind )
+	{
+		switch ( ind )
+		{
+			case 0:
+				up = vars.kb.isPressed("up");
+				break;
+			case 1:
+				up = vars.kb.isPressed("up1");
+				break;
+		}
+
+		for ( Rectangle r : ladders )
+		{
+			if ( up && ents.get(ind).getCB().getBox().intersects(r) )
+			{
+				move("up", ents.get(ind));
+				ents.get(ind).setLadder(true);
+
+				if ( vars.kb.isPressed("left") )
+				{
+					move("left", ents.get(ind));
+				}
+
+				if ( vars.kb.isPressed("right") )
+				{
+					move("right", ents.get(ind));
+				}
+				return;
+			}
+
+			ents.get(ind).setLadder(false);
+		}
+	}
+
+	public void gravity ( Active e )
+	{
+		if ( !e.isLadder() )
+		{
+			super.gravity(e);
+		}
+	}
+
+	public void drawColisions ( Graphics g )
+	{
+		for ( Rectangle r : ladders )
+		{
+			g.setColor(Color.pink);
+			g.drawRect(r.x, r.y, r.width, r.height);
+		}
 	}
 
 }

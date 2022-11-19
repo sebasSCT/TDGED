@@ -16,6 +16,7 @@ public class GameMap
 	private ArrayList<ColisionBox> colisions;
 	private ArrayList<Triplet<String, Point, String>> structures;
 	private ArrayList<Rectangle> towerColisions;
+	private ArrayList<Rectangle> ladders;
 	private String bg;
 
 	public GameMap ()
@@ -24,6 +25,7 @@ public class GameMap
 		colisions = new ArrayList<>();
 		structures = new ArrayList<>();
 		towerColisions = new ArrayList<>();
+		ladders = new ArrayList<>();
 
 		System.out.println("GameMap");
 	}
@@ -96,6 +98,11 @@ public class GameMap
 	public ArrayList<Rectangle> getTC ()
 	{
 		return towerColisions;
+	}
+
+	public ArrayList<Rectangle> getLadders ()
+	{
+		return ladders;
 	}
 
 }

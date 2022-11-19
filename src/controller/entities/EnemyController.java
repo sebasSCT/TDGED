@@ -74,17 +74,6 @@ public class EnemyController extends ActiveEntityController
 			{
 				damage += en.getDamage();
 				en.setAttacking(true);
-
-				switch ( en.getDirection() )
-				{
-					case "left":
-						da.get(i).setAnimation("a2", "loop", (float) 0.4, 4);
-						break;
-					case "right":
-						da.get(i).setAnimation("a3", "loop", (float) 0.4, 4);
-						break;
-				}
-
 			}
 
 			else
@@ -94,8 +83,8 @@ public class EnemyController extends ActiveEntityController
 					damage -= en.getDamage();
 				}
 			}
-
 		}
+
 		return damage;
 	}
 
@@ -108,13 +97,21 @@ public class EnemyController extends ActiveEntityController
 				if ( ents.get(i).getPos().x < 300 )
 				{
 					move("right", ents.get(i));
-					da.get(i).setAnimation("a1", "static", 0);
+
+					if ( !colision(ents.get(i), "right") )
+					{
+						da.get(i).setAnimation("a1", "static", 0);
+					}
 				}
 
 				else
 				{
 					move("left", ents.get(i));
-					da.get(i).setAnimation("a0", "static", 0);
+
+					if ( !colision(ents.get(i), "left") )
+					{
+						da.get(i).setAnimation("a0", "static", 0);
+					}
 				}
 			}
 		}
@@ -140,15 +137,18 @@ public class EnemyController extends ActiveEntityController
 	{
 		for ( int i = 0; i < ents.size(); i++ )
 		{
-			switch ( ents.get(i).getDirection() )
+			Enemy en = (Enemy) ents.get(i);
+			if ( en.isAttacking() )
 			{
-				case "right":
-
-					break;
-
-				case "left":
-
-					break;
+				switch ( en.getDirection() )
+				{
+					case "left":
+						da.get(i).setAnimation("a2", "loop", (float) 0.4, 4);
+						break;
+					case "right":
+						da.get(i).setAnimation("a3", "loop", (float) 0.4, 4);
+						break;
+				}
 			}
 		}
 	}

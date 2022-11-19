@@ -10,7 +10,7 @@ public abstract class Active extends Entity
 	protected double vel, acl;
 	protected double wg;
 	protected int g = vars.gravity, carry, ps;
-	protected boolean falling, walking, carrying;
+	protected boolean falling, walking, carrying, ladder;
 
 	public Active ( String id, Point pos, int ps, double vel, double maxVel, Point offset )
 	{
@@ -19,6 +19,16 @@ public abstract class Active extends Entity
 		this.wg = maxVel;
 		this.ps = ps;
 		this.acl = 0;
+	}
+
+	public boolean isLadder ()
+	{
+		return ladder;
+	}
+
+	public void setLadder ( boolean ladder )
+	{
+		this.ladder = ladder;
 	}
 
 	public boolean isCarrying ()

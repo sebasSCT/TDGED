@@ -75,6 +75,21 @@ public class MapController
 			}
 		}
 
+		// escaleras
+		if ( global.get("ladders") != null )
+		{
+			JSONArray recs = JSONgetters.getArrayJSON(global.get("ladders").toString());
+			for ( Object rec : recs )
+			{
+				int x = JSONgetters.getIntJSON((JSONObject) rec, "x");
+				int y = JSONgetters.getIntJSON((JSONObject) rec, "y");
+				int width = JSONgetters.getIntJSON((JSONObject) rec, "width");
+				int height = JSONgetters.getIntJSON((JSONObject) rec, "height");
+
+				mapa.getLadders().add(new Rectangle(x, y, width, height));
+			}
+		}
+
 		// vida de la torre
 		mapa.setTowerPS(JSONgetters.getIntJSON(global, "towerps"));
 

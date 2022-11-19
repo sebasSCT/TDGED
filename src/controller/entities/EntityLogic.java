@@ -30,7 +30,8 @@ public class EntityLogic implements Controller
 		this.tower = map.getTC();
 		this.towerPS = map.getTowerPS();
 
-		cc = new CharacterController(this.players, map.getPosIni(), map.getColisions());
+		cc = new CharacterController(	this.players, map.getPosIni(), map.getColisions(),
+										map.getLadders());
 		ec = new EnemyController(map.getColisions());
 		mtc = new MaterialController(map.getColisions());
 		stc = new StructureController();
@@ -38,10 +39,10 @@ public class EntityLogic implements Controller
 		mtc.addMaterial("cannonball2", new Point(23, 14));
 
 		ec.addEnemy("one", new Point(0, 19));
-		ec.addEnemy("one", new Point(5, 19));
-		ec.addEnemy("one", new Point(10, 19));
-		ec.addEnemy("one", new Point(30, 19));
-		ec.addEnemy("one", new Point(35, 19));
+		// ec.addEnemy("one", new Point(5, 19));
+		// ec.addEnemy("one", new Point(10, 19));
+		// ec.addEnemy("one", new Point(30, 19));
+		// ec.addEnemy("one", new Point(35, 19));
 		ec.addEnemy("one", new Point(40, 19));
 
 		for ( Triplet<String, Point, String> st : map.getStructures() )
@@ -71,8 +72,9 @@ public class EntityLogic implements Controller
 		ec.draw(g);
 
 		g.setColor(Color.black);
-		g.drawString("TOWERPS: " + towerPS, 300, 5);
+		g.drawString("TOWERPS: " + towerPS, 300, 50);
 		g.setColor(Color.red);
+		g.drawString("TOWERPS: " + towerPS, 300, 51);
 	}
 
 	private void enemyAttack ()
@@ -83,7 +85,6 @@ public class EntityLogic implements Controller
 		{
 			for ( Rectangle r : tower )
 			{
-				System.out.println("damage: " + ec.attack(r));
 				towerPS -= ec.attack(r);
 			}
 		}
