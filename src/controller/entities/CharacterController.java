@@ -108,6 +108,7 @@ public class CharacterController extends ActiveEntityController
 		g.drawString("Walking: " + ents.get(0).isWalking(), 10, 40);
 		g.drawString("Direction: " + ents.get(0).getDirection(), 10, 50);
 		g.drawString("Carrying: " + a.isCarrying() + " " + a.getCarry(), 10, 60);
+		g.drawString("Ladder: " + a.isLadder(), 10, 70);
 		g.setColor(Color.white);
 		// g.drawString("entity", ents.get(1).getPos().x + 5,
 		// ents.get(1).getPos().y + 5);
@@ -115,10 +116,10 @@ public class CharacterController extends ActiveEntityController
 
 		g.drawString(
 				"Pos X: " + ents.get(0).getPos().x + "  Tile: " + ents.get(0).getPos().x / 16,
-				10, 80);
+				10, 90);
 		g.drawString(
 				"Pos Y: " + ents.get(0).getPos().y + "  Tile: " + ents.get(0).getPos().y / 16,
-				10, 90);
+				10, 100);
 
 		// g.drawString("player", ents.get(0).getPos().x + 5,
 		// ents.get(0).getPos().y + 5);
@@ -306,32 +307,37 @@ public class CharacterController extends ActiveEntityController
 		}
 	}
 
-	private boolean up = false;
+	private boolean[] actions =
+	{ false, false, false };
 	private void ladder ( int ind )
 	{
 		switch ( ind )
 		{
 			case 0:
-				up = vars.kb.isPressed("up");
+				actions[0] = vars.kb.isPressed("up");
+				actions[1] = vars.kb.isPressed("left");
+				actions[2] = vars.kb.isPressed("right");
 				break;
 			case 1:
-				up = vars.kb.isPressed("up1");
+				actions[0] = vars.kb.isPressed("up1");
+				actions[1] = vars.kb.isPressed("left1");
+				actions[2] = vars.kb.isPressed("right1");
 				break;
 		}
 
 		for ( Rectangle r : ladders )
 		{
-			if ( up && ents.get(ind).getCB().getBox().intersects(r) )
+			if ( actions[0] && ents.get(ind).getCB().getBox().intersects(r) )
 			{
 				move("up", ents.get(ind));
 				ents.get(ind).setLadder(true);
 
-				if ( vars.kb.isPressed("left") )
+				if ( actions[1] )
 				{
 					move("left", ents.get(ind));
 				}
 
-				if ( vars.kb.isPressed("right") )
+				if ( actions[2] )
 				{
 					move("right", ents.get(ind));
 				}
@@ -357,6 +363,8 @@ public class CharacterController extends ActiveEntityController
 			g.setColor(Color.pink);
 			g.drawRect(r.x, r.y, r.width, r.height);
 		}
+
+		super.drawColisions(g);
 	}
 
 }
