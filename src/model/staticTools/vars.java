@@ -71,4 +71,8 @@ public class vars
 	public final static int gravity = 1;
 
 	//
+
+	//
+	public static int entities;
+	//
 }

@@ -29,30 +29,12 @@ public class EnemyController extends ActiveEntityController
 		entList.put("one", "00-100-1-4-10-19-2");
 	}
 
-	boolean pressed = false;
-	private float time;
 	public void update ()
 	{
 		gotower();
 		anim();
 
 		super.update();
-
-		time += 0.016;
-		if ( vars.kb.isPressed("delEnemy") && !pressed )
-		{
-			pressed = !pressed;
-			if ( ents.get(0) != null )
-			{
-				delEnemy(ents.size() - 1);
-			}
-		}
-
-		if ( time >= 0.8 )
-		{
-			pressed = !pressed;
-			time = 0;
-		}
 	}
 
 	public void draw ( Graphics g )
@@ -165,24 +147,28 @@ public class EnemyController extends ActiveEntityController
 		}
 	}
 
-	public void addEnemy ( String name, Point pos )
+	public void addEnemy ( String name, int posx, int posy )
 	{
 		String[] data = entList.get(name).split("-");
 
-		ents.add(new Enemy(	data[0], pos, Integer.parseInt(data[1]), Integer.parseInt(data[2]),
-							Integer.parseInt(data[3]),
+		ents.add(new Enemy(	data[0], new Point(posx, posy), Integer.parseInt(data[1]),
+							Integer.parseInt(data[2]), Integer.parseInt(data[3]),
 							new Point(Integer.parseInt(data[4]), Integer.parseInt(data[5])),
 							Integer.parseInt(data[6])));
 		loadAnim(name, ents.get(ents.size() - 1));
 		ents.get(ents.size() - 1).setDirection("right");
 		da.add(new DrawAnimation(ents.get(ents.size() - 1)));
 		da.get(ents.size() - 1).setAnimation("a0", "loop", (float) 1, 1);
+
+		vars.entities++;
 	}
 
 	public void delEnemy ( int ind )
 	{
 		ents.remove(ind);
 		da.remove(ind);
+
+		vars.entities--;
 	}
 
 }

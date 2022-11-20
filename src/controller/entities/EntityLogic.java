@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import controller.Controller;
 import model.entities.active.GameCharacter;
 import model.entities.active.Material;
+import model.logic.dataStructure.Duplet;
 import model.logic.dataStructure.Triplet;
 import model.scene.GameMap;
 import model.staticTools.vars;
@@ -37,17 +38,19 @@ public class EntityLogic implements Controller
 		stc = new StructureController();
 
 		// precarga
-		mtc.addMaterial("cannonball2", new Point(15, 14));
-		mtc.addMaterial("cannonball2", new Point(23, 14));
+		mtc.addMaterial("cannonball", 15, 14);
+		mtc.addMaterial("cannonball", 23, 14);
+		mtc.addMaterial("gunpowder", 15, 19);
+		mtc.addMaterial("block", 23, 19);
 
-		ec.addEnemy("one", new Point(0, 19));
-		// ec.addEnemy("one", new Point(5, 19));
-		// ec.addEnemy("one", new Point(10, 19));
-		// ec.addEnemy("one", new Point(30, 19));
-		// ec.addEnemy("one", new Point(35, 19));
-		ec.addEnemy("one", new Point(40, 19));
+		ec.addEnemy("one", 0, 19);
+		ec.addEnemy("one", 5, 19);
+		ec.addEnemy("one", 10, 19);
+		ec.addEnemy("one", 30, 19);
+		ec.addEnemy("one", 35, 19);
+		ec.addEnemy("one", 40, 19);
 
-		for ( Triplet<String, Point, String> st : map.getStructures() )
+		for ( Triplet<String, Point, Duplet<String, String>> st : map.getStructures() )
 		{
 			stc.addStructure(st.getA(), st.getB(), st.getC());
 		}
@@ -73,10 +76,12 @@ public class EntityLogic implements Controller
 		mtc.draw(g);
 		ec.draw(g);
 
-		g.setColor(Color.black);
-		g.drawString("TOWER: " + towerPS, 300, 100);
-		g.setColor(Color.white);
-		g.drawString("TOWER: " + towerPS, 300, 101);
+		drawTowerPs(g);
+	}
+
+	private void interact ()
+	{
+
 	}
 
 	private void enemyAttack ()
@@ -111,13 +116,7 @@ public class EntityLogic implements Controller
 			if ( p[i].isCarrying() )
 			{
 				mtc.carrying(p[i].getPos(), p[i].getCarry(), p[i].getOffset().y);
-				// mtc.borderOn(p[i].getCarry());
 			}
-
-			// else
-			// {
-
-			// }
 
 			if ( pressed[i] )
 			{
@@ -181,6 +180,14 @@ public class EntityLogic implements Controller
 		{
 			g.drawRect(r.x, r.y, r.width, r.height);
 		}
+	}
+
+	private void drawTowerPs ( Graphics g )
+	{
+		g.setColor(Color.black);
+		g.drawString("TOWER: " + towerPS, 300, 100);
+		g.setColor(Color.white);
+		g.drawString("TOWER: " + towerPS, 300, 101);
 	}
 
 }

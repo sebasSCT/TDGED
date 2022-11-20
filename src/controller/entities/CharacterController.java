@@ -39,10 +39,11 @@ public class CharacterController extends ActiveEntityController
 		for ( int i = 0; i < ids.length; i++ )
 		{
 			ents.add(new GameCharacter(	data[i][0], pos, Integer.parseInt(data[i][1]),
-									Integer.parseInt(data[i][2]), Integer.parseInt(data[i][3]),
-									new Point(	Integer.parseInt(data[i][4]),
-												Integer.parseInt(data[i][5])),
-									data[i][0]));
+										Integer.parseInt(data[i][2]),
+										Integer.parseInt(data[i][3]),
+										new Point(	Integer.parseInt(data[i][4]),
+													Integer.parseInt(data[i][5])),
+										data[i][0]));
 
 			// Agrega las animaciones al personaje
 			da.add(new DrawAnimation(ents.get(i)));
@@ -55,6 +56,7 @@ public class CharacterController extends ActiveEntityController
 		for ( Active p : ents )
 		{
 			loadAnim(p.getID(), p);
+			vars.entities++;
 		}
 
 		////
@@ -65,7 +67,7 @@ public class CharacterController extends ActiveEntityController
 	private void startList ()
 	{
 		// (id)-(ps)-(vel)-(maxVel)-(offsetX)-(offsetY)
-		entList.put("santy", "santy-100-1-4-10-19");
+		entList.put("santy", "santy-100-1-4-10-20");
 		entList.put("juan", "juan-100-1-4-10-15");
 		entList.put("beto", "beto-100-1-4-10-20");
 		entList.put("sebas", "sebas-100-1-4-10-20");
@@ -109,6 +111,7 @@ public class CharacterController extends ActiveEntityController
 		g.drawString("Direction: " + ents.get(0).getDirection(), 10, 50);
 		g.drawString("Carrying: " + a.isCarrying() + " " + a.getCarry(), 10, 60);
 		g.drawString("Ladder: " + a.isLadder(), 10, 70);
+		g.drawString("Entities: " + vars.entities, 10, 120);
 		g.setColor(Color.white);
 		// g.drawString("entity", ents.get(1).getPos().x + 5,
 		// ents.get(1).getPos().y + 5);

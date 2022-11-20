@@ -6,15 +6,17 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import controller.scene.SpriteSheetController;
 import model.logic.ColisionBox;
+import model.logic.dataStructure.Duplet;
 import model.staticTools.vars;
 
 public abstract class Entity
 {
 
-	protected String id, direction, idanim;
+	protected String id, direction;
 	protected Point pos, offset;
 	protected ColisionBox cb;
 
+	protected Duplet<String, String> idAnim;
 	protected Hashtable<String, ArrayList<BufferedImage>> animations;
 	protected Hashtable<String, BufferedImage> sprites;
 	protected SpriteSheetController ssc;
@@ -74,9 +76,9 @@ public abstract class Entity
 		return ssc;
 	}
 
-	public String getIDA ()
+	public Duplet<String, String> getIDA ()
 	{
-		return idanim;
+		return idAnim;
 	}
 
 	public void setDirection ( String direction )
@@ -115,9 +117,9 @@ public abstract class Entity
 		cb.setBox(this.pos.x, this.pos.y + offset.y);
 	}
 
-	public void setIdanim ( String idanim )
+	public void setIdanim ( String idAnim, String idAnim_ )
 	{
-		this.idanim = idanim;
+		this.idAnim = new Duplet<String, String>(idAnim, idAnim_);
 	}
 
 }

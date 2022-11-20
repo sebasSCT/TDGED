@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import model.logic.ColisionBox;
+import model.logic.dataStructure.Duplet;
 import model.logic.dataStructure.Triplet;
 import model.scene.GameMap;
 import model.staticTools.GetResources;
@@ -53,10 +54,14 @@ public class MapController
 				int y = JSONgetters.getIntJSON((JSONObject) structure, "posY");
 				Object direction = JSONgetters	.getObjectJSON(structure.toString())
 												.get("direction");
+				Object animation = JSONgetters	.getObjectJSON(structure.toString())
+												.get("animation");
 
 				mapa.getStructures()
-					.add(new Triplet<String, Point, String>(type.toString(), new Point(x, y),
-															direction.toString()));
+					.add(new Triplet<String, Point, Duplet<String, String>>(type.toString(),
+																			new Point(x, y),
+																			new Duplet<String, String>(	direction.toString(),
+																										animation.toString())));
 			}
 		}
 

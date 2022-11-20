@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import model.logic.ColisionBox;
+import model.logic.dataStructure.Duplet;
 import model.logic.dataStructure.Triplet;
 
 public class GameMap
@@ -14,7 +15,7 @@ public class GameMap
 	private Point posIni;
 	private ArrayList<ArrayList<BufferedImage>> spriteLayers;
 	private ArrayList<ColisionBox> colisions;
-	private ArrayList<Triplet<String, Point, String>> structures;
+	private ArrayList<Triplet<String, Point, Duplet<String, String>>> structures;
 	private ArrayList<Rectangle> towerColisions;
 	private ArrayList<Rectangle> ladders;
 	private String bg;
@@ -90,7 +91,7 @@ public class GameMap
 		return colisions;
 	}
 
-	public ArrayList<Triplet<String, Point, String>> getStructures ()
+	public ArrayList<Triplet<String, Point, Duplet<String, String>>> getStructures ()
 	{
 		return structures;
 	}

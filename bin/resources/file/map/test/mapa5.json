@@ -299,15 +299,17 @@
  [
        {
        "type": "cannon",
-       "posX": 13,
+       "posX": 14,
        "posY": 15,
-       "direction": "left"
+       "direction": "left",
+       "animation": "a3"
        },
        {
        "type": "cannon",
-       "posX": 27,
+       "posX": 26,
        "posY": 15,
-       "direction": "right"
+       "direction": "right",
+       "animation": "a3"
        }
  ],
  "towerColisions":

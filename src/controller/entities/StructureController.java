@@ -3,6 +3,8 @@ package controller.entities;
 import java.awt.Graphics;
 import java.awt.Point;
 import model.entities.inactive.Structure;
+import model.logic.dataStructure.Duplet;
+import model.staticTools.vars;
 import view.DrawAnimation;
 
 public class StructureController extends InactiveEntityController
@@ -21,7 +23,7 @@ public class StructureController extends InactiveEntityController
 	private void startList ()
 	{
 		// (id)-(offsetX)-(offsetY)-(anim)
-		entList.put("cannon", "00-6-15");
+		entList.put("cannon", "cannon-6-15");
 	}
 
 	public void update ()
@@ -34,7 +36,15 @@ public class StructureController extends InactiveEntityController
 		super.draw(g);
 	}
 
-	public void addStructure ( String name, Point pos, String direction )
+	public void action ()
+	{
+		for ( int i = 0; i < entsI.size(); i++ )
+		{
+
+		}
+	}
+
+	public void addStructure ( String name, Point pos, Duplet<String, String> anim )
 	{
 		String[] data = entList.get(name).split("-");
 
@@ -44,16 +54,18 @@ public class StructureController extends InactiveEntityController
 
 		da.add(new DrawAnimation(entsI.get(entsI.size() - 1)));
 
-		switch ( direction )
+		switch ( anim.getA() )
 		{
 			case "right":
-				da.get(entsI.size() - 1).setAnimation("a0", "static", 0);
+				da.get(entsI.size() - 1).setAnimation(anim.getB(), "static", 0);
 				break;
 
 			case "left":
-				da.get(entsI.size() - 1).setAnimation("a0", "static", 1);
+				da.get(entsI.size() - 1).setAnimation(anim.getB(), "static", 1);
 				break;
 		}
+
+		vars.entities++;
 
 	}
 
