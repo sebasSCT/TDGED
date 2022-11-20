@@ -169,21 +169,21 @@
    "posX": 13,
    "posY": 20,
    "direction": "left",
-   "animation": "a3"
+   "animation": "3"
    },
    {
    "type": "cannon",
    "posX": 25,
    "posY": 20,
    "direction": "right",
-   "animation": "a3"
+   "animation": "3"
    },
    {
    "type": "cannon",
    "posX": 19,
    "posY": 3,
    "direction": "left",
-   "animation": "a3"
+   "animation": "3"
    }
  ],
  "nextlayerid":6,

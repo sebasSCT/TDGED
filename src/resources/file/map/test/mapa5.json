@@ -294,7 +294,7 @@
   "posiniX": 20,
  "posiniY": 14,
  "background": 3,
- "towerps": 1000,
+ "towerps": 10000,
  "structures":
  [
        {
@@ -302,14 +302,14 @@
        "posX": 14,
        "posY": 15,
        "direction": "left",
-       "animation": "a2"
+       "animation": "2"
        },
        {
        "type": "cannon",
        "posX": 26,
        "posY": 15,
        "direction": "right",
-       "animation": "a2"
+       "animation": "2"
        }
  ],
  "towerColisions":

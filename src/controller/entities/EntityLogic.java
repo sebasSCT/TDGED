@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import controller.Controller;
 import model.entities.active.GameCharacter;
 import model.entities.active.Material;
+import model.logic.ColisionBox;
 import model.logic.dataStructure.Duplet;
 import model.logic.dataStructure.Triplet;
 import model.scene.GameMap;
@@ -62,6 +63,7 @@ public class EntityLogic implements Controller
 	{
 		carryMaterial();
 		enemyAttack();
+		interact();
 
 		stc.update();
 		mtc.update();
@@ -79,9 +81,10 @@ public class EntityLogic implements Controller
 		drawTowerPs(g);
 	}
 
+	private ColisionBox[] CB = new ColisionBox[2];
 	private void interact ()
 	{
-
+		stc.border(CB);
 	}
 
 	private void enemyAttack ()
@@ -112,6 +115,7 @@ public class EntityLogic implements Controller
 		for ( int i = 0; i < p.length; i++ )
 		{
 			p[i] = (GameCharacter) cc.getEnts().get(i);
+			CB[i] = p[i].getCB();
 
 			if ( p[i].isCarrying() )
 			{
@@ -129,7 +133,7 @@ public class EntityLogic implements Controller
 			}
 		}
 
-		mtc.border(p);
+		mtc.border(CB);
 
 		if ( vars.kb.isPressed("interact") && !pressed[0] )
 		{

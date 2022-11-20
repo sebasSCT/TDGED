@@ -3,6 +3,7 @@ package controller.entities;
 import java.awt.Graphics;
 import java.awt.Point;
 import model.entities.inactive.Structure;
+import model.logic.ColisionBox;
 import model.logic.dataStructure.Duplet;
 import model.staticTools.vars;
 import view.DrawAnimation;
@@ -36,10 +37,31 @@ public class StructureController extends InactiveEntityController
 		super.draw(g);
 	}
 
-	public void action ()
+	private boolean border;
+	public void border ( ColisionBox[] CB )
 	{
-		for ( int i = 0; i < entsI.size(); i++ )
+		for ( int i = 0; i < getEntsI().size(); i++ )
 		{
+			border = false;
+			for ( ColisionBox box : CB )
+			{
+				if ( getEntsI().get(i).getCB().getBox().intersects(box.getBox()) )
+				{
+					border = true;
+					break;
+				}
+			}
+
+			if ( border )
+			{
+				da.get(i).setAnimation(
+						String.valueOf((Integer.parseInt(entsI.get(i).getIDA().getA()) + 1)),
+						"static", Integer.parseInt(entsI.get(i).getIDA().getB()));
+				continue;
+			}
+
+			da.get(i).setAnimation(entsI.get(i).getIDA().getA(), "static",
+					Integer.parseInt(entsI.get(i).getIDA().getB()));
 
 		}
 	}
@@ -50,7 +72,7 @@ public class StructureController extends InactiveEntityController
 
 		entsI.add(new Structure(data[0], pos, new Point(Integer.parseInt(data[1]),
 														Integer.parseInt(data[2]))));
-		loadAnim(name, entsI.get(entsI.size() - 1));
+		loadAnim(name, entsI.get(entsI.size() - 1), vars.entitySpriteSize, "");
 
 		da.add(new DrawAnimation(entsI.get(entsI.size() - 1)));
 
@@ -58,10 +80,12 @@ public class StructureController extends InactiveEntityController
 		{
 			case "right":
 				da.get(entsI.size() - 1).setAnimation(anim.getB(), "static", 0);
+				entsI.get(entsI.size() - 1).setIdanim(anim.getB(), "0");
 				break;
 
 			case "left":
 				da.get(entsI.size() - 1).setAnimation(anim.getB(), "static", 1);
+				entsI.get(entsI.size() - 1).setIdanim(anim.getB(), "1");
 				break;
 		}
 

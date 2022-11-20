@@ -44,14 +44,14 @@ public class MaterialController extends ActiveEntityController
 	}
 
 	private boolean border;
-	public void border ( Active[] e )
+	public void border ( ColisionBox[] e )
 	{
 		for ( int i = 0; i < getEnts().size(); i++ )
 		{
 			border = false;
-			for ( Active ee : e )
+			for ( ColisionBox ee : e )
 			{
-				if ( getEnts().get(i).getCB().getBox().intersects(ee.getCB().getBox()) )
+				if ( getEnts().get(i).getCB().getBox().intersects(ee.getBox()) )
 				{
 					border = true;
 					break;
