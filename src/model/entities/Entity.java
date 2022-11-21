@@ -21,6 +21,8 @@ public abstract class Entity
 	protected Hashtable<String, BufferedImage> sprites;
 	protected SpriteSheetController ssc;
 
+	protected boolean hiden;
+
 	public Entity ( String id, Point pos, Point offset )
 	{
 		this.id = id;
@@ -44,6 +46,16 @@ public abstract class Entity
 	public Hashtable<String, BufferedImage> getSprites ()
 	{
 		return sprites;
+	}
+
+	public boolean isHiden ()
+	{
+		return hiden;
+	}
+
+	public void setHiden ( boolean hiden )
+	{
+		this.hiden = hiden;
 	}
 
 	public ColisionBox getCB ()

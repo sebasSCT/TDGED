@@ -25,6 +25,7 @@ public class vars
 
 	public static int FPS, APS;
 	public static double delta;
+	public static float time = (float) 0.016;
 	// ==================================
 
 	// Rutas

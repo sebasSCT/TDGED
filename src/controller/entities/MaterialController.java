@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import controller.scene.SpriteSheetController;
-import model.entities.active.Active;
 import model.entities.active.Material;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
@@ -48,6 +47,11 @@ public class MaterialController extends ActiveEntityController
 	{
 		for ( int i = 0; i < getEnts().size(); i++ )
 		{
+			if ( ents.get(i).isHiden() )
+			{
+				continue;
+			}
+
 			border = false;
 			for ( ColisionBox ee : e )
 			{
@@ -87,43 +91,40 @@ public class MaterialController extends ActiveEntityController
 	}
 
 	float time = 0;
-	boolean up = false;
-	@ SuppressWarnings ( "unused" )
-	private void inertia ()
+	boolean shoot = false;
+	private void shootMove ( int ind, String direction )
 	{
-		for ( Active e : ents )
-		{
-			if ( e.getVel() != 0 )
-			{
-				move(e.getDirection(), e);
-				move("up", e);
-
-				time += (float) 0.016;
-				if ( time >= 0.09 )
-				{
-					if ( e.getVel() > 1 )
-					{
-						e.setVel(e.getVel() - 1);
-						time = 0;
-					}
-					if ( time >= 0.5 )
-					{
-						e.setVel(0);
-						time = 0;
-					}
-				}
-
-				if ( colision(e, "down") )
-				{
-					e.setVel(0);
-				}
-			}
-		}
+		move("left", ents.get(ind));
+		// move("down", ents.get(ind));
 	}
 
 	public void carrying ( Point pos, int ind, int offsety )
 	{
 		ents.get(ind).setPos(new Point(pos.x, pos.y - offsety - 5));
+	}
+
+	public void hide ( int ind )
+	{
+		da.get(ind).setAnimation("a1", "static", 6);
+		ents.get(ind).setPosTile(0, 0);
+		ents.get(ind).setHiden(true);
+	}
+
+	public void delete ( int ind )
+	{
+
+		da.remove(ind);
+		ents.remove(ind);
+
+		vars.entities--;
+	}
+
+	public void shoot ( int ind, Point pos, String direction )
+	{
+		ents.get(ind).setPos(pos);
+		da.get(ind).setAnimation(ents.get(ind).getIDA().getA(), "static",
+				Integer.parseInt(ents.get(ind).getIDA().getB()));
+		shootMove(ind, direction);
 	}
 
 }

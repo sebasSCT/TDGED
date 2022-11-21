@@ -41,6 +41,7 @@ public class EntityLogic implements Controller
 		// precarga
 		mtc.addMaterial("cannonball", 15, 14);
 		mtc.addMaterial("cannonball", 23, 14);
+		mtc.addMaterial("cannonball", 23, 14);
 		mtc.addMaterial("gunpowder", 15, 19);
 		mtc.addMaterial("block", 23, 19);
 
@@ -61,6 +62,7 @@ public class EntityLogic implements Controller
 
 	public void update ()
 	{
+		// characterData();
 		carryMaterial();
 		enemyAttack();
 		interact();
@@ -81,12 +83,30 @@ public class EntityLogic implements Controller
 		drawTowerPs(g);
 	}
 
+	@ SuppressWarnings ( "unchecked" )
+	private Duplet<String, Integer>[] carry = new Duplet[2];
 	private ColisionBox[] CB = new ColisionBox[2];
+	private Triplet<Integer, Point, String> ind;
+	private boolean killEnemies = false;
 	private void interact ()
 	{
 		stc.border(CB);
+
+		ind = stc.interact(carry);
+
+		if ( ind.getA() < 99 )
+		{
+			p[ind.getA()].setCarrying(false);
+			mtc.delete(p[ind.getA()].getCarry());
+		}
+
+		else if ( ind.getA() > 99 )
+		{
+			killEnemies = true;
+		}
 	}
 
+	private float[] time = new float[3];
 	private void enemyAttack ()
 	{
 		time[2] += 0.016;
@@ -107,7 +127,6 @@ public class EntityLogic implements Controller
 
 	private Material m;
 	private boolean[] pressed = new boolean[2];
-	private float[] time = new float[3];
 	private GameCharacter[] p = new GameCharacter[2];
 	private void carryMaterial ()
 	{
@@ -119,7 +138,15 @@ public class EntityLogic implements Controller
 
 			if ( p[i].isCarrying() )
 			{
+				carry[i] = new Duplet<String, Integer>(mtc	.getEnts().get(p[i].getCarry())
+															.getID(),
+														p[i].getCarry());
 				mtc.carrying(p[i].getPos(), p[i].getCarry(), p[i].getOffset().y);
+			}
+
+			else
+			{
+				carry[i] = new Duplet<String, Integer>(null, 9999);
 			}
 
 			if ( pressed[i] )
@@ -170,6 +197,11 @@ public class EntityLogic implements Controller
 		m = (Material) mtc.getEnts().get(p.getCarry());
 		m.setCarry(false);
 		p.setCarrying(false);
+
+	}
+
+	private void characterData ()
+	{
 
 	}
 
