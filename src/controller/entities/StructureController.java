@@ -120,6 +120,9 @@ public class StructureController extends InactiveEntityController
 	{
 		int r = st.getCharged().getB();
 		st.setCharged(false, 9999);
+		da.get(s).setAnimation(
+				String.valueOf((Integer.parseInt(entsI.get(s).getIDA().getA()) + 3)), "once",
+				Integer.parseInt(entsI.get(s).getIDA().getB()));
 		return new Triplet<Integer, Point, String>(r + 100, st.getPos(), st.getDirection());
 	}
 

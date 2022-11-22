@@ -302,14 +302,14 @@
        "posX": 14,
        "posY": 15,
        "direction": "left",
-       "animation": "3"
+       "animation": "4"
        },
        {
        "type": "cannon",
        "posX": 26,
        "posY": 15,
        "direction": "right",
-       "animation": "3"
+       "animation": "4"
        }
  ],
  "towerColisions":
