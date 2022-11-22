@@ -26,6 +26,7 @@ public class StructureController extends InactiveEntityController
 	{
 		// (id)-(offsetX)-(offsetY)-(anim)-(type)-(material(s))
 		entList.put("cannon", "cannon-6-15-weapon-cannonball");
+		entList.put("cannonball_table", "cannonball_table-6-15-table-cannonball");
 	}
 
 	public void update ()
@@ -178,18 +179,17 @@ public class StructureController extends InactiveEntityController
 
 		da.add(new DrawAnimation(entsI.get(entsI.size() - 1)));
 
+		entsI.get(entsI.size() - 1).setDirection(anim.getA());
 		switch ( anim.getA() )
 		{
 			case "right":
 				da.get(entsI.size() - 1).setAnimation(anim.getB(), "static", 0);
 				entsI.get(entsI.size() - 1).setIdanim(anim.getB(), "0");
-				entsI.get(entsI.size() - 1).setDirection("right");
 				break;
 
 			case "left":
 				da.get(entsI.size() - 1).setAnimation(anim.getB(), "static", 1);
 				entsI.get(entsI.size() - 1).setIdanim(anim.getB(), "1");
-				entsI.get(entsI.size() - 1).setDirection("left");
 				break;
 		}
 

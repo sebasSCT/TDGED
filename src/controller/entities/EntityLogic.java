@@ -39,11 +39,11 @@ public class EntityLogic implements Controller
 		stc = new StructureController();
 
 		// precarga
+
 		mtc.addMaterial("cannonball", 15, 14);
 		mtc.addMaterial("cannonball", 23, 14);
 		mtc.addMaterial("cannonball", 23, 14);
-		mtc.addMaterial("gunpowder", 15, 19);
-		mtc.addMaterial("block", 23, 19);
+		mtc.addMaterial("block", 20, 19);
 
 		ec.addEnemy("one", 0, 19);
 		ec.addEnemy("one", 5, 19);
@@ -56,6 +56,9 @@ public class EntityLogic implements Controller
 		{
 			stc.addStructure(st.getA(), st.getB(), st.getC());
 		}
+
+		stc.addStructure("cannonball_table", new Point(23, 19),
+				new Duplet<String, String>("right", "0"));
 
 		System.out.println("Entity Logic");
 	}
