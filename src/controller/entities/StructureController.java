@@ -91,8 +91,6 @@ public class StructureController extends InactiveEntityController
 
 					if ( s.getMaterial()[0].equals(carry.getA()) )
 					{
-						System.out.println(carry.getA());
-						System.out.println(s.getMaterial()[0]);
 						pressed[p] = true;
 						s.setCharged(true, carry.getB());
 						return new Triplet<Integer, Point, String>(p, null, null);
@@ -109,7 +107,12 @@ public class StructureController extends InactiveEntityController
 				return new Triplet<Integer, Point, String>(99, null, null);
 
 			case "table":
-				break;
+				if ( !pressed[p] )
+				{
+					pressed[p] = true;
+					return new Triplet<Integer, Point, String>(500 + p, null, null);
+				}
+				return new Triplet<Integer, Point, String>(99, null, null);
 		}
 
 		System.err.println("Something Went Wrong...");

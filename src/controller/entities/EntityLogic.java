@@ -57,6 +57,11 @@ public class EntityLogic implements Controller
 			stc.addStructure(st.getA(), st.getB(), st.getC());
 		}
 
+		for ( Point p : map.getTables() )
+		{
+			stc.addStructure("cannonball_table", p, new Duplet<String, String>("right", "0"));
+		}
+
 		stc.addStructure("cannonball_table", new Point(23, 19),
 				new Duplet<String, String>("right", "0"));
 
@@ -106,6 +111,16 @@ public class EntityLogic implements Controller
 		else if ( ind.getA() > 99 )
 		{
 			killEnemies = true;
+		}
+
+		if ( ind.getA() >= 500 )
+		{
+			mtc.addMaterial("cannonball", p[ind.getA() - 500].getPos().x,
+					p[ind.getA() - 500].getPos().y);
+			p[ind.getA() - 500].setCarry(mtc.getEnts().size() - 1);
+			p[ind.getA() - 500].setCarrying(true);
+			mtc.carrying(p[ind.getA() - 500].getPos(), p[ind.getA() - 500].getCarry(),
+					p[ind.getA() - 500].getOffset().y);
 		}
 	}
 

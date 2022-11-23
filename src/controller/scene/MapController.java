@@ -98,6 +98,19 @@ public class MapController
 		// vida de la torre
 		mapa.setTowerPS(JSONgetters.getIntJSON(global, "towerps"));
 
+		// tables
+		if ( global.get("tables") != null )
+		{
+			JSONArray points = JSONgetters.getArrayJSON(global.get("tables").toString());
+			for ( Object rec : points )
+			{
+				int x = JSONgetters.getIntJSON((JSONObject) rec, "x");
+				int y = JSONgetters.getIntJSON((JSONObject) rec, "y");
+
+				mapa.getTables().add(new Point(x, y));
+			}
+		}
+
 		// Extraer las capas de sprites y las capas de colisiones
 		JSONArray layers = JSONgetters.getArrayJSON(global.get("layers").toString());
 		String[] spriteLy;

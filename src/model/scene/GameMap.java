@@ -18,6 +18,7 @@ public class GameMap
 	private ArrayList<Triplet<String, Point, Duplet<String, String>>> structures;
 	private ArrayList<Rectangle> towerColisions;
 	private ArrayList<Rectangle> ladders;
+	private ArrayList<Point> tables;
 	private String bg;
 
 	public GameMap ()
@@ -27,8 +28,14 @@ public class GameMap
 		structures = new ArrayList<>();
 		towerColisions = new ArrayList<>();
 		ladders = new ArrayList<>();
+		tables = new ArrayList<>();
 
 		System.out.println("GameMap");
+	}
+
+	public ArrayList<Point> getTables ()
+	{
+		return tables;
 	}
 
 	public String getBG ()
