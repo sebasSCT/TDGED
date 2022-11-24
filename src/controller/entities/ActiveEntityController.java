@@ -3,6 +3,7 @@ package controller.entities;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import model.entities.active.Active;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
@@ -31,9 +32,9 @@ public abstract class ActiveEntityController extends EntityController
 
 	public void update ()
 	{
-		for ( Active p : ents )
+		for ( Entry<Integer, Active> p : ents.entrySet() )
 		{
-			gravity(p);
+			gravity(p.getValue());
 		}
 
 		super.update();

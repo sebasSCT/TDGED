@@ -12,6 +12,8 @@ import view.DrawAnimation;
 public class MaterialController extends ActiveEntityController
 {
 
+	private int materials = 0;
+
 	public MaterialController ( ArrayList<ColisionBox> cbm )
 	{
 		super(cbm);
@@ -47,6 +49,11 @@ public class MaterialController extends ActiveEntityController
 	{
 		for ( int i = 0; i < getEnts().size(); i++ )
 		{
+			if ( ents.get(i) == null )
+			{
+				continue;
+			}
+
 			if ( ents.get(i).isHiden() )
 			{
 				continue;
@@ -75,19 +82,24 @@ public class MaterialController extends ActiveEntityController
 		}
 	}
 
-	public void addMaterial ( String name, int posx, int posy )
+	public int addMaterial ( String name, int posx, int posy )
 	{
+		int rer = materials;
+
 		String[] data = entList.get(name).split("-");
 
-		ents.add(new Material(data[0], new Point(posx, posy), Double.parseDouble(
+		ents.put(materials, new Material(data[0], new Point(posx, posy), Double.parseDouble(
 				data[1]), new Point(Integer.parseInt(data[2]), Integer.parseInt(data[3]))));
 
-		loadAnim("materials", ents.get(ents.size() - 1));
-		da.add(new DrawAnimation(ents.get(ents.size() - 1)));
-		da.get(ents.size() - 1).setAnimation(data[4], "static", Integer.parseInt(data[5]));
-		ents.get(ents.size() - 1).setIdanim(data[4], data[5]);
+		loadAnim("materials", ents.get(materials));
+		da.put(materials, new DrawAnimation(ents.get(materials)));
+		da.get(materials).setAnimation(data[4], "static", Integer.parseInt(data[5]));
+		ents.get(materials).setIdanim(data[4], data[5]);
 
 		vars.entities++;
+		materials++;
+
+		return rer;
 	}
 
 	float time = 0;
@@ -100,6 +112,11 @@ public class MaterialController extends ActiveEntityController
 
 	public void carrying ( Point pos, int ind, int offsety )
 	{
+		if ( ents.get(ind) == null )
+		{
+			return;
+		}
+
 		ents.get(ind).setPos(new Point(pos.x, pos.y - offsety - 5));
 	}
 

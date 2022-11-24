@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import model.entities.active.Active;
 import model.entities.active.GameCharacter;
 import model.logic.ColisionBox;
@@ -38,7 +39,8 @@ public class CharacterController extends ActiveEntityController
 
 		for ( int i = 0; i < ids.length; i++ )
 		{
-			ents.add(new GameCharacter(	data[i][0], pos, Integer.parseInt(data[i][1]),
+			ents.put(i,
+					new GameCharacter(	data[i][0], pos, Integer.parseInt(data[i][1]),
 										Integer.parseInt(data[i][2]),
 										Integer.parseInt(data[i][3]),
 										new Point(	Integer.parseInt(data[i][4]),
@@ -46,16 +48,16 @@ public class CharacterController extends ActiveEntityController
 										data[i][0]));
 
 			// Agrega las animaciones al personaje
-			da.add(new DrawAnimation(ents.get(i)));
+			da.put(i, new DrawAnimation(ents.get(i)));
 			// Setea animaciones
 			da.get(i).setAnimation("a0", "loop", 1);
 			ents.get(i).setDirection("right");
 		}
 
 		// Carga las animaciones
-		for ( Active p : ents )
+		for ( Entry<Integer, Active> p : ents.entrySet() )
 		{
-			loadAnim(p.getID(), p);
+			loadAnim(p.getValue().getID(), p.getValue());
 			vars.entities++;
 		}
 
@@ -90,9 +92,9 @@ public class CharacterController extends ActiveEntityController
 	public void draw ( Graphics g )
 	{
 
-		for ( Active e : ents )
+		for ( Entry<Integer, Active> e : ents.entrySet() )
 		{
-			a = (GameCharacter) e;
+			a = (GameCharacter) e.getValue();
 			g.setColor(Color.black);
 			g.drawString(a.getPlayerName(), a.getPos().x + 6,
 					(a.isCarrying()) ? a.getPos().y - 6 : a.getPos().y + 6);

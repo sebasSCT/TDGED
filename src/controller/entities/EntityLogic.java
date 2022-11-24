@@ -99,6 +99,7 @@ public class EntityLogic implements Controller
 		if ( ind.getA() < 99 )
 		{
 			p[ind.getA()].setCarrying(false);
+			// p[ind.getA()].setCarry(false);
 			mtc.delete(p[ind.getA()].getCarry());
 			return;
 		}
@@ -119,14 +120,14 @@ public class EntityLogic implements Controller
 			}
 
 			killEnemies = false;
+			return;
 
 		}
 
 		if ( ind.getA() >= 500 )
 		{
-			mtc.addMaterial("cannonball", p[ind.getA() - 500].getPos().x,
-					p[ind.getA() - 500].getPos().y);
-			p[ind.getA() - 500].setCarry(mtc.getEnts().size() - 1);
+			p[ind.getA() - 500].setCarry(mtc.addMaterial("cannonball",
+					p[ind.getA() - 500].getPos().x, p[ind.getA() - 500].getPos().y));
 			p[ind.getA() - 500].setCarrying(true);
 			mtc.carrying(p[ind.getA() - 500].getPos(), p[ind.getA() - 500].getCarry(),
 					p[ind.getA() - 500].getOffset().y);
@@ -209,6 +210,11 @@ public class EntityLogic implements Controller
 		{
 			for ( int i = 0; i < mtc.getEnts().size(); i++ )
 			{
+				if ( mtc.getEnts().get(i) == null )
+				{
+					continue;
+				}
+
 				if ( mtc.getEnts().get(i).getCB().getBox().intersects(p.getCB().getBox()) )
 				{
 					m = (Material) mtc.getEnts().get(i);

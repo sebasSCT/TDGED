@@ -12,6 +12,8 @@ import view.DrawAnimation;
 public class StructureController extends InactiveEntityController
 {
 
+	private int structures = 0;
+
 	public StructureController ()
 	{
 		super();
@@ -187,7 +189,7 @@ public class StructureController extends InactiveEntityController
 								data[3], data[4]));
 		loadAnim(name, entsI.get(entsI.size() - 1), vars.entitySpriteSize, "");
 
-		da.add(new DrawAnimation(entsI.get(entsI.size() - 1)));
+		da.put(structures, new DrawAnimation(entsI.get(entsI.size() - 1)));
 
 		entsI.get(entsI.size() - 1).setDirection(anim.getA());
 		switch ( anim.getA() )
@@ -204,6 +206,7 @@ public class StructureController extends InactiveEntityController
 		}
 
 		vars.entities++;
+		structures++;
 
 	}
 

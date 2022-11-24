@@ -20,7 +20,7 @@ public abstract class EntityController implements Controller
 	protected Hashtable<String, String> entList;
 	protected SpriteSheetController ssc;
 
-	protected ArrayList<DrawAnimation> da;
+	protected Hashtable<Integer, DrawAnimation> da;
 
 	// deprecated
 	protected Hashtable<Integer, Active> ents;
@@ -32,15 +32,15 @@ public abstract class EntityController implements Controller
 	{
 		this.ents = new Hashtable<>();
 		this.entsI = new ArrayList<>();
-		this.da = new ArrayList<>();
+		this.da = new Hashtable<>();
 		entList = new Hashtable<>();
 	}
 
 	public void draw ( Graphics g )
 	{
-		for ( DrawAnimation d : da )
+		for ( Entry<Integer, DrawAnimation> d : da.entrySet() )
 		{
-			d.draw(g);
+			d.getValue().draw(g);
 		}
 
 		g.setColor(Color.red);
@@ -119,7 +119,7 @@ public abstract class EntityController implements Controller
 		return entType;
 	}
 
-	public ArrayList<DrawAnimation> getDa ()
+	public Hashtable<Integer, DrawAnimation> getDa ()
 	{
 		return da;
 	}

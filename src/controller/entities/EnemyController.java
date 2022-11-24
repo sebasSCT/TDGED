@@ -1,6 +1,5 @@
 package controller.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -13,6 +12,8 @@ import view.DrawAnimation;
 
 public class EnemyController extends ActiveEntityController
 {
+
+	private int enemies;
 
 	public EnemyController ( ArrayList<ColisionBox> cbm )
 	{
@@ -51,6 +52,11 @@ public class EnemyController extends ActiveEntityController
 
 		for ( int i = 0; i < ents.size(); i++ )
 		{
+			if ( ents.get(i) == null )
+			{
+				continue;
+			}
+
 			Enemy en = (Enemy) ents.get(i);
 
 			if ( en.getCB().getBox().intersects(r) )
@@ -75,6 +81,11 @@ public class EnemyController extends ActiveEntityController
 	{
 		for ( int i = 0; i < ents.size(); i++ )
 		{
+			if ( ents.get(i) == null )
+			{
+				continue;
+			}
+
 			if ( !row(ents.get(i), i) )
 			{
 				if ( ents.get(i).getPos().x < 300 )
@@ -104,6 +115,11 @@ public class EnemyController extends ActiveEntityController
 	{
 		for ( int i = 0; i < ents.size(); i++ )
 		{
+			if ( ents.get(i) == null )
+			{
+				continue;
+			}
+
 			if ( i != ind )
 			{
 				if ( e.getCB().getBox().intersects(ents.get(i).getCB().getBox()) )
@@ -120,6 +136,11 @@ public class EnemyController extends ActiveEntityController
 	{
 		for ( int i = 0; i < ents.size(); i++ )
 		{
+			if ( ents.get(i) == null )
+			{
+				continue;
+			}
+
 			Enemy en = (Enemy) ents.get(i);
 			if ( en.isAttacking() )
 			{
@@ -139,29 +160,31 @@ public class EnemyController extends ActiveEntityController
 	@ SuppressWarnings ( "unused" )
 	private void showPS ( Graphics g )
 	{
-		for ( Active e : ents )
-		{
-			g.setColor(Color.red);
-			g.drawString("" + e.getPs(), e.getPos().x + 5, e.getPos().y + 5);
-			g.setColor(Color.black);
-			g.drawString("" + e.getPs(), e.getPos().x + 5, e.getPos().y + 6);
-		}
+		// for ( Active e : ents )
+		// {
+		// g.setColor(Color.red);
+		// g.drawString("" + e.getPs(), e.getPos().x + 5, e.getPos().y + 5);
+		// g.setColor(Color.black);
+		// g.drawString("" + e.getPs(), e.getPos().x + 5, e.getPos().y + 6);
+		// }
 	}
 
 	public void addEnemy ( String name, int posx, int posy )
 	{
 		String[] data = entList.get(name).split("-");
 
-		ents.add(new Enemy(	data[0], new Point(posx, posy), Integer.parseInt(data[1]),
+		ents.put(enemies,
+				new Enemy(	data[0], new Point(posx, posy), Integer.parseInt(data[1]),
 							Integer.parseInt(data[2]), Integer.parseInt(data[3]),
 							new Point(Integer.parseInt(data[4]), Integer.parseInt(data[5])),
 							Integer.parseInt(data[6])));
-		loadAnim(name, ents.get(ents.size() - 1));
-		ents.get(ents.size() - 1).setDirection("right");
-		da.add(new DrawAnimation(ents.get(ents.size() - 1)));
-		da.get(ents.size() - 1).setAnimation("a0", "loop", (float) 1, 1);
+		loadAnim(name, ents.get(enemies));
+		ents.get(enemies).setDirection("right");
+		da.put(enemies, new DrawAnimation(ents.get(enemies)));
+		da.get(enemies).setAnimation("a0", "loop", (float) 1, 1);
 
 		vars.entities++;
+		enemies++;
 	}
 
 	public void delEnemy ( String direction )
@@ -170,6 +193,11 @@ public class EnemyController extends ActiveEntityController
 
 		for ( int x = 0; x < ents.size(); x++ )
 		{
+
+			if ( ents.get(x) == null )
+			{
+				continue;
+			}
 
 			en = (Enemy) ents.get(x);
 
