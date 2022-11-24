@@ -26,7 +26,8 @@ public class EnemyController extends ActiveEntityController
 	private void startList ()
 	{
 		// (id)-(ps)-(vel)-(maxVel)-(offsetX)-(offsetY)-(damage)
-		entList.put("one", "00-100-1-4-10-19-2");
+		entList.put("one", "00-100-1-4-10-19-17");
+		entList.put("two", "01-100-1-4-10-19-19");
 	}
 
 	public void update ()
@@ -82,7 +83,7 @@ public class EnemyController extends ActiveEntityController
 
 					if ( !colision(ents.get(i), "right") )
 					{
-						da.get(i).setAnimation("a1", "static", 0);
+						da.get(i).setAnimation("a0", "loop", (float) 0.5, 3);
 					}
 				}
 
@@ -92,7 +93,7 @@ public class EnemyController extends ActiveEntityController
 
 					if ( !colision(ents.get(i), "left") )
 					{
-						da.get(i).setAnimation("a0", "static", 0);
+						da.get(i).setAnimation("a1", "loop", (float) 0.5, 3);
 					}
 				}
 			}
@@ -163,12 +164,25 @@ public class EnemyController extends ActiveEntityController
 		vars.entities++;
 	}
 
-	public void delEnemy ( int ind )
+	public void delEnemy ( String direction )
 	{
-		ents.remove(ind);
-		da.remove(ind);
+		Enemy en;
 
-		vars.entities--;
+		for ( int x = 0; x < ents.size(); x++ )
+		{
+
+			en = (Enemy) ents.get(x);
+
+			if ( en.getDirection() != direction && !en.isAttacking() )
+			{
+				continue;
+			}
+
+			ents.remove(x);
+			da.remove(x);
+			vars.entities--;
+		}
+
 	}
 
 }

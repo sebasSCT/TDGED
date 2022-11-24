@@ -2,6 +2,7 @@ package application;
 
 import controller.DUController;
 import model.staticTools.vars;
+import model.threads.Draw;
 
 public class Loop
 {
@@ -12,6 +13,8 @@ public class Loop
 	public static void startLoop ( DUController duc )
 	{
 		int aps = 0, fps = 0;
+
+		Draw d = new Draw(duc);
 
 		// Equivalencia
 		final int NS_POR_SEGUNDO = 1000000000;
@@ -63,7 +66,7 @@ public class Loop
 				// -----------------
 
 				// Dibujar------------------
-				duc.draw();
+				d.run();
 				fps++;
 				// ------------------
 

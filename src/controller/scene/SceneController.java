@@ -93,12 +93,12 @@ public class SceneController
 		if ( !vars.kb.isActive("pause") && el != null )
 		{
 			g.setColor(Color.red);
-			g.drawString("PAUSE", 300, 200);
+			g.drawString("PAUSE", 10, 100);
 		}
 
 		///
-		g.setColor(Color.white);
-		g.drawString("Pause: " + !vars.kb.isActive("pause"), 10, 110);
+		// g.setColor(Color.white);
+		// g.drawString("Pause: " + !vars.kb.isActive("pause"), 10, 110);
 
 	}
 

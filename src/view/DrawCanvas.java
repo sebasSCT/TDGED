@@ -79,8 +79,8 @@ public class DrawCanvas extends Canvas
 
 		/// Estetica sisi
 		g.setColor(Color.white);
-		g.drawString("FPS: " + String.valueOf(vars.FPS), 10, 10);
-		g.drawString("APS: " + String.valueOf(vars.APS), 10, 20);
+		// g.drawString("FPS: " + String.valueOf(vars.FPS), 10, 10);
+		// g.drawString("APS: " + String.valueOf(vars.APS), 10, 20);
 		///
 
 		// Limpiar g, cada que inicia

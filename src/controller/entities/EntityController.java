@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Map.Entry;
 import controller.Controller;
 import controller.scene.SpriteSheetController;
 import model.entities.Entity;
@@ -22,14 +23,14 @@ public abstract class EntityController implements Controller
 	protected ArrayList<DrawAnimation> da;
 
 	// deprecated
-	protected ArrayList<Active> ents;
+	protected Hashtable<Integer, Active> ents;
 	protected ArrayList<Inactive> entsI;
 
 	protected String entType;
 
 	public EntityController ()
 	{
-		this.ents = new ArrayList<>();
+		this.ents = new Hashtable<>();
 		this.entsI = new ArrayList<>();
 		this.da = new ArrayList<>();
 		entList = new Hashtable<>();
@@ -96,14 +97,14 @@ public abstract class EntityController implements Controller
 			g.drawRect(e.getCB().getBox().x, e.getCB().getBox().y, e.getCB().getBox().width,
 					e.getCB().getBox().height);
 		}
-		for ( Entity e : ents )
+		for ( Entry<Integer, Active> e : ents.entrySet() )
 		{
-			g.drawRect(e.getCB().getBox().x, e.getCB().getBox().y, e.getCB().getBox().width,
-					e.getCB().getBox().height);
+			g.drawRect(e.getValue().getCB().getBox().x, e.getValue().getCB().getBox().y,
+					e.getValue().getCB().getBox().width, e.getValue().getCB().getBox().height);
 		}
 	}
 
-	public ArrayList<Active> getEnts ()
+	public Hashtable<Integer, Active> getEnts ()
 	{
 		return ents;
 	}

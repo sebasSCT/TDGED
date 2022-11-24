@@ -39,18 +39,14 @@ public class EntityLogic implements Controller
 		stc = new StructureController();
 
 		// precarga
-
-		mtc.addMaterial("cannonball", 15, 14);
-		mtc.addMaterial("cannonball", 23, 14);
-		mtc.addMaterial("cannonball", 23, 14);
 		mtc.addMaterial("block", 20, 19);
 
-		ec.addEnemy("one", 0, 19);
-		ec.addEnemy("one", 5, 19);
-		ec.addEnemy("one", 10, 19);
-		ec.addEnemy("one", 30, 19);
-		ec.addEnemy("one", 35, 19);
-		ec.addEnemy("one", 40, 19);
+		ec.addEnemy("two", 0, 19);
+		ec.addEnemy("two", 1, 19);
+		ec.addEnemy("two", 2, 19);
+		ec.addEnemy("two", 38, 19);
+		ec.addEnemy("two", 39, 19);
+		ec.addEnemy("two", 40, 19);
 
 		for ( Triplet<String, Point, Duplet<String, String>> st : map.getStructures() )
 		{
@@ -67,7 +63,8 @@ public class EntityLogic implements Controller
 
 	public void update ()
 	{
-		// characterData();
+
+		characterData();
 		carryMaterial();
 		enemyAttack();
 		interact();
@@ -103,11 +100,26 @@ public class EntityLogic implements Controller
 		{
 			p[ind.getA()].setCarrying(false);
 			mtc.delete(p[ind.getA()].getCarry());
+			return;
 		}
 
-		else if ( ind.getA() > 99 )
+		if ( ind.getA() > 900 )
 		{
-			killEnemies = true;
+
+			switch ( ind.getA() )
+			{
+				case 901:
+					ec.delEnemy("right");
+					break;
+
+				case 902:
+					ec.delEnemy("left");
+					break;
+
+			}
+
+			killEnemies = false;
+
 		}
 
 		if ( ind.getA() >= 500 )

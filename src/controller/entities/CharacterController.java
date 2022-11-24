@@ -103,6 +103,12 @@ public class CharacterController extends ActiveEntityController
 
 		super.draw(g);
 
+		// debug(g);
+
+	}
+
+	private void debug ( Graphics g )
+	{
 		// Debug (mover)
 		a = (GameCharacter) ents.get(0);
 		g.setColor(Color.white);
@@ -126,7 +132,6 @@ public class CharacterController extends ActiveEntityController
 
 		// g.drawString("player", ents.get(0).getPos().x + 5,
 		// ents.get(0).getPos().y + 5);
-
 	}
 
 	boolean startIns = false; // prueba de instrucciones

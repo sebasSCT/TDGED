@@ -107,7 +107,8 @@ public class StructureController extends InactiveEntityController
 					return shoot(x, s);
 				}
 
-				return new Triplet<Integer, Point, String>(99, null, null);
+				return new Triplet<Integer, Point, String>((s.getDirection() == "left") ? 901
+						: 902, null, null);
 
 			case "table":
 				if ( !pressed[p] )
