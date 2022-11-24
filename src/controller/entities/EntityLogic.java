@@ -62,9 +62,6 @@ public class EntityLogic implements Controller
 			stc.addStructure("cannonball_table", p, new Duplet<String, String>("right", "0"));
 		}
 
-		stc.addStructure("cannonball_table", new Point(23, 19),
-				new Duplet<String, String>("right", "0"));
-
 		System.out.println("Entity Logic");
 	}
 

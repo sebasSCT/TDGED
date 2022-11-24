@@ -26,7 +26,7 @@ public class StructureController extends InactiveEntityController
 	{
 		// (id)-(offsetX)-(offsetY)-(anim)-(type)-(material(s))
 		entList.put("cannon", "cannon-6-15-weapon-cannonball");
-		entList.put("cannonball_table", "cannonball_table-6-15-table-cannonball");
+		entList.put("cannonball_table", "cannonball_table-7-16-table-cannonball");
 	}
 
 	public void update ()
@@ -52,7 +52,7 @@ public class StructureController extends InactiveEntityController
 				continue;
 			}
 			time[a] += (float) 0.016;
-			if ( time[a] >= 0.5 )
+			if ( time[a] >= 1 )
 			{
 				time[a] = 0;
 				pressed[a] = false;
@@ -61,17 +61,19 @@ public class StructureController extends InactiveEntityController
 
 		for ( int x = 0; x < entsI.size(); x++ )
 		{
+
+			s = (Structure) entsI.get(x);
+
 			if ( vars.kb.isPressed("interact") && entsI.get(x).getColision()[0] )
 			{
-				s = (Structure) entsI.get(x);
 				return action(s, x, carry[0], 0);
 			}
 
 			if ( vars.kb.isPressed("interact1") && entsI.get(x).getColision()[1] )
 			{
-				s = (Structure) entsI.get(x);
 				return action(s, x, carry[1], 1);
 			}
+
 		}
 		return new Triplet<Integer, Point, String>(99, null, null);
 	}
@@ -101,6 +103,7 @@ public class StructureController extends InactiveEntityController
 
 				if ( !pressed[p] )
 				{
+					s.setCooldown(true);
 					return shoot(x, s);
 				}
 
@@ -110,8 +113,10 @@ public class StructureController extends InactiveEntityController
 				if ( !pressed[p] )
 				{
 					pressed[p] = true;
+					s.setCooldown(true);
 					return new Triplet<Integer, Point, String>(500 + p, null, null);
 				}
+				s.setCooldown(false);
 				return new Triplet<Integer, Point, String>(99, null, null);
 		}
 
@@ -148,6 +153,7 @@ public class StructureController extends InactiveEntityController
 			}
 
 			s = (Structure) entsI.get(i);
+
 			if ( s.getCharged().getA() )
 			{
 				da.get(i).setAnimation(
