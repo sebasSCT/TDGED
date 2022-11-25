@@ -45,7 +45,6 @@ public class SceneController
 		for ( int x = 0; x < vars.nMaps; x++ )
 		{
 			mc.loadMap(vars.getMapJSON("test", String.valueOf(x)));
-
 			scenes.add(new GameScene(mc.getMapa(), hc.getHuds().get(x)));
 		}
 

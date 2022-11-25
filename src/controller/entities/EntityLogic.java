@@ -41,13 +41,6 @@ public class EntityLogic implements Controller
 		// precarga
 		mtc.addMaterial("block", 20, 19);
 
-		ec.addEnemy("two", 0, 19);
-		ec.addEnemy("two", 2, 19);
-		ec.addEnemy("two", 4, 19);
-		ec.addEnemy("two", 36, 19);
-		ec.addEnemy("two", 38, 19);
-		ec.addEnemy("two", 40, 19);
-
 		for ( Triplet<String, Point, Duplet<String, String>> st : map.getStructures() )
 		{
 			stc.addStructure(st.getA(), st.getB(), st.getC());
@@ -68,6 +61,7 @@ public class EntityLogic implements Controller
 		carryMaterial();
 		enemyAttack();
 		interact();
+		raids();
 
 		stc.update();
 		mtc.update();
@@ -83,6 +77,67 @@ public class EntityLogic implements Controller
 		ec.draw(g);
 
 		drawTowerPs(g);
+	}
+
+	private float timer;
+	private boolean[] raids =
+	{ true, true, true };
+	private void raids ()
+	{
+		timer += (float) 0.016;
+
+		if ( timer >= 2 && raids[0] )
+		{
+			ec.addEnemy("two", 0, 18);
+			ec.addEnemy("two", 2, 18);
+			ec.addEnemy("two", 4, 18);
+			ec.addEnemy("two", 36, 18);
+			ec.addEnemy("two", 38, 18);
+			ec.addEnemy("two", 40, 18);
+
+			raids[0] = false;
+		}
+
+		if ( timer >= 25 && raids[1] )
+		{
+			ec.addEnemy("two", 0, 18);
+			ec.addEnemy("two", 2, 18);
+			ec.addEnemy("two", 4, 18);
+			ec.addEnemy("two", 36, 18);
+			ec.addEnemy("two", 38, 18);
+			ec.addEnemy("two", 40, 18);
+
+			raids[1] = false;
+		}
+
+		if ( timer >= 40 && raids[2] )
+		{
+			ec.addEnemy("two", 0, 18);
+			ec.addEnemy("two", 2, 18);
+			ec.addEnemy("two", 4, 18);
+			ec.addEnemy("two", 36, 18);
+			ec.addEnemy("two", 38, 18);
+			ec.addEnemy("two", 40, 18);
+
+			raids[2] = false;
+		}
+
+		if ( timer >= 50 )
+		{
+			ec.addEnemy("two", 0, 19);
+			ec.addEnemy("two", 2, 19);
+			ec.addEnemy("two", 4, 19);
+			ec.addEnemy("two", 36, 19);
+			ec.addEnemy("two", 38, 19);
+			ec.addEnemy("two", 40, 19);
+
+			timer = 0;
+			for ( int i = 0; i < raids.length; i++ )
+			{
+				raids[i] = true;
+			}
+		}
+
 	}
 
 	@ SuppressWarnings ( "unchecked" )

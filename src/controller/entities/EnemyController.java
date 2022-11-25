@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import model.entities.active.Active;
 import model.entities.active.Enemy;
 import model.logic.ColisionBox;
 import model.staticTools.vars;
@@ -28,7 +27,7 @@ public class EnemyController extends ActiveEntityController
 	{
 		// (id)-(ps)-(vel)-(maxVel)-(offsetX)-(offsetY)-(damage)
 		entList.put("one", "00-100-1-4-10-19-17");
-		entList.put("two", "01-100-1-4-10-19-19");
+		entList.put("two", "01-100-1-4-10-19-78");
 	}
 
 	public void update ()
@@ -77,6 +76,7 @@ public class EnemyController extends ActiveEntityController
 		return damage;
 	}
 
+	private Enemy en;
 	private void gotower ()
 	{
 		for ( int i = 0; i < enemies; i++ )
@@ -86,7 +86,9 @@ public class EnemyController extends ActiveEntityController
 				continue;
 			}
 
-			if ( !row(ents.get(i), i) )
+			en = (Enemy) ents.get(i);
+
+			if ( !row(en, i) )
 			{
 				if ( ents.get(i).getPos().x < 300 )
 				{
@@ -113,20 +115,27 @@ public class EnemyController extends ActiveEntityController
 		}
 	}
 
-	private boolean row ( Active e, int ind )
+	private boolean row ( Enemy e, int ind )
 	{
 		for ( int i = 0; i < enemies; i++ )
 		{
-			if ( ents.get(i) == null )
+			if ( !e.isAttacking() )
 			{
-				continue;
+				return false;
 			}
 
-			if ( i != ind )
 			{
-				if ( e.getCB().getBox().intersects(ents.get(i).getCB().getBox()) )
+				if ( ents.get(i) == null )
 				{
-					return true;
+					continue;
+				}
+
+				if ( i != ind )
+				{
+					if ( e.getCB().getBox().intersects(ents.get(i).getCB().getBox()) )
+					{
+						return true;
+					}
 				}
 			}
 		}
