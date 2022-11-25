@@ -191,7 +191,7 @@ public class CharacterController extends ActiveEntityController
 		list.addNode("move:right");
 		list.addNode("move:left");
 		list.addNode("moveto:player");
-		list.addNode("follow:player");
+		// list.addNode("follow:player");
 		// list.imprimir();
 		ins = list.unstack().toString();
 	}

@@ -50,7 +50,7 @@ public class EnemyController extends ActiveEntityController
 	{
 		int damage = 0;
 
-		for ( int i = 0; i < ents.size(); i++ )
+		for ( int i = 0; i < enemies; i++ )
 		{
 			if ( ents.get(i) == null )
 			{
@@ -79,7 +79,7 @@ public class EnemyController extends ActiveEntityController
 
 	private void gotower ()
 	{
-		for ( int i = 0; i < ents.size(); i++ )
+		for ( int i = 0; i < enemies; i++ )
 		{
 			if ( ents.get(i) == null )
 			{
@@ -90,6 +90,7 @@ public class EnemyController extends ActiveEntityController
 			{
 				if ( ents.get(i).getPos().x < 300 )
 				{
+					ents.get(i).setDirection("right");
 					move("right", ents.get(i));
 
 					if ( !colision(ents.get(i), "right") )
@@ -100,6 +101,7 @@ public class EnemyController extends ActiveEntityController
 
 				else
 				{
+					ents.get(i).setDirection("left");
 					move("left", ents.get(i));
 
 					if ( !colision(ents.get(i), "left") )
@@ -113,7 +115,7 @@ public class EnemyController extends ActiveEntityController
 
 	private boolean row ( Active e, int ind )
 	{
-		for ( int i = 0; i < ents.size(); i++ )
+		for ( int i = 0; i < enemies; i++ )
 		{
 			if ( ents.get(i) == null )
 			{
@@ -134,7 +136,7 @@ public class EnemyController extends ActiveEntityController
 	// provisional
 	private void anim ()
 	{
-		for ( int i = 0; i < ents.size(); i++ )
+		for ( int i = 0; i < enemies; i++ )
 		{
 			if ( ents.get(i) == null )
 			{
@@ -191,7 +193,7 @@ public class EnemyController extends ActiveEntityController
 	{
 		Enemy en;
 
-		for ( int x = 0; x < ents.size(); x++ )
+		for ( int x = 0; x < enemies; x++ )
 		{
 
 			if ( ents.get(x) == null )
@@ -201,14 +203,18 @@ public class EnemyController extends ActiveEntityController
 
 			en = (Enemy) ents.get(x);
 
-			if ( en.getDirection() != direction && !en.isAttacking() )
+			if ( !en.isAttacking() )
 			{
 				continue;
 			}
 
-			ents.remove(x);
-			da.remove(x);
-			vars.entities--;
+			if ( en.getDirection() == direction )
+			{
+				ents.remove(x);
+				da.remove(x);
+				vars.entities--;
+			}
+
 		}
 
 	}

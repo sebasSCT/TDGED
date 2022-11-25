@@ -109,8 +109,7 @@ public class StructureController extends InactiveEntityController
 					return shoot(x, s);
 				}
 
-				return new Triplet<Integer, Point, String>((s.getDirection() == "left") ? 901
-						: 902, null, null);
+				return new Triplet<Integer, Point, String>(99, null, null);
 
 			case "table":
 				if ( !pressed[p] )
@@ -135,7 +134,8 @@ public class StructureController extends InactiveEntityController
 		da.get(s).setAnimation(
 				String.valueOf((Integer.parseInt(entsI.get(s).getIDA().getA()) + 3)), "once",
 				Integer.parseInt(entsI.get(s).getIDA().getB()));
-		return new Triplet<Integer, Point, String>(r + 100, st.getPos(), st.getDirection());
+		return new Triplet<Integer, Point, String>((st.getDirection().equals("left")) ? 101
+				: 102, st.getPos(), st.getDirection());
 	}
 
 	private boolean border;

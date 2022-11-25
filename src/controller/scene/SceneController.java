@@ -51,7 +51,7 @@ public class SceneController
 
 		currentScene = scenes.get(5);
 		ds = new DrawScene(currentScene);
-		el = new EntityLogic("juan:beto", currentScene.getMap());
+		el = new EntityLogic("sebas:beto", currentScene.getMap());
 	}
 
 	// Actualiza todos los elementos de la escena para asignar la posicion de

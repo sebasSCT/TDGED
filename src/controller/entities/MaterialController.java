@@ -47,7 +47,7 @@ public class MaterialController extends ActiveEntityController
 	private boolean border;
 	public void border ( ColisionBox[] e )
 	{
-		for ( int i = 0; i < getEnts().size(); i++ )
+		for ( int i = 0; i < materials; i++ )
 		{
 			if ( ents.get(i) == null )
 			{
@@ -142,6 +142,11 @@ public class MaterialController extends ActiveEntityController
 		da.get(ind).setAnimation(ents.get(ind).getIDA().getA(), "static",
 				Integer.parseInt(ents.get(ind).getIDA().getB()));
 		shootMove(ind, direction);
+	}
+
+	public int getMaterials ()
+	{
+		return materials;
 	}
 
 }

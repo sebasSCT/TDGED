@@ -42,10 +42,10 @@ public class EntityLogic implements Controller
 		mtc.addMaterial("block", 20, 19);
 
 		ec.addEnemy("two", 0, 19);
-		ec.addEnemy("two", 1, 19);
 		ec.addEnemy("two", 2, 19);
+		ec.addEnemy("two", 4, 19);
+		ec.addEnemy("two", 36, 19);
 		ec.addEnemy("two", 38, 19);
-		ec.addEnemy("two", 39, 19);
 		ec.addEnemy("two", 40, 19);
 
 		for ( Triplet<String, Point, Duplet<String, String>> st : map.getStructures() )
@@ -89,7 +89,6 @@ public class EntityLogic implements Controller
 	private Duplet<String, Integer>[] carry = new Duplet[2];
 	private ColisionBox[] CB = new ColisionBox[2];
 	private Triplet<Integer, Point, String> ind;
-	private boolean killEnemies = false;
 	private void interact ()
 	{
 		stc.border(CB);
@@ -99,27 +98,24 @@ public class EntityLogic implements Controller
 		if ( ind.getA() < 99 )
 		{
 			p[ind.getA()].setCarrying(false);
-			// p[ind.getA()].setCarry(false);
 			mtc.delete(p[ind.getA()].getCarry());
 			return;
 		}
 
-		if ( ind.getA() > 900 )
+		if ( ind.getA() > 100 && ind.getA() < 500 )
 		{
 
 			switch ( ind.getA() )
 			{
-				case 901:
+				case 101:
 					ec.delEnemy("right");
 					break;
 
-				case 902:
+				case 102:
 					ec.delEnemy("left");
 					break;
 
 			}
-
-			killEnemies = false;
 			return;
 
 		}
@@ -208,7 +204,7 @@ public class EntityLogic implements Controller
 	{
 		if ( !p.isCarrying() )
 		{
-			for ( int i = 0; i < mtc.getEnts().size(); i++ )
+			for ( int i = 0; i < mtc.getMaterials(); i++ )
 			{
 				if ( mtc.getEnts().get(i) == null )
 				{
