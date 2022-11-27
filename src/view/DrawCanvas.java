@@ -30,15 +30,10 @@ public class DrawCanvas extends Canvas
 
 	private void canvasConfig ()
 	{
-		// Para que jsvs no refuerce el repintado
 		setIgnoreRepaint(true);
-		// Asginar dimension de lo de adentro
 		setPreferredSize(new Dimension(width, height));
-		// Para que la ventana este en el foco y se pueda interactuar
 		setFocusable(true);
-		// Lo mismo pero pide focos
 		requestFocus(true);
-		// Agrega las teclas al escuchador
 		addKeyListener(vars.kb);
 	}
 

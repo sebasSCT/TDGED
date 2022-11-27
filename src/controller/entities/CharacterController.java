@@ -109,6 +109,7 @@ public class CharacterController extends ActiveEntityController
 
 	}
 
+	@ SuppressWarnings ( "unused" )
 	private void debug ( Graphics g )
 	{
 		// Debug (mover)

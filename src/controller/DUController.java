@@ -10,6 +10,7 @@ public class DUController
 {
 
 	private DrawCanvas c;
+	@ SuppressWarnings ( "unused" )
 	private Window w;
 
 	private SceneController sc;

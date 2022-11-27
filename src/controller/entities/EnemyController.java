@@ -27,7 +27,7 @@ public class EnemyController extends ActiveEntityController
 	{
 		// (id)-(ps)-(vel)-(maxVel)-(offsetX)-(offsetY)-(damage)
 		entList.put("one", "00-100-1-4-10-19-17");
-		entList.put("two", "01-100-1-4-10-19-78");
+		entList.put("two", "01-100-1-4-10-19-27");
 	}
 
 	public void update ()

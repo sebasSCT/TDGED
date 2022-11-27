@@ -98,7 +98,7 @@ public class EntityLogic implements Controller
 			raids[0] = false;
 		}
 
-		if ( timer >= 25 && raids[1] )
+		if ( timer >= 20 && raids[1] )
 		{
 			ec.addEnemy("two", 0, 18);
 			ec.addEnemy("two", 2, 18);
@@ -110,7 +110,7 @@ public class EntityLogic implements Controller
 			raids[1] = false;
 		}
 
-		if ( timer >= 40 && raids[2] )
+		if ( timer >= 35 && raids[2] )
 		{
 			ec.addEnemy("two", 0, 18);
 			ec.addEnemy("two", 2, 18);
@@ -122,7 +122,7 @@ public class EntityLogic implements Controller
 			raids[2] = false;
 		}
 
-		if ( timer >= 50 )
+		if ( timer >= 40 )
 		{
 			ec.addEnemy("two", 0, 19);
 			ec.addEnemy("two", 2, 19);

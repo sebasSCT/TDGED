@@ -54,7 +54,7 @@ public class StructureController extends InactiveEntityController
 				continue;
 			}
 			time[a] += (float) 0.016;
-			if ( time[a] >= 1 )
+			if ( time[a] >= 0.5 )
 			{
 				time[a] = 0;
 				pressed[a] = false;
@@ -129,7 +129,6 @@ public class StructureController extends InactiveEntityController
 
 	private Triplet<Integer, Point, String> shoot ( int s, Structure st )
 	{
-		int r = st.getCharged().getB();
 		st.setCharged(false, 9999);
 		da.get(s).setAnimation(
 				String.valueOf((Integer.parseInt(entsI.get(s).getIDA().getA()) + 3)), "once",
